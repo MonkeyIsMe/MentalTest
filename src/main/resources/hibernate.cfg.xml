@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+<session-factory>
+
+   <!-- #hibernate.dialect org.hibernate.dialect.MySQLDialect
+		#hibernate.dialect org.hibernate.dialect.MySQLInnoDBDialect
+		#hibernate.dialect org.hibernate.dialect.MySQLMyISAMDialect
+		#hibernate.connection.driver_class com.mysql.jdbc.Driver
+		#hibernate.connection.url jdbc:mysql:///test
+		#hibernate.connection.username gavin
+		#hibernate.connection.password
+	 -->
+
+<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+<property name="hibernate.c3p0.max_size">20</property>
+<property name="hibernate.c3p0.min_size">5</property>
+<property name="hibernate.c3p0.timeout">120</property>
+<property name="automaticTestTable">Test</property>
+<property name="hibernate.c3p0.max_statements">100</property>
+<property name="hibernate.c3p0.idle_test_period">120</property>
+<property name="hibernate.c3p0.acquire_increment">1</property>
+<property name="c3p0.testConnectionOnCheckout">true</property>
+<property name="c3p0.idleConnectionTestPeriod">18000</property>
+<property name="c3p0.maxIdleTime">25000</property>
+<property name="c3p0.idle_test_period">120</property>
+
+<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+<property name="hibernate.connection.url">jdbc:mysql:///mental_test?autoReconnect=true&amp;autoReconnectForPools=true&amp;characterEncoding=UTF-8
+</property>
+<property name="hibernate.connection.username">root</property>
+<property name="hibernate.connection.password">vlab214</property>
+<property name="current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</property>	
+<property name="connection.autoReconnect">true</property> 
+<property name="connection.autoReconnectForPools">true</property> 
+<property name="connection.is-connection-validation-required">true</property> 
+<property name="hibernate.connection.autocommit">true</property> 
+<property name="hiberante.cache.use_second_level_cache">false</property>
+<property name="hibernate.jdbc.batch_size">2</property>
+<property name="hibernate.connection.isolation">4</property>     
+<!-- <property name="show_sql">true</property> -->
+
+		
+		<!-- 
+		## auto schema export  自动导出表结构. 自动建表
+		#hibernate.hbm2ddl.auto create		自动建表.每次框架运行都会创建新的表.以前表将会被覆盖,表数据会丢失.(开发环境中测试使用)
+		#hibernate.hbm2ddl.auto create-drop 自动建表.每次框架运行结束都会将所有表删除.(开发环境中测试使用)
+		#hibernate.hbm2ddl.auto update(推荐使用) 自动生成表.如果已经存在不会再生成.如果表有变动.自动更新表(不会删除任何数据).
+		#hibernate.hbm2ddl.auto validate	校验.不自动生成表.每次启动会校验数据库中表是否正确.校验失败.
+		 -->
+
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		
+<mapping class="CSU.Mental.Model.Patient" />
+<mapping class="CSU.Mental.Model.Choice" />
+<mapping class="CSU.Mental.Model.Deadline" />
+<mapping class="CSU.Mental.Model.Factor" />
+<mapping class="CSU.Mental.Model.FactorProblem" />
+<mapping class="CSU.Mental.Model.Fkind" />
+<mapping class="CSU.Mental.Model.Hospital" />
+<mapping class="CSU.Mental.Model.Problem" />
+<mapping class="CSU.Mental.Model.Record" />
+<mapping class="CSU.Mental.Model.Reference" />
+<mapping class="CSU.Mental.Model.Scale" />
+<mapping class="CSU.Mental.Model.Skind" />
+<mapping class="CSU.Mental.Model.SubChoice" />
+<mapping class="CSU.Mental.Model.Template" />
+<mapping class="CSU.Mental.Model.User" />
+</session-factory>
+
+
+
+</hibernate-configuration>

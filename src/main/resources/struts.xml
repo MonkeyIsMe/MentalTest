@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+         "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+         "http://struts.apache.org/dtds/struts-2.5.dtd">
+	
+<struts>
+	<!-- #  struts.objectFactory = spring	将action的创建交给spring容器	
+			struts.objectFactory.spring.autoWire = name spring负责装配Action依赖属性
+			-->
+
+<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+<constant name="struts.action.extension" value=","></constant> 
+
+	<!-- Action必须放在指定的包名空间中 -->
+	<package name="json"  extends="json-default" namespace="/">
+	
+		<!-- 整合方案1:class属性上仍然配置action的完整类名
+				struts2仍然创建action,由spring负责组装Action中的依赖属性
+		 -->
+		 <!-- 
+		 	整合方案2:class属性上填写spring中action对象的BeanName
+		 		完全由spring管理action生命周期,包括Action的创建
+		 		注意:需要手动组装依赖属性
+		  -->
+		<!-- 大类 -->
+		<action name="QueryAllFkind" class="FkindAction" method="QueryAllFkind" >
+		</action>
+		<action name="UpdateFkind" class="FkindAction" method="UpdateFkind" >
+		</action>
+		<action name="AddFkind" class="FkindAction" method="AddFkind" >
+		</action>
+		<action name="DeleteFkind" class="FkindAction" method="DeleteFkind" >
+		</action>
+		<action name="CountFkind" class="FkindAction" method="CountFkind" >
+		</action>
+		
+		<!-- 用户 -->
+		<action name="AddUser" class="UserAction" method="AddUser" >
+		</action>
+		<action name="UpdateUserInfo" class="UserAction" method="UpdateUserInfo" >
+		</action>
+		<action name="UpdateUserPassword" class="UserAction" method="UpdateUserPassword" >
+		</action>
+		<action name="CountUser" class="UserAction" method="CountUser" >
+		</action>
+		<action name="QueryUserPageSize" class="UserAction" method="QueryUserPageSize" >
+		</action>
+		<action name="Login" class="UserAction" method="Login" >
+		</action>
+		
+		<!-- 小类 -->
+		<action name="AddSkind" class="SkindAction" method="AddSkind" >
+		</action>
+		<action name="UpdateSkind" class="SkindAction" method="UpdateSkind" >
+		</action>
+		<action name="QueryAllSkind" class="SkindAction" method="QueryAllSkind" >
+		</action>
+		<action name="DeleteSkind" class="SkindAction" method="DeleteSkind" >
+		</action>
+		
+		<!-- 因子 -->
+		<action name="AddScaleFactor" class="FactorAction" method="AddScaleFactor" >
+		</action>
+		
+		<!-- 激活 -->
+		<action name="AddOrUpdateDeadLine" class="DeadlineAction" method="AddOrUpdateDeadLine" >
+		</action>
+		
+		<!-- 题目 -->
+		<action name="DeleteProblem" class="ProblemAction" method="DeleteProblem" >
+		</action>
+		<action name="UpdateProblemInfo" class="ProblemAction" method="UpdateProblemInfo" >
+		</action>
+		<action name="AddScaleChoice" class="ProblemAction" method="AddScaleChoice" >
+		</action>
+		
+		<!-- 记录 -->
+		<action name="CountRecord" class="RecordAction" method="CountRecord" >
+		</action>
+		<action name="QueryRecordPageSize" class="RecordAction" method="QueryRecordPageSize" >
+		</action>
+		<action name="DeleteRecord" class="RecordAction" method="DeleteRecord" >
+		</action>
+		
+		<!-- 量表 -->
+		<action name="UpdateScaleNumber" class="ScaleAction" method="UpdateScaleNumber" >
+		</action>
+		<action name="DoScaleTest" class="ScaleAction" method="DoScaleTest" >
+		</action>
+		<action name="QueryScaleInfo" class="ScaleAction" method="QueryScaleInfo" >
+		</action>
+		<action name="AddScale" class="ScaleAction" method="AddScale" >
+		</action>
+		<action name="UpdateScale" class="ScaleAction" method="UpdateScale" >
+		</action>
+		<action name="QueryScalePageSize" class="ScaleAction" method="QueryScalePageSize" >
+		</action>
+		<action name="QueryScaleByFkindSkindPageSize" class="ScaleAction" method="QueryScaleByFkindSkindPageSize" >
+		</action>
+		<action name="CountScale" class="ScaleAction" method="CountScale" >
+		</action>
+		<action name="CountScaleByFkindSkind" class="ScaleAction" method="CountScaleByFkindSkind" >
+		</action>
+		
+		<!-- 病人 -->
+		<action name="CountPatient" class="PatientAction" method="CountPatient" >
+		</action>
+		<action name="QueryPatientPageSize" class="PatientAction" method="QueryPatientPageSize" >
+		</action>
+		<action name="UpdatePatient" class="PatientAction" method="UpdatePatient" >
+		</action>
+		<action name="AddPatient" class="PatientAction" method="AddPatient" >
+		</action>
+		<action name="DeletePatient" class="PatientAction" method="DeletePatient" >
+		</action>
+				
+		<!-- 模板 -->
+		<action name="AddTemplate" class="TemplateAction" method="AddTemplate" >
+		</action>
+		<action name="DeleteTemplate" class="TemplateAction" method="DeleteTemplate" >
+		</action>
+		<action name="UpdateTemplate" class="TemplateAction" method="UpdateTemplate" >
+		</action>
+		<action name="CountTemplate" class="TemplateAction" method="CountTemplate" >
+		</action>
+		<action name="QueryAllTemplate" class="TemplateAction" method="QueryAllTemplate" >
+		</action>
+		
+	</package>
+</struts>
+	

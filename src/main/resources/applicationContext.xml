@@ -1,0 +1,175 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:aop="http://www.springframework.org/schema/aop" 
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+							http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd 
+							http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd 
+							http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
+	
+	<!-- 使用外部的hibernate.cfg.xml配置信息 -->
+	<bean name="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" >
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" ></property>
+	</bean>
+	
+	<!-- 核心事务管理器 -->
+	<bean name="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	
+	<!-- 开启注解事务-->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager" >
+		<tx:attributes>
+			<tx:method name="save*" isolation="READ_COMMITTED" propagation="REQUIRED" read-only="false" />
+			<tx:method name="persist*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+			<tx:method name="update*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+			<tx:method name="modify*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+			<tx:method name="delete*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+			<tx:method name="remove*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false" />
+			<tx:method name="get*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true" />
+			<tx:method name="find*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- action -->
+	<!-- 注意:Action对象作用范围一定是多例的.这样才符合struts2架构 -->
+	<bean name="DeadlineAction" class="CSU.Mental.Controller.DeadlineAction" scope="prototype" >
+		<property name="DeadlineService" ref="DeadlineService" ></property>
+	</bean>
+	<bean name="FactorAction" class="CSU.Mental.Controller.FactorAction" scope="prototype" >
+		<property name="FactorService" ref="FactorService" ></property>
+		<property name="ReferenceService" ref="ReferenceService" ></property>
+	</bean>
+	<bean name="FkindAction" class="CSU.Mental.Controller.FkindAction" scope="prototype" >
+		<property name="FkindService" ref="FkindService" ></property>
+	</bean>
+	<bean name="PatientAction" class="CSU.Mental.Controller.PatientAction" scope="prototype" >
+		<property name="PatientService" ref="PatientService" ></property>
+	</bean>	
+	<bean name="ProblemAction" class="CSU.Mental.Controller.ProblemAction" scope="prototype" >
+		<property name="ProblemService" ref="ProblemService" ></property>
+		<property name="ChoiceService" ref="ChoiceService" ></property>
+		<property name="FactorProblemService" ref="FactorProblemService" ></property>
+	</bean>
+	<bean name="RecordAction" class="CSU.Mental.Controller.RecordAction" scope="prototype" >
+		<property name="RecordService" ref="RecordService" ></property>
+	</bean>	
+	<bean name="ScaleAction" class="CSU.Mental.Controller.ScaleAction" scope="prototype" >
+		<property name="ScaleService" ref="ScaleService" ></property>
+		<property name="FactorService" ref="FactorService" ></property>
+		<property name="ReferenceService" ref="ReferenceService" ></property>
+		<property name="ProblemService" ref="ProblemService" ></property>
+		<property name="PatientService" ref="PatientService" ></property>
+		<property name="RecordService" ref="RecordService" ></property>
+		<property name="ChoiceService" ref="ChoiceService" ></property>
+		<property name="FactorProblemService" ref="FactorProblemService" ></property>
+	</bean>
+	<bean name="SkindAction" class="CSU.Mental.Controller.SkindAction" scope="prototype" >
+		<property name="SkindService" ref="SkindService" ></property>
+	</bean>
+		<bean name="TemplateAction" class="CSU.Mental.Controller.TemplateAction" scope="prototype" >
+		<property name="TemplateService" ref="TemplateService" ></property>
+		<property name="ChoiceService" ref="ChoiceService" ></property>
+	</bean>
+	<bean name="UserAction" class="CSU.Mental.Controller.UserAction" scope="prototype" >
+		<property name="UserService" ref="UserService" ></property>
+	</bean>
+	
+	<!-- service -->
+	<bean name="ChoiceService" class="CSU.Mental.Service.Impl.ChoiceServiceImpl" >
+		<property name="ChoiceDao" ref="ChoiceDao" ></property>
+	</bean>
+	<bean name="ProblemService" class="CSU.Mental.Service.Impl.ProblemServiceImpl" >
+		<property name="ProblemDao" ref="ProblemDao" ></property>
+	</bean>
+	<bean name="DeadlineService" class="CSU.Mental.Service.Impl.DeadlineServiceImpl" >
+		<property name="DeadlineDao" ref="DeadlineDao" ></property>
+	</bean>
+	<bean name="FactorService" class="CSU.Mental.Service.Impl.FactorServiceImpl" >
+		<property name="FactorDao" ref="FactorDao" ></property>
+	</bean>
+	<bean name="FactorProblemService" class="CSU.Mental.Service.Impl.FactorProblemServiceImpl" >
+		<property name="FactorProblemDao" ref="FactorProblemDao" ></property>
+	</bean>
+	<bean name="FkindService" class="CSU.Mental.Service.Impl.FkindServiceImpl" >
+		<property name="FkindDao" ref="FkindDao" ></property>
+	</bean>
+	<bean name="ScaleService" class="CSU.Mental.Service.Impl.ScaleServiceImpl" >
+		<property name="ScaleDao" ref="ScaleDao" ></property>
+	</bean>
+	<bean name="SkindService" class="CSU.Mental.Service.Impl.SkindServiceImpl" >
+		<property name="SkindDao" ref="SkindDao" ></property>
+	</bean>
+	<bean name="SubChoiceService" class="CSU.Mental.Service.Impl.SubChoiceServiceImpl" >
+		<property name="SubChoiceDao" ref="SubChoiceDao" ></property>
+	</bean>
+	<bean name="UserService" class="CSU.Mental.Service.Impl.UserServiceImpl" >
+		<property name="UserDao" ref="UserDao" ></property>
+	</bean>
+	<bean name="HospitalService" class="CSU.Mental.Service.Impl.HospitalServiceImpl" >
+		<property name="HospitalDao" ref="HospitalDao" ></property>
+	</bean>
+	<bean name="PatientService" class="CSU.Mental.Service.Impl.PatientServiceImpl" >
+		<property name="PatientDao" ref="PatientDao" ></property>
+	</bean>
+	<bean name="RecordService" class="CSU.Mental.Service.Impl.RecordServiceImpl" >
+		<property name="RecordDao" ref="RecordDao" ></property>
+	</bean>
+	<bean name="ReferenceService" class="CSU.Mental.Service.Impl.ReferenceServiceImpl" >
+		<property name="ReferenceDao" ref="ReferenceDao" ></property>
+	</bean>
+	<bean name="TemplateService" class="CSU.Mental.Service.Impl.TemplateServiceImpl" >
+		<property name="TemplateDao" ref="TemplateDao" ></property>
+	</bean>
+	
+	<!-- Dao -->
+	<bean name="ChoiceDao" class="CSU.Mental.Dao.Impl.ChoiceDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="DeadlineDao" class="CSU.Mental.Dao.Impl.DeadlineDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="FactorDao" class="CSU.Mental.Dao.Impl.FactorDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="FactorProblemDao" class="CSU.Mental.Dao.Impl.FactorProblemDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="FkindDao" class="CSU.Mental.Dao.Impl.FkindDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="ScaleDao" class="CSU.Mental.Dao.Impl.ScaleDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="SkindDao" class="CSU.Mental.Dao.Impl.SkindDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="SubChoiceDao" class="CSU.Mental.Dao.Impl.SubChoiceDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="UserDao" class="CSU.Mental.Dao.Impl.UserDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="HospitalDao" class="CSU.Mental.Dao.Impl.HospitalDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="PatientDao" class="CSU.Mental.Dao.Impl.PatientDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="ProblemDao" class="CSU.Mental.Dao.Impl.ProblemDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="RecordDao" class="CSU.Mental.Dao.Impl.RecordDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="ReferenceDao" class="CSU.Mental.Dao.Impl.ReferenceDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="TemplateDao" class="CSU.Mental.Dao.Impl.TemplateDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	
+</beans>
