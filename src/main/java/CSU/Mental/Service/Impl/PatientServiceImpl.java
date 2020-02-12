@@ -46,9 +46,29 @@ public class PatientServiceImpl implements PatientService{
 		return PatientDao.CountPatient();
 	}
 
-	public List<Patient> QueryPatientByPageSize(int PageSize, int rows) {
+	public List<Patient> QueryPatientPageSize(int PageSize, int rows) {
 		// TODO Auto-generated method stub
-		return PatientDao.QueryPatientByPageSize(PageSize, rows);
+		return PatientDao.QueryPatientPageSize(PageSize, rows);
+	}
+
+	public List<Patient> QueryPatientByUserPageSize(int PageSize, int rows, int UserId) {
+		// TODO Auto-generated method stub
+		return PatientDao.QueryPatientByUserPageSize(PageSize, rows, UserId);
+	}
+
+	public int CountPatientByUser(int UserId) {
+		// TODO Auto-generated method stub
+		return PatientDao.CountPatientByUser(UserId);
+	}
+
+	public List<Patient> VaguePatientByNamePageSize(int PageSize, int rows, String name) {
+		// TODO Auto-generated method stub
+		return PatientDao.VaguePatientByNamePageSize(PageSize, rows, name);
+	}
+
+	public int CountVaguePatient(String name) {
+		// TODO Auto-generated method stub
+		return PatientDao.CountVaguePatient(name);
 	}
 
 }

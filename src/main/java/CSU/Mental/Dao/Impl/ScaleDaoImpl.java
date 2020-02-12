@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import CSU.Mental.Dao.ScaleDao;
+import CSU.Mental.Model.Patient;
 import CSU.Mental.Model.Scale;
 
 @Transactional
@@ -195,6 +196,41 @@ public class ScaleDaoImpl extends HibernateDaoSupport implements ScaleDao{
 			                (rows - 1) * PageSize).setMaxResults(PageSize);
 					query.setParameter(0, FkindId);
 					query.setParameter(1, SkindId);
+					List<Scale> list = query.list();
+					return list;
+				}
+			});
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public int CountVagueScale(String name) {
+		// TODO Auto-generated method stub
+		int count = - 1;
+		try {
+			String hql = "select count(*) from Scale as scale where patient_name like '%"+ name +"%'"; 
+			return ((Long)getHibernateTemplate().iterate(hql).next()).intValue();
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
+	public List<Scale> VagueScalePageSize(final int PageSize, final int rows, final String name) {
+		// TODO Auto-generated method stub
+		try {
+			return getHibernateTemplate().execute(new HibernateCallback<List<Scale>>() {
+
+				public List<Scale> doInHibernate(Session session) throws HibernateException {
+					// TODO Auto-generated method stub
+					String hql = "from Patient where user_name like :name";
+					Query query = session.createQuery(hql).setFirstResult(
+			                (rows - 1) * PageSize).setMaxResults(PageSize);
+					query.setString("name", "%"+ name +"%");
 					List<Scale> list = query.list();
 					return list;
 				}

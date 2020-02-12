@@ -16,4 +16,6 @@ public interface FactorDao {
 	
 	public List<Factor> QueryFactorByScale(int ScaleId);
 	
+	public Object DeleteMutiplyFactor(List<Factor> list);
+	
 }

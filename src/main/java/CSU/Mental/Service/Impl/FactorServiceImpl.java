@@ -46,4 +46,9 @@ public class FactorServiceImpl implements FactorService{
 		return FactorDao.QueryFactorByScale(ScaleId);
 	}
 
+	public Object DeleteMutiplyFactor(List<Factor> list) {
+		// TODO Auto-generated method stub
+		return FactorDao.DeleteMutiplyFactor(list);
+	}
+
 }

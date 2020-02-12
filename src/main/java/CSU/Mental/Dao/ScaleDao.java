@@ -20,9 +20,13 @@ public interface ScaleDao {
 	
 	public int CountScaleBySkind(int SkindId);
 	
+	public int CountVagueScale(String name);
+	
 	public int CountScaleBySkindFkind(int SkindId,int FkindId);
 	
 	public List<Scale> QueryScalePageSize(int PageSize,int rows);
+	
+	public List<Scale> VagueScalePageSize(int PageSize,int rows,String name);
 	
 	public List<Scale> QueryScaleBySkindPageSize(int PageSize,int rows,int SkindId);
 	

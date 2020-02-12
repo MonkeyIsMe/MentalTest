@@ -111,7 +111,6 @@ public class ScaleAction extends ActionSupport{
 		PatientService = patientService;
 	}
 	
-
 	//更新使用次数
 	public void UpdateScaleNumber() throws Exception{
 		
@@ -538,7 +537,6 @@ public class ScaleAction extends ActionSupport{
 		
 	}
 	
-
 	//查询量表总数
 	public void CountScale() throws Exception{
 		
@@ -577,7 +575,6 @@ public class ScaleAction extends ActionSupport{
 			count = ScaleService.CountScale();
 		}
 		
-		
 		JSONObject jo = new JSONObject();
 		
 		jo.put("Count", count);
@@ -589,7 +586,6 @@ public class ScaleAction extends ActionSupport{
 		
 	}
 	
-
 	//根据大类小类分页查询量表
 	public void QueryScaleByFkindSkindPageSize() throws Exception{
 		
@@ -707,6 +703,128 @@ public class ScaleAction extends ActionSupport{
 		int count = ScaleService.CountScaleBySkindFkind(skid, fkid);
 		
 		JSONObject jo = new JSONObject();
+		jo.put("Count", count);
+		
+		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
+	}
+
+	//删除量表
+	public void DeleteScale() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+
+		String scale_id = request.getParameter("scale_id");
+		
+		//boolean flag = true;
+		
+		if(!cutil.IsNumber(scale_id)) {
+			out.println("Fail");
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int sid = Integer.valueOf(scale_id);
+		
+		ScaleService.DeleteScale(scale);
+		
+		//和一个量表相关的类; 
+		List<Problem> plist = ProblemService.QueryProblemByScale(sid);
+		List<Factor> flist = FactorService.QueryFactorByScale(sid);
+		
+		for(Problem pro : plist) {
+			int pid = pro.getProblemId();
+			List<Choice> clist = ChoiceService.QueryChoiceByProblem(pid);
+			ChoiceService.DeleteMutiplyChoice(clist);
+		}
+		
+		ProblemService.AddMutiplyProblem(plist);
+		
+		for(Factor fac : flist) {
+			int fid = fac.getFactorId();
+			List<Reference> rlist = ReferenceService.QueryReferenceByFactor(fid);
+			ReferenceService.DeleteMutiplyReference(rlist);
+		}
+		
+		FactorService.DeleteMutiplyFactor(flist);
+		
+		out.println("Success");
+		out.flush();
+		out.close();
+		return;
+	}
+
+	//模糊分页查询量表
+	public void VagueScalePageSize() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+
+		String page = request.getParameter("page");
+		String size = request.getParameter("limit");
+		String scale_name = request.getParameter("scale_name");
+		
+		int rows = 1;
+		int PageSize = 5;
+
+		if (!(page == null || page == "" || page.equals("")) && cutil.IsNumber(page)) {
+			rows = Integer.valueOf(page);
+		}
+		if (!(size == null || size == "" || size.equals("")) && cutil.IsNumber(size)) {
+			PageSize = Integer.valueOf(size);
+		}
+		
+		int count = ScaleService.CountVagueScale(scale_name);
+		List<Scale> ScaleList = ScaleService.VagueScalePageSize(PageSize, rows, scale_name);
+		
+		JSONObject jo = new JSONObject();
+		if(ScaleList.size() == 0) {
+			jo.put("Count", "0");
+			jo.put("rows", "0");
+			jo.put("PageSize", "0");
+			jo.put("Array", "null");
+		}
+		else {
+			jo.put("Count", count);
+			jo.put("rows", rows);
+			jo.put("PageSize", PageSize);
+			jo.put("Array", ScaleList.toString());
+		}
+		
+		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
+	}
+	
+	//模糊查询量表总数
+	public void CountVagueScale() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+
+		String scale_name = request.getParameter("scale_name");
+		
+		int count = ScaleService.CountVagueScale(scale_name);
+		
+		JSONObject jo = new JSONObject();
+		
 		jo.put("Count", count);
 		
 		out.println(jo.toString());

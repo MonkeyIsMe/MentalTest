@@ -25,6 +25,7 @@ import CSU.Mental.Service.ChoiceService;
 import CSU.Mental.Service.FkindService;
 import CSU.Mental.Service.ProblemService;
 import CSU.Mental.Service.ScaleService;
+import CSU.Mental.Service.PatientService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -45,6 +46,9 @@ public class TestSpring {
 	@Resource(name="ProblemService")
 	private ProblemService ProblemService;
 	
+	@Resource(name="PatientService")
+	private PatientService PatientService;
+	
 	@Test
 	public void QueryAllFkind() {
 		System.out.println(FkindService.QueryAllFkind().size());
@@ -53,6 +57,11 @@ public class TestSpring {
 	@Test
 	public void QueryChoiceByProblem() {
 		System.out.println(ChoiceService.QueryChoiceByProblem(10));
+	}
+	
+	@Test
+	public void CountVaguePatient() {
+		System.out.println(PatientService.CountVaguePatient("1"));
 	}
 	
 	@Test

@@ -81,4 +81,14 @@ public class ScaleServiceImpl implements ScaleService{
 		return ScaleDao.CountScale();
 	}
 
+	public int CountVagueScale(String name) {
+		// TODO Auto-generated method stub
+		return ScaleDao.CountVagueScale(name);
+	}
+
+	public List<Scale> VagueScalePageSize(int PageSize, int rows, String name) {
+		// TODO Auto-generated method stub
+		return ScaleDao.VagueScalePageSize(PageSize, rows, name);
+	}
+
 }

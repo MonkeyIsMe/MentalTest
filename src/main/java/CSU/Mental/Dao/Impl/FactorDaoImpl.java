@@ -89,4 +89,23 @@ public class FactorDaoImpl extends HibernateDaoSupport implements FactorDao{
 		return null;
 	}
 
+	public Object DeleteMutiplyFactor(final List<Factor> list) {
+		// TODO Auto-generated method stub
+		return getHibernateTemplate().execute(new HibernateCallback<Object>() {
+
+			public Object doInHibernate(Session session) throws HibernateException {
+				// TODO Auto-generated method stub
+				for(int i = 0; i < list.size(); i ++) {
+					session.delete(list.get(i));
+                    if (i % 50 == 0) {  
+                        session.flush();  
+                        session.clear();  
+                    }  
+				}
+				return null;
+			}
+			
+		});
+	}
+
 }

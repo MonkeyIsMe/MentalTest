@@ -30,4 +30,7 @@ public interface ScaleService {
 	
 	public int CountScaleBySkindFkind(int SkindId,int FkindId);
 	
+	public int CountVagueScale(String name);
+	
+	public List<Scale> VagueScalePageSize(int PageSize,int rows,String name);
 }

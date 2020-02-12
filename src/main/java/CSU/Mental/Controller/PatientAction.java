@@ -122,7 +122,7 @@ public class PatientAction extends ActionSupport{
 			PageSize = Integer.valueOf(size);
 		}
 		
-		List<Patient> PatientList = PatientService.QueryPatientByPageSize(PageSize, rows);
+		List<Patient> PatientList = PatientService.QueryPatientPageSize(PageSize, rows);
 		int count = PatientService.CountPatient();
 		
 		JSONObject jo = new JSONObject();
@@ -265,5 +265,142 @@ public class PatientAction extends ActionSupport{
 			return;
 		}
 		
+	}
+
+	//根据userid查病人
+	public void QueryPatientByUserPageSize() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String page = request.getParameter("page");
+		String size = request.getParameter("limit");
+		String user_id = request.getParameter("user_id");
+		
+		int rows = 1;
+		int PageSize = 5;
+
+		if (!(page == null || page == "" || page.equals("")) && cutil.IsNumber(page)) {
+			rows = Integer.valueOf(page);
+		}
+		if (!(size == null || size == "" || size.equals("")) && cutil.IsNumber(size)) {
+			PageSize = Integer.valueOf(size);
+		}
+		
+		if(!cutil.IsNumber(user_id)) {
+			
+			JSONObject jos = new JSONObject();
+			jos.put("Count", "0");
+			jos.put("rows", "0");
+			jos.put("PageSize", "0");
+			jos.put("Array", "null");
+			
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int uid = Integer.valueOf(user_id);
+		
+		List<Patient> PatientList = PatientService.QueryPatientByUserPageSize(PageSize, rows, uid);
+		int count = PatientService.CountPatientByUser(uid);
+		
+		JSONObject jo = new JSONObject();
+		if(PatientList.size() == 0) {
+			jo.put("Count", "0");
+			jo.put("rows", "0");
+			jo.put("PageSize", "0");
+			jo.put("Array", "null");
+		}
+		else {
+			jo.put("Count", count);
+			jo.put("rows", rows);
+			jo.put("PageSize", PageSize);
+			jo.put("Array", PatientList.toString());
+		}
+		
+		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
+		
+	}
+	
+	//根据名字模糊搜索病人
+	public void VaguePatientPageSize() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String page = request.getParameter("page");
+		String size = request.getParameter("limit");
+		String patient_name = request.getParameter("patient_name");
+		
+		int rows = 1;
+		int PageSize = 5;
+
+		if (!(page == null || page == "" || page.equals("")) && cutil.IsNumber(page)) {
+			rows = Integer.valueOf(page);
+		}
+		if (!(size == null || size == "" || size.equals("")) && cutil.IsNumber(size)) {
+			PageSize = Integer.valueOf(size);
+		}
+		
+		
+		List<Patient> PatientList = PatientService.VaguePatientByNamePageSize(PageSize, rows, patient_name);
+		int count = PatientService.CountVaguePatient(patient_name);
+		
+		JSONObject jo = new JSONObject();
+		if(PatientList.size() == 0) {
+			jo.put("Count", "0");
+			jo.put("rows", "0");
+			jo.put("PageSize", "0");
+			jo.put("Array", "null");
+		}
+		else {
+			jo.put("Count", count);
+			jo.put("rows", rows);
+			jo.put("PageSize", PageSize);
+			jo.put("Array", PatientList.toString());
+		}
+		
+		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
+		
+	}
+	
+	//模糊查询总数
+	public void CountVaugePatient() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String patient_name = request.getParameter("patient_name");
+		
+		int count = PatientService.CountVaguePatient(patient_name);
+		
+		JSONObject jo = new JSONObject();
+		
+		jo.put("Count", count);
+		
+		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
 	}
 }

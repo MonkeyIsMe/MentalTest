@@ -61,6 +61,8 @@
 		<!-- 因子 -->
 		<action name="AddScaleFactor" class="FactorAction" method="AddScaleFactor" >
 		</action>
+		<action name="DeleteFactor" class="FactorAction" method="DeleteFactor" >
+		</action>
 		
 		<!-- 激活 -->
 		<action name="AddOrUpdateDeadLine" class="DeadlineAction" method="AddOrUpdateDeadLine" >
@@ -101,6 +103,12 @@
 		</action>
 		<action name="CountScaleByFkindSkind" class="ScaleAction" method="CountScaleByFkindSkind" >
 		</action>
+		<action name="DeleteScale" class="ScaleAction" method="DeleteScale" >
+		</action>
+		<action name="VagueScalePageSize" class="ScaleAction" method="VagueScalePageSize" >
+		</action>
+		<action name="CountVagueScale" class="ScaleAction" method="CountVagueScale" >
+		</action>
 		
 		<!-- 病人 -->
 		<action name="CountPatient" class="PatientAction" method="CountPatient" >
@@ -113,7 +121,13 @@
 		</action>
 		<action name="DeletePatient" class="PatientAction" method="DeletePatient" >
 		</action>
-				
+		<action name="QueryPatientByUserPageSize" class="PatientAction" method="QueryPatientByUserPageSize" >
+		</action>
+		<action name="VaguePatientPageSize" class="PatientAction" method="VaguePatientPageSize" >
+		</action>
+		<action name="CountVaugePatient" class="PatientAction" method="CountVaugePatient" >
+		</action>	
+		
 		<!-- 模板 -->
 		<action name="AddTemplate" class="TemplateAction" method="AddTemplate" >
 		</action>

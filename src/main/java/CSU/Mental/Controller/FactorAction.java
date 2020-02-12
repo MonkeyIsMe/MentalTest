@@ -48,6 +48,48 @@ public class FactorAction extends ActionSupport{
 	public void setFactorProblemService(FactorProblemService factorProblemService) {
 		FactorProblemService = factorProblemService;
 	}
+	
+	//删除一个因子
+	public void DeleteFactor() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String factor_id = request.getParameter("factor_id");
+		
+		if(!cutil.IsNumber(factor_id)) {
+			out.println("Fail");
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int fid = Integer.valueOf(factor_id);
+		
+		factor = FactorService.QueryFactor(fid);
+		
+		if(factor == null) {
+			out.println("Fail");
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		List<Reference> rlist = ReferenceService.QueryReferenceByFactor(fid);
+		
+		ReferenceService.DeleteMutiplyReference(rlist);
+		FactorService.DeleteFactor(factor);
+		
+		out.println("Success");
+		out.flush();
+		out.close();
+		return;
+	}
+	
 	//添加量表因子
 	public void AddScaleFactor() throws Exception{
 		

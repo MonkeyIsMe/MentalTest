@@ -42,6 +42,7 @@
 	<bean name="FactorAction" class="CSU.Mental.Controller.FactorAction" scope="prototype" >
 		<property name="FactorService" ref="FactorService" ></property>
 		<property name="ReferenceService" ref="ReferenceService" ></property>
+		<property name="FactorProblemService" ref="FactorProblemService" ></property>
 	</bean>
 	<bean name="FkindAction" class="CSU.Mental.Controller.FkindAction" scope="prototype" >
 		<property name="FkindService" ref="FkindService" ></property>
@@ -52,7 +53,6 @@
 	<bean name="ProblemAction" class="CSU.Mental.Controller.ProblemAction" scope="prototype" >
 		<property name="ProblemService" ref="ProblemService" ></property>
 		<property name="ChoiceService" ref="ChoiceService" ></property>
-		<property name="FactorProblemService" ref="FactorProblemService" ></property>
 	</bean>
 	<bean name="RecordAction" class="CSU.Mental.Controller.RecordAction" scope="prototype" >
 		<property name="RecordService" ref="RecordService" ></property>

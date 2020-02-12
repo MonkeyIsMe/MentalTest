@@ -16,6 +16,14 @@ public interface PatientDao {
 	
 	public int CountPatient();
 	
-	public List<Patient> QueryPatientByPageSize(int PageSize,int rows);
+	public List<Patient> QueryPatientPageSize(int PageSize,int rows);
+	
+	public List<Patient> QueryPatientByUserPageSize(int PageSize,int rows,int UserId);
+	
+	public int CountPatientByUser(int UserId);
+	
+	public int CountVaguePatient(String name);
+	
+	public List<Patient> VaguePatientByNamePageSize(int PageSize,int rows,String name);
 	
 }
