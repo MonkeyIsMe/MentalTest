@@ -1,6 +1,8 @@
 package CSU.Mental.Controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,7 +11,9 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import CSU.Mental.Model.Factor;
+import CSU.Mental.Model.FactorProblem;
 import CSU.Mental.Model.Reference;
+import CSU.Mental.Service.FactorProblemService;
 import CSU.Mental.Service.FactorService;
 import CSU.Mental.Service.ReferenceService;
 import CSU.Mental.Utils.CommonUtils;
@@ -21,6 +25,7 @@ public class FactorAction extends ActionSupport{
 	private CommonUtils cutil = new CommonUtils();
 	private FactorService FactorService;
 	private ReferenceService ReferenceService;
+	private FactorProblemService FactorProblemService;
 	private Factor factor = new Factor();
 	private Reference reference = new Reference();
 	
@@ -37,6 +42,12 @@ public class FactorAction extends ActionSupport{
 		ReferenceService = referenceService;
 	}
 	
+	public FactorProblemService getFactorProblemService() {
+		return FactorProblemService;
+	}
+	public void setFactorProblemService(FactorProblemService factorProblemService) {
+		FactorProblemService = factorProblemService;
+	}
 	//添加量表因子
 	public void AddScaleFactor() throws Exception{
 		
@@ -64,6 +75,8 @@ public class FactorAction extends ActionSupport{
 			String factor_formula = jo.getString("factor_formula");
 			String factor_order = jo.getString("factor_order");
 			String refer_info = jo.getString("refer_info");
+			String problem_info = jo.getString("problem_info");
+			
 			
 			//处理因子
 			Factor fac = new Factor();
@@ -76,6 +89,21 @@ public class FactorAction extends ActionSupport{
 			fac.setScaleId(sid);
 			
 			int fid = FactorService.AddFactor(fac);
+			
+			//处理题目
+			List<FactorProblem> fplist = new ArrayList<FactorProblem>();
+			JSONArray pja = JSONArray.fromObject(problem_info);
+			for(int j = 0; j < pja.size(); j ++) {
+				JSONObject pjo = pja.getJSONObject(j);
+				String problem_id = pjo.getString("problem_id");
+				int pid = Integer.valueOf(problem_id);
+				FactorProblem fp = new FactorProblem();
+				fp.setFactorId(fid);
+				fp.setProblemId(pid);
+				fplist.add(fp);
+			}
+			
+			FactorProblemService.AddMutiplyFactorProblem(fplist);
 			
 			//处理参考意见范围
 			JSONArray rja = JSONArray.fromObject(refer_info);
