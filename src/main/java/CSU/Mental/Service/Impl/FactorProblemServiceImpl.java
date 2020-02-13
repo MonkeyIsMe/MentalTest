@@ -51,4 +51,14 @@ public class FactorProblemServiceImpl implements FactorProblemService{
 		return FactorProblemDao.AddMutiplyFactorProblem(list);
 	}
 
+	public List<FactorProblem> QueryFactorProblemByFactor(int FactorId) {
+		// TODO Auto-generated method stub
+		return FactorProblemDao.QueryFactorProblemByFactor(FactorId);
+	}
+
+	public Object DeleteMutiplyFactorProblem(List<FactorProblem> list) {
+		// TODO Auto-generated method stub
+		return FactorProblemDao.DeleteMutiplyFactorProblem(list);
+	}
+
 }

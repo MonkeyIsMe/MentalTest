@@ -16,6 +16,10 @@ public interface FactorProblemService {
 	
 	public List<FactorProblem> QueryFactorProblemByProblem(int ProblemId);
 	
+	public List<FactorProblem> QueryFactorProblemByFactor(int FactorId);
+	
 	public Object AddMutiplyFactorProblem(List<FactorProblem> list);
+	
+	public Object DeleteMutiplyFactorProblem(List<FactorProblem> list);
 	
 }

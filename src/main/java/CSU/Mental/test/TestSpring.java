@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import CSU.Mental.Dao.FkindDao;
 import CSU.Mental.Model.Choice;
+import CSU.Mental.Model.Factor;
 import CSU.Mental.Model.Problem;
 import CSU.Mental.Model.Scale;
 import CSU.Mental.Service.ChoiceService;
@@ -26,6 +27,7 @@ import CSU.Mental.Service.FkindService;
 import CSU.Mental.Service.ProblemService;
 import CSU.Mental.Service.ScaleService;
 import CSU.Mental.Service.PatientService;
+import CSU.Mental.Service.FactorService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -49,9 +51,19 @@ public class TestSpring {
 	@Resource(name="PatientService")
 	private PatientService PatientService;
 	
+	@Resource(name="FactorService")
+	private FactorService FactorService;
+	
 	@Test
 	public void QueryAllFkind() {
 		System.out.println(FkindService.QueryAllFkind().size());
+	}
+	
+	@Test
+	public void AddFactor() {
+		Factor fac = new Factor();
+		fac.setFactorName("test_add");
+		FactorService.AddFactor(fac);
 	}
 	
 	@Test

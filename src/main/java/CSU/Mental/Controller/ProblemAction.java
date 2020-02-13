@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.opensymphony.xwork2.ActionSupport;
 
 import CSU.Mental.Model.Choice;
@@ -104,6 +105,131 @@ public class ProblemAction extends ActionSupport{
 		}
 	}
 	
+	public void QuerySingleProblem() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String problem_id = request.getParameter("problem_id");
+		
+		if(!cutil.IsNumber(problem_id)) {
+			
+			JSONObject jos = new JSONObject();
+			jos.put("ProblemInfo", "null");
+			jos.put("ChoiceInfo", "null");
+			
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int pid = Integer.valueOf(problem_id);
+		
+		problem = ProblemService.QueryProblem(pid);
+		
+		if(problem == null) {
+			
+			JSONObject jos = new JSONObject();
+			jos.put("ProblemInfo", "null");
+			jos.put("ChoiceInfo", "null");
+			
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		List<Choice> clist = ChoiceService.QueryChoiceByProblem(pid);
+		
+		JSONObject jo = new JSONObject();
+		jo.put("ProblemInfo", problem.toString());
+		jo.put("ChoiceInfo", clist.toString());
+		
+		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
+	}
+	
+	//添加一个问题
+	public void AddProblem() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String scale_id = request.getParameter("scale_id");
+		String problem_name = request.getParameter("problem_name");
+		String problem_type = request.getParameter("problem_type");
+		String template_id = request.getParameter("template_id");
+		String problem_flag = request.getParameter("problem_flag");
+		String problem_number = request.getParameter("problem_number");
+		String ChoiceInfo = request.getParameter("choice_info"); //选项信息
+		
+		if(!cutil.IsNumber(scale_id)) {
+			out.println("Fail");
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		if(!cutil.IsNumber(template_id)) {
+			out.println("Fail");
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int tid = Integer.valueOf(template_id);
+		int sid = Integer.valueOf(scale_id);
+		
+		problem.setProblemFlag(Integer.valueOf(problem_flag));
+		problem.setProblemName(problem_name);
+		problem.setProblemFlag(tid);
+		problem.setScaleId(sid);
+		problem.setProblemType(problem_type);
+		problem.setProblemNumber(problem_number);
+		
+		int pid = ProblemService.AddProblem(problem);
+		if(tid == 0){
+			//处理选项
+			List<Choice> clist = new ArrayList<Choice>();
+			JSONArray cja = JSONArray.fromObject(ChoiceInfo);
+			for(int i = 0; i < cja.size(); i ++) {
+				JSONObject cjo = new JSONObject();
+				String choice_info = cjo.getString("choice_info");
+				String choice_sub = cjo.getString("choice_sub");
+				String choice_score = cjo.getString("choice_score");
+				String choice_type = cjo.getString("choice_type");
+				
+				Choice ch = new Choice();
+				ch.setChoiceInfo(choice_info);
+				ch.setTemplateId(0);
+				ch.setChoiceSub(choice_sub);
+				ch.setChoiceScore(Integer.valueOf(choice_score));
+				ch.setChoiceType(Integer.valueOf(choice_type));
+				ch.setProblemId(pid);
+				
+				clist.add(ch); 
+			}
+			
+			ChoiceService.AddMutiplyChoice(clist);
+		}
+		
+		out.println("Success");
+		out.flush();
+		out.close();
+		return;
+	}
+	
 	//更新一个问题题面
 	public void UpdateProblemInfo() throws Exception{
 		
@@ -168,7 +294,7 @@ public class ProblemAction extends ActionSupport{
 	}
 	
 	//添加量表题目
-	public void AddScaleChoice() throws Exception{
+	public void AddScaleProblem() throws Exception{
 		
 		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
 		HttpServletRequest request= ServletActionContext.getRequest();

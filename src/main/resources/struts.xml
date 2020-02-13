@@ -73,7 +73,7 @@
 		</action>
 		<action name="UpdateProblemInfo" class="ProblemAction" method="UpdateProblemInfo" >
 		</action>
-		<action name="AddScaleChoice" class="ProblemAction" method="AddScaleChoice" >
+		<action name="AddScaleProblem" class="ProblemAction" method="AddScaleProblem" >
 		</action>
 		
 		<!-- 记录 -->

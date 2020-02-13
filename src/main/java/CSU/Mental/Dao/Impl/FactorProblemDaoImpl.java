@@ -108,4 +108,44 @@ public class FactorProblemDaoImpl extends HibernateDaoSupport implements FactorP
 		});
 	}
 
+	public List<FactorProblem> QueryFactorProblemByFactor(final int FactorId) {
+		// TODO Auto-generated method stub
+		try {
+			return getHibernateTemplate().execute(new HibernateCallback<List<FactorProblem>>() {
+
+				public List<FactorProblem> doInHibernate(Session session) throws HibernateException {
+					// TODO Auto-generated method stub
+					String hql = "from FactorProblem where problem_id = ?";
+					Query query = session.createQuery(hql);
+					query.setParameter(0, FactorId);
+					List<FactorProblem> list = query.list();
+					return list;
+				}
+			});
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Object DeleteMutiplyFactorProblem(final List<FactorProblem> list) {
+		// TODO Auto-generated method stub
+		return getHibernateTemplate().execute(new HibernateCallback<Object>() {
+
+			public Object doInHibernate(Session session) throws HibernateException {
+				// TODO Auto-generated method stub
+				for(int i = 0; i < list.size(); i ++) {
+					session.delete(list.get(i));
+                    if (i % 50 == 0) {  
+                        session.flush();  
+                        session.clear();  
+                    }  
+				}
+				return null;
+			}
+			
+		});
+	}
+
 }
