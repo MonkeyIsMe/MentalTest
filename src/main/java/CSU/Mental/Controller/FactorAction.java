@@ -211,9 +211,7 @@ public class FactorAction extends ActionSupport{
 		return;
 		
 	}
-	
-	
-	
+		
 	//删除量表因子
 	public void DeleteScaleFactor() throws Exception{
 		

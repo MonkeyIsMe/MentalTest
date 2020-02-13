@@ -22,6 +22,33 @@
 		 		完全由spring管理action生命周期,包括Action的创建
 		 		注意:需要手动组装依赖属性
 		  -->
+		  
+		<!-- 选项 -->
+		<action name="DeleteChoice" class="ChoiceAction" method="DeleteChoice" >
+		</action>
+		<action name="AddChoice" class="ChoiceAction" method="AddChoice" >
+		</action>
+		<action name="AddMutiplyChoice" class="ChoiceAction" method="AddMutiplyChoice" >
+		</action>
+		  		
+		<!-- 激活 -->
+		<action name="AddOrUpdateDeadLine" class="DeadlineAction" method="AddOrUpdateDeadLine" >
+		</action>
+				
+		<!-- 因子 -->
+		<action name="AddScaleFactor" class="FactorAction" method="AddScaleFactor" >
+		</action>
+		<action name="DeleteFactor" class="FactorAction" method="DeleteFactor" >
+		</action>
+		<action name="DeleteScaleFactor" class="FactorAction" method="DeleteScaleFactor" >
+		</action>
+		<action name="AddFactor" class="FactorAction" method="AddFactor" >
+		</action>
+		<action name="UpdateScaleFactor" class="FactorAction" method="UpdateScaleFactor" >
+		</action>
+		<action name="QuerySingleFactor" class="FactorAction" method="QuerySingleFactor" >
+		</action>
+		
 		<!-- 大类 -->
 		<action name="QueryAllFkind" class="FkindAction" method="QueryAllFkind" >
 		</action>
@@ -33,39 +60,27 @@
 		</action>
 		<action name="CountFkind" class="FkindAction" method="CountFkind" >
 		</action>
-		
-		<!-- 用户 -->
-		<action name="AddUser" class="UserAction" method="AddUser" >
+				
+		<!-- 注册 -->
+		<action name="AddOrUpdateHospital" class="HospitalAction" method="AddOrUpdateHospital" >
 		</action>
-		<action name="UpdateUserInfo" class="UserAction" method="UpdateUserInfo" >
+				
+		<!-- 病人 -->
+		<action name="CountPatient" class="PatientAction" method="CountPatient" >
 		</action>
-		<action name="UpdateUserPassword" class="UserAction" method="UpdateUserPassword" >
+		<action name="QueryPatientPageSize" class="PatientAction" method="QueryPatientPageSize" >
 		</action>
-		<action name="CountUser" class="UserAction" method="CountUser" >
+		<action name="UpdatePatient" class="PatientAction" method="UpdatePatient" >
 		</action>
-		<action name="QueryUserPageSize" class="UserAction" method="QueryUserPageSize" >
+		<action name="AddPatient" class="PatientAction" method="AddPatient" >
 		</action>
-		<action name="Login" class="UserAction" method="Login" >
+		<action name="DeletePatient" class="PatientAction" method="DeletePatient" >
 		</action>
-		
-		<!-- 小类 -->
-		<action name="AddSkind" class="SkindAction" method="AddSkind" >
+		<action name="QueryPatientByUserPageSize" class="PatientAction" method="QueryPatientByUserPageSize" >
 		</action>
-		<action name="UpdateSkind" class="SkindAction" method="UpdateSkind" >
+		<action name="VaguePatientPageSize" class="PatientAction" method="VaguePatientPageSize" >
 		</action>
-		<action name="QueryAllSkind" class="SkindAction" method="QueryAllSkind" >
-		</action>
-		<action name="DeleteSkind" class="SkindAction" method="DeleteSkind" >
-		</action>
-		
-		<!-- 因子 -->
-		<action name="AddScaleFactor" class="FactorAction" method="AddScaleFactor" >
-		</action>
-		<action name="DeleteFactor" class="FactorAction" method="DeleteFactor" >
-		</action>
-		
-		<!-- 激活 -->
-		<action name="AddOrUpdateDeadLine" class="DeadlineAction" method="AddOrUpdateDeadLine" >
+		<action name="CountVaugePatient" class="PatientAction" method="CountVaugePatient" >
 		</action>
 		
 		<!-- 题目 -->
@@ -75,13 +90,27 @@
 		</action>
 		<action name="AddScaleProblem" class="ProblemAction" method="AddScaleProblem" >
 		</action>
-		
+		<action name="QuerySingleProblem" class="ProblemAction" method="QuerySingleProblem" >
+		</action>
+		<action name="AddProblem" class="ProblemAction" method="AddProblem" >
+		</action>
+		<action name="UpdateProblem" class="ProblemAction" method="UpdateProblem" >
+		</action>
+				
 		<!-- 记录 -->
 		<action name="CountRecord" class="RecordAction" method="CountRecord" >
 		</action>
 		<action name="QueryRecordPageSize" class="RecordAction" method="QueryRecordPageSize" >
 		</action>
 		<action name="DeleteRecord" class="RecordAction" method="DeleteRecord" >
+		</action>
+				  
+		<!-- 选项 -->
+		<action name="DeteleReference" class="ReferenceAction" method="DeteleReference" >
+		</action>
+		<action name="AddReference" class="ReferenceAction" method="AddReference" >
+		</action>
+		<action name="AddMutiplyReference" class="ReferenceAction" method="AddMutiplyReference" >
 		</action>
 		
 		<!-- 量表 -->
@@ -110,24 +139,16 @@
 		<action name="CountVagueScale" class="ScaleAction" method="CountVagueScale" >
 		</action>
 		
-		<!-- 病人 -->
-		<action name="CountPatient" class="PatientAction" method="CountPatient" >
+		<!-- 小类 -->
+		<action name="AddSkind" class="SkindAction" method="AddSkind" >
 		</action>
-		<action name="QueryPatientPageSize" class="PatientAction" method="QueryPatientPageSize" >
+		<action name="UpdateSkind" class="SkindAction" method="UpdateSkind" >
 		</action>
-		<action name="UpdatePatient" class="PatientAction" method="UpdatePatient" >
+		<action name="QueryAllSkind" class="SkindAction" method="QueryAllSkind" >
 		</action>
-		<action name="AddPatient" class="PatientAction" method="AddPatient" >
+		<action name="DeleteSkind" class="SkindAction" method="DeleteSkind" >
 		</action>
-		<action name="DeletePatient" class="PatientAction" method="DeletePatient" >
-		</action>
-		<action name="QueryPatientByUserPageSize" class="PatientAction" method="QueryPatientByUserPageSize" >
-		</action>
-		<action name="VaguePatientPageSize" class="PatientAction" method="VaguePatientPageSize" >
-		</action>
-		<action name="CountVaugePatient" class="PatientAction" method="CountVaugePatient" >
-		</action>	
-		
+
 		<!-- 模板 -->
 		<action name="AddTemplate" class="TemplateAction" method="AddTemplate" >
 		</action>
@@ -139,7 +160,20 @@
 		</action>
 		<action name="QueryAllTemplate" class="TemplateAction" method="QueryAllTemplate" >
 		</action>
-		
+				
+		<!-- 用户 -->
+		<action name="AddUser" class="UserAction" method="AddUser" >
+		</action>
+		<action name="UpdateUserInfo" class="UserAction" method="UpdateUserInfo" >
+		</action>
+		<action name="UpdateUserPassword" class="UserAction" method="UpdateUserPassword" >
+		</action>
+		<action name="CountUser" class="UserAction" method="CountUser" >
+		</action>
+		<action name="QueryUserPageSize" class="UserAction" method="QueryUserPageSize" >
+		</action>
+		<action name="Login" class="UserAction" method="Login" >
+		</action>
 	</package>
 </struts>
 	

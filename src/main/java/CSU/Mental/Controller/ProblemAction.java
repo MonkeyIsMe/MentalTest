@@ -53,6 +53,104 @@ public class ProblemAction extends ActionSupport{
 		FactorProblemService = factorProblemService;
 	}
 
+	//更新一个问题
+	public void UpdateProblem() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String problem_id = request.getParameter("problem_id");
+		String problem_name = request.getParameter("problem_name");
+		String problem_type = request.getParameter("problem_type");
+		String template_id = request.getParameter("template_id");
+		String problem_flag = request.getParameter("problem_flag");
+		String problem_number = request.getParameter("problem_number");
+		String ChoiceInfo = request.getParameter("choice_info"); //选项信息
+		
+		if(!cutil.IsNumber(problem_id)) {
+			out.println("Fail");
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		if(!cutil.IsNumber(template_id)) {
+			out.println("Fail");
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int tid = Integer.valueOf(template_id);
+		int pid = Integer.valueOf(problem_id);
+		
+		problem = ProblemService.QueryProblem(pid);
+		
+		if(problem == null) {
+			out.println("Fail");
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		problem.setProblemFlag(Integer.valueOf(problem_flag));
+		problem.setProblemName(problem_name);
+		problem.setProblemFlag(tid);
+		problem.setProblemType(problem_type);
+		problem.setProblemNumber(problem_number);
+		
+		ProblemService.UpdateProblem(problem);
+		
+		if(tid == 0) {
+			//处理选项
+			JSONArray cja = JSONArray.fromObject(ChoiceInfo);
+			List<Choice> clist = new ArrayList<Choice>();
+			
+			for(int i = 0; i < cja.size(); i ++) {
+				JSONObject cjo = new JSONObject();
+				String choice_info = cjo.getString("choice_info");
+				String choice_sub = cjo.getString("choice_sub");
+				String choice_score = cjo.getString("choice_score");
+				String choice_type = cjo.getString("choice_type");
+				String choice_id = cjo.getString("choice_id");
+				
+				int cid = Integer.valueOf(choice_id);
+				if(cid == 0) {
+					Choice ch = new Choice();
+					ch.setChoiceInfo(choice_info);
+					ch.setTemplateId(0);
+					ch.setChoiceSub(choice_sub);
+					ch.setChoiceScore(Integer.valueOf(choice_score));
+					ch.setChoiceType(Integer.valueOf(choice_type));
+					ch.setProblemId(pid);
+					clist.add(ch);
+				}
+				else {
+					Choice ch = ChoiceService.QueryChoice(cid);
+					ch.setChoiceInfo(choice_info);
+					ch.setTemplateId(0);
+					ch.setChoiceSub(choice_sub);
+					ch.setChoiceScore(Integer.valueOf(choice_score));
+					ch.setChoiceType(Integer.valueOf(choice_type));
+					ch.setProblemId(pid);
+					ChoiceService.UpdateChoice(ch);
+				}
+				
+			}
+			
+			ChoiceService.AddMutiplyChoice(clist);
+		}
+		
+		out.println("Success");
+		out.flush();
+		out.close();
+		return;
+	}
+	
 	//删除一个问题
 	public void DeleteProblem() throws Exception{
 		
@@ -66,7 +164,7 @@ public class ProblemAction extends ActionSupport{
 		boolean flag = true;
 		
 		String problem_id = request.getParameter("problem_id");
-		//System.out.println(problem_id);
+		
 		if(!cutil.IsNumber(problem_id)) {
 			out.println("Fail");
 			out.flush();

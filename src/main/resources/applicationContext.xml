@@ -36,6 +36,9 @@
 	
 	<!-- action -->
 	<!-- 注意:Action对象作用范围一定是多例的.这样才符合struts2架构 -->
+	<bean name="ChoiceAction" class="CSU.Mental.Controller.ChoiceAction" scope="prototype" >
+		<property name="ChoiceService" ref="ChoiceService" ></property>
+	</bean>
 	<bean name="DeadlineAction" class="CSU.Mental.Controller.DeadlineAction" scope="prototype" >
 		<property name="DeadlineService" ref="DeadlineService" ></property>
 	</bean>
@@ -47,15 +50,22 @@
 	<bean name="FkindAction" class="CSU.Mental.Controller.FkindAction" scope="prototype" >
 		<property name="FkindService" ref="FkindService" ></property>
 	</bean>
+	<bean name="HospitalAction" class="CSU.Mental.Controller.HospitalAction" scope="prototype" >
+		<property name="HospitalService" ref="HospitalService" ></property>
+	</bean>
 	<bean name="PatientAction" class="CSU.Mental.Controller.PatientAction" scope="prototype" >
 		<property name="PatientService" ref="PatientService" ></property>
 	</bean>	
 	<bean name="ProblemAction" class="CSU.Mental.Controller.ProblemAction" scope="prototype" >
 		<property name="ProblemService" ref="ProblemService" ></property>
 		<property name="ChoiceService" ref="ChoiceService" ></property>
+		<property name="FactorProblemService" ref="FactorProblemService" ></property>
 	</bean>
 	<bean name="RecordAction" class="CSU.Mental.Controller.RecordAction" scope="prototype" >
 		<property name="RecordService" ref="RecordService" ></property>
+	</bean>	
+	<bean name="ReferenceAction" class="CSU.Mental.Controller.ReferenceAction" scope="prototype" >
+		<property name="ReferenceService" ref="ReferenceService" ></property>
 	</bean>	
 	<bean name="ScaleAction" class="CSU.Mental.Controller.ScaleAction" scope="prototype" >
 		<property name="ScaleService" ref="ScaleService" ></property>
