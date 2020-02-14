@@ -44,7 +44,9 @@ public class ChoiceAction extends ActionSupport{
 		String choice_id = request.getParameter("choice_id"); 
 		
 		if(!cutil.IsNumber(choice_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -55,7 +57,9 @@ public class ChoiceAction extends ActionSupport{
 		choice = ChoiceService.QueryChoice(cid);
 		
 		if(choice == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -63,14 +67,17 @@ public class ChoiceAction extends ActionSupport{
 		
 		flag = ChoiceService.DeleteChoice(choice);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
+			jo.put("result", "Success");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		else {
-			out.println("Fail");
+			jo.put("result", "Fail");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -97,7 +104,9 @@ public class ChoiceAction extends ActionSupport{
 		String flag_id = request.getParameter("flag_id"); 
 		
 		if(!cutil.IsNumber(flag_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -121,17 +130,20 @@ public class ChoiceAction extends ActionSupport{
 		
 		flag = ChoiceService.AddChoice(choice);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 	}
 	
@@ -149,7 +161,9 @@ public class ChoiceAction extends ActionSupport{
 		String problem_id = request.getParameter("problem_id");
 		
 		if(!cutil.IsNumber(problem_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -180,7 +194,10 @@ public class ChoiceAction extends ActionSupport{
 		
 		ChoiceService.AddMutiplyChoice(clist);
 		
-		out.println("Success");
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;

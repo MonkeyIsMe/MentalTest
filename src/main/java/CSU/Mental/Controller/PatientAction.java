@@ -43,7 +43,9 @@ public class PatientAction extends ActionSupport{
 		String patient_id = request.getParameter("patient_id");
 		
 		if(!cutil.IsNumber(patient_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -54,7 +56,9 @@ public class PatientAction extends ActionSupport{
 		patient = PatientService.QueryPatient(pid);
 		
 		if(patient == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -62,17 +66,20 @@ public class PatientAction extends ActionSupport{
 		
 		flag = PatientService.DeletePatient(patient);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 		
 	}
@@ -168,7 +175,9 @@ public class PatientAction extends ActionSupport{
 		String patient_id = request.getParameter("patient_id");
 		
 		if(!cutil.IsNumber(patient_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -196,17 +205,20 @@ public class PatientAction extends ActionSupport{
 		
 		flag = PatientService.UpdatePatient(patient);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 	}
 	
@@ -232,7 +244,9 @@ public class PatientAction extends ActionSupport{
 		String user_id = request.getParameter("user_id");
 		
 		if(!cutil.IsNumber(user_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -252,17 +266,20 @@ public class PatientAction extends ActionSupport{
 		
 		flag = PatientService.AddPatient(patient);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 		
 	}

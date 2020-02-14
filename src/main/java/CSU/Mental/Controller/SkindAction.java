@@ -43,7 +43,9 @@ public class SkindAction extends ActionSupport{
 		String skind_name = request.getParameter("skind_name");
 		
 		if(!cutil.IsNumber(fk_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -56,17 +58,20 @@ public class SkindAction extends ActionSupport{
 		
 		flag = SkindService.AddSkind(skind);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 		
 		
@@ -88,7 +93,9 @@ public class SkindAction extends ActionSupport{
 		String skind_name = request.getParameter("skind_name");
 		
 		if(!cutil.IsNumber(sk_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -109,17 +116,20 @@ public class SkindAction extends ActionSupport{
 		
 		flag = SkindService.UpdateSkind(skind);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 		
 	}
@@ -193,7 +203,9 @@ public class SkindAction extends ActionSupport{
 		String sk_id = request.getParameter("sk_id");
 		
 		if(!cutil.IsNumber(sk_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -204,7 +216,9 @@ public class SkindAction extends ActionSupport{
 		skind = SkindService.QuerySkind(skid);
 		
 		if(skind == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -212,17 +226,20 @@ public class SkindAction extends ActionSupport{
 		
 		flag = SkindService.DeleteSkind(skind);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 		
 	}

@@ -22,4 +22,6 @@ public interface ProblemService {
 	
 	public List<Integer> AddMutiplyProblem(List<Problem> list);
 	
+	public List<Object[]> QuerySingleProblemByScale(int ScaleId);
+	
 }

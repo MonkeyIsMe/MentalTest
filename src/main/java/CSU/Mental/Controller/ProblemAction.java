@@ -72,14 +72,18 @@ public class ProblemAction extends ActionSupport{
 		String ChoiceInfo = request.getParameter("choice_info"); //选项信息
 		
 		if(!cutil.IsNumber(problem_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		
 		if(!cutil.IsNumber(template_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -91,7 +95,9 @@ public class ProblemAction extends ActionSupport{
 		problem = ProblemService.QueryProblem(pid);
 		
 		if(problem == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -145,7 +151,10 @@ public class ProblemAction extends ActionSupport{
 			ChoiceService.AddMutiplyChoice(clist);
 		}
 		
-		out.println("Success");
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;
@@ -166,7 +175,9 @@ public class ProblemAction extends ActionSupport{
 		String problem_id = request.getParameter("problem_id");
 		
 		if(!cutil.IsNumber(problem_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -180,26 +191,23 @@ public class ProblemAction extends ActionSupport{
 		
 		if(flag) {
 			List<Choice> ChoiceList = ChoiceService.QueryChoiceByProblem(pid);
-			if(ChoiceList.size() == 0) {
-				out.println("Success");
-				out.flush();
-				out.close();
-				return;
-			}
 			ChoiceService.DeleteMutiplyChoice(ChoiceList);
 		}
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 	}
 	
@@ -273,14 +281,18 @@ public class ProblemAction extends ActionSupport{
 		String ChoiceInfo = request.getParameter("choice_info"); //选项信息
 		
 		if(!cutil.IsNumber(scale_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		
 		if(!cutil.IsNumber(template_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -322,7 +334,10 @@ public class ProblemAction extends ActionSupport{
 			ChoiceService.AddMutiplyChoice(clist);
 		}
 		
-		out.println("Success");
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;
@@ -346,14 +361,18 @@ public class ProblemAction extends ActionSupport{
 		String template_id = request.getParameter("template_id");
 		
 		if(!cutil.IsNumber(problem_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		
 		if(!cutil.IsNumber(template_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -365,7 +384,9 @@ public class ProblemAction extends ActionSupport{
 		problem = ProblemService.QueryProblem(pid);
 		
 		if(problem == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -377,17 +398,20 @@ public class ProblemAction extends ActionSupport{
 		
 		flag = ProblemService.UpdateProblem(problem);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 	}
 	
@@ -472,9 +496,13 @@ public class ProblemAction extends ActionSupport{
 		
 		ChoiceService.AddMutiplyChoice(clist);
 		
-		out.println("Success");
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;
 	}
+
 }

@@ -60,6 +60,16 @@ public class TestSpring {
 	}
 	
 	@Test
+	public void CountScale() {
+		System.out.println(ScaleService.CountScale());
+	}
+	
+	@Test
+	public void CountPatient() {
+		System.out.println(PatientService.CountPatient());
+	}
+	
+	@Test
 	public void AddFactor() {
 		Factor fac = new Factor();
 		fac.setFactorName("test_add");
@@ -88,6 +98,13 @@ public class TestSpring {
 	@Test
 	public void QueryProblem() {
 		System.out.println(ProblemService.QueryProblem(0));
+	}
+	
+	@Test
+	public void TestJsonOne() {
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		System.out.println(jo.toString());
 	}
 	
 	@Test

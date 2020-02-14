@@ -43,7 +43,7 @@ public class ScaleServiceImpl implements ScaleService{
 
 	public int CountScale() {
 		// TODO Auto-generated method stub
-		return 0;
+		return ScaleDao.CountScale();
 	}
 
 	public List<Scale> QueryScalePageSize(int PageSize, int rows) {

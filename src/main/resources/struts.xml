@@ -112,6 +112,8 @@
 		</action>
 		<action name="AddMutiplyReference" class="ReferenceAction" method="AddMutiplyReference" >
 		</action>
+		<action name="QueryReferenceByFactor" class="ReferenceAction" method="QueryReferenceByFactor" >
+		</action>
 		
 		<!-- 量表 -->
 		<action name="UpdateScaleNumber" class="ScaleAction" method="UpdateScaleNumber" >

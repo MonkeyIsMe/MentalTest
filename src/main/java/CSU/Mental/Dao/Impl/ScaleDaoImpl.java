@@ -78,7 +78,7 @@ public class ScaleDaoImpl extends HibernateDaoSupport implements ScaleDao{
 		// TODO Auto-generated method stub
 		int count = - 1;
 		try {
-			String hql = "select count(*) from Comment as comment"; 
+			String hql = "select count(*) from Scale as Scale"; 
 			return ((Long)getHibernateTemplate().iterate(hql).next()).intValue();
 		} catch (DataAccessException e) {
 			// TODO Auto-generated catch block

@@ -12,6 +12,7 @@ import CSU.Mental.Model.Deadline;
 import CSU.Mental.Service.DeadlineService;
 import CSU.Mental.Utils.CommonUtils;
 import CSU.Mental.Utils.DesUtil;
+import net.sf.json.JSONObject;
 
 public class DeadlineAction extends ActionSupport{
 
@@ -53,18 +54,22 @@ public class DeadlineAction extends ActionSupport{
 			flag = DeadlineService.UpdateDeadLine(deadline);
 		}
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
+		
 	}
 	
 }

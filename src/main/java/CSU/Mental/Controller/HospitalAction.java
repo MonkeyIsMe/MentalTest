@@ -11,6 +11,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import CSU.Mental.Model.Hospital;
 import CSU.Mental.Service.HospitalService;
 import CSU.Mental.Utils.CommonUtils;
+import net.sf.json.JSONObject;
 
 public class HospitalAction extends ActionSupport{
 
@@ -61,17 +62,20 @@ public class HospitalAction extends ActionSupport{
 			flag = HospitalService.UpdateHospital(hospital);
 		}
 
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 		
 	}

@@ -1,0 +1,85 @@
+.second{
+	display: flex;
+	flex-direction: column;
+	margin-top: 50px;
+	margin-left: 180px;
+	font-size: 14px;
+}
+.name_textarea{
+	width: 900px;
+	height: 15px;
+	margin-left: 70px;
+	margin-top: -20px;
+	font-size: 14px;
+}
+.ClassName{
+	margin-top: 20px;
+}
+.select1{
+	width: 250px;
+	height: 25px;
+	margin-left: 70px;
+	margin-top: -20px;
+}
+.select2{
+	width: 250px;
+	height: 25px;
+	margin-left: 360px;
+	margin-top: -25px;
+}
+.third{
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+	margin-left: 180px;
+	font-size: 14px;
+}
+.introduction{
+	width:84%;
+	height: 450px;
+	margin-top: 20px;
+}
+.tableInstruction{
+	margin-top: 20px;
+}
+.Instruction{
+	width:84%;
+	height: 200px;
+	margin-top: 20px;
+}
+.save{
+	width: 122px;
+	height: 30px;
+	text-align: center;
+	background-color: rgb(255,204,51);
+	margin-left: 60%;
+	margin-top: 15px;
+	border: 2px solid gray;
+	border-radius: 5px;
+}
+.nextStep{
+	width: 122px;
+	height: 30px;
+	text-align: center;
+	background-color: rgb(255,204,51);
+	margin-left: 74%;
+	margin-top: -30px;
+	border: 2px solid gray;
+	border-radius: 5px;
+}
+
+.background1{
+	position: absolute;
+	margin-top: -1000px;
+	width: 122px;
+	height: 1500px;
+	background-color: rgb(196,196,196);
+}
+.background2{
+	position: absolute;
+	margin-top: -1000px;
+	margin-left: 91%;
+	width: 125px;
+	height: 1500px;
+	background-color: rgb(196,196,196);
+}

@@ -40,7 +40,9 @@ public class UserAction extends ActionSupport{
 		
 		boolean exist = UserService.QueryUserIsExist(user_account);
 		if(exist) {
-			out.println("Already");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Already");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -55,17 +57,20 @@ public class UserAction extends ActionSupport{
 		
 		flag = UserService.AddUser(user);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 	}
 	
@@ -87,7 +92,10 @@ public class UserAction extends ActionSupport{
 		String user_role = request.getParameter("user_role");
 		
 		if(!cutil.IsNumber(user_id)) {
-			out.println("Fail");
+			JSONObject jo = new JSONObject();
+			jo.put("result", "Fail");
+			
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -98,7 +106,10 @@ public class UserAction extends ActionSupport{
 		user = UserService.QueryUser(uid);
 		
 		if(user == null) {
-			out.println("Fail");
+			JSONObject jo = new JSONObject();
+			jo.put("result", "Fail");
+			
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -110,17 +121,20 @@ public class UserAction extends ActionSupport{
 		
 		flag = UserService.UpdateUser(user);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 	}
 	
@@ -142,7 +156,10 @@ public class UserAction extends ActionSupport{
 		String password = cutil.md5(user_password);
 		
 		if(!cutil.IsNumber(user_id)) {
-			out.println("Fail");
+			JSONObject jo = new JSONObject();
+			jo.put("result", "Fail");
+			
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -153,7 +170,10 @@ public class UserAction extends ActionSupport{
 		user = UserService.QueryUser(uid);
 		
 		if(user == null) {
-			out.println("Fail");
+			JSONObject jo = new JSONObject();
+			jo.put("result", "Fail");
+			
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -163,17 +183,20 @@ public class UserAction extends ActionSupport{
 		
 		flag = UserService.UpdateUser(user);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 	}
 	
@@ -264,7 +287,10 @@ public class UserAction extends ActionSupport{
 		user = UserService.QueryUserByAccount(user_account);
 		
 		if(user == null) {
-			out.println("NoUser");
+			JSONObject jo = new JSONObject();
+			jo.put("result", "NoUser");
+			
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -276,7 +302,10 @@ public class UserAction extends ActionSupport{
 		
 		boolean cflag = code.equals(checkcode);
 		if(!cflag) {
-			out.println("WrongCode");
+			JSONObject jo = new JSONObject();
+			jo.put("result", "WrongCode");
+			
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -285,13 +314,19 @@ public class UserAction extends ActionSupport{
 		String upassword = user.getUserPassword();
 		boolean pflag = password.equals(upassword);
 		if(!pflag) {
-			out.println("WrongPassword");
+			JSONObject jo = new JSONObject();
+			jo.put("result", "WrongPassword");
+			
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		
-		out.println("Success");
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;

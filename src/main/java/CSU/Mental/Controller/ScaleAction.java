@@ -126,7 +126,9 @@ public class ScaleAction extends ActionSupport{
 		String scale_id = request.getParameter("scale_id");
 		
 		if(!cutil.IsNumber(scale_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -137,7 +139,9 @@ public class ScaleAction extends ActionSupport{
 		scale = ScaleService.QueryScale(sid);
 		
 		if(scale == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -349,21 +353,27 @@ public class ScaleAction extends ActionSupport{
 		boolean flag = true;
 		
 		if(!cutil.IsNumber(scale_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		
 		if(!cutil.IsNumber(sk_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		
 		if(!cutil.IsNumber(fk_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -422,14 +432,20 @@ public class ScaleAction extends ActionSupport{
 		String fk_id = request.getParameter("fk_id");
 		
 		if(!cutil.IsNumber(sk_id)) {
-			out.println("Fail");
+			JSONObject jo = new JSONObject();
+			jo.put("ScaleId", 0);
+			
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		
 		if(!cutil.IsNumber(fk_id)) {
-			out.println("Fail");
+			JSONObject jo = new JSONObject();
+			jo.put("ScaleId", 0);
+			
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -726,7 +742,10 @@ public class ScaleAction extends ActionSupport{
 		//boolean flag = true;
 		
 		if(!cutil.IsNumber(scale_id)) {
-			out.println("Fail");
+			JSONObject jo = new JSONObject();
+			jo.put("result", "Fail");
+			
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -756,7 +775,10 @@ public class ScaleAction extends ActionSupport{
 		
 		FactorService.DeleteMutiplyFactor(flist);
 		
-		out.println("Success");
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;

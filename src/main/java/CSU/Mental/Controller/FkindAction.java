@@ -46,14 +46,17 @@ public class FkindAction extends ActionSupport{
 		
 		flag = FkindService.AddFkind(fkind);
 		
-		if(flag) {
-			out.println("Success");
+		JSONObject jo = new JSONObject();
+		if (flag) {
+			jo.put("result", "Success");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
-		}
+		} 
 		else {
-			out.println("Fail");
+			jo.put("result", "Fail");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -76,7 +79,9 @@ public class FkindAction extends ActionSupport{
 		String fkind_name = request.getParameter("fkind_name");
 		
 		if(!cutil.IsNumber(fkind_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -87,7 +92,9 @@ public class FkindAction extends ActionSupport{
 		fkind = FkindService.QueryFkind(fid);
 		
 		if(fkind == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -97,14 +104,17 @@ public class FkindAction extends ActionSupport{
 		
 		flag = FkindService.UpdateFkind(fkind);
 		
-		if(flag) {
-			out.println("Success");
+		JSONObject jo = new JSONObject();
+		if (flag) {
+			jo.put("result", "Success");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
-		}
+		} 
 		else {
-			out.println("Fail");
+			jo.put("result", "Fail");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -126,7 +136,9 @@ public class FkindAction extends ActionSupport{
 		String fkind_id = request.getParameter("fkind_id");
 		
 		if(!cutil.IsNumber(fkind_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -137,7 +149,9 @@ public class FkindAction extends ActionSupport{
 		fkind = FkindService.QueryFkind(fid);
 		
 		if(fkind == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -146,14 +160,17 @@ public class FkindAction extends ActionSupport{
 		
 		flag = FkindService.DeleteFkind(fkind);
 		
-		if(flag) {
-			out.println("Success");
+		JSONObject jo = new JSONObject();
+		if (flag) {
+			jo.put("result", "Success");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
-		}
+		} 
 		else {
-			out.println("Fail");
+			jo.put("result", "Fail");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;

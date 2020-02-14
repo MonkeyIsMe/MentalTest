@@ -148,4 +148,19 @@ public class ProblemDaoImpl extends HibernateDaoSupport implements ProblemDao{
 		return in_list;
 	}
 
+	public List<Object[]> QuerySingleProblemByScale(final int ScaleId) {
+		// TODO Auto-generated method stub
+		return getHibernateTemplate().execute(new HibernateCallback<List<Object[]>>() {
+
+			public List<Object[]> doInHibernate(Session session) throws HibernateException {
+				// TODO Auto-generated method stub
+				String hql = "select ProblemId,ProblemName,ProblemNumber from Problem where scale_id = ?";
+				Query query = session.createQuery(hql);
+				query.setParameter(0, ScaleId);
+				List<Object[]> list = query.list();
+				return list;
+			}
+		});
+	}
+
 }

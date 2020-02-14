@@ -44,7 +44,9 @@ public class ReferenceAction extends ActionSupport{
 		String reference_id = request.getParameter("reference_id"); 
 		
 		if(!cutil.IsNumber(reference_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -54,7 +56,9 @@ public class ReferenceAction extends ActionSupport{
 	
 		reference = ReferenceService.QueryReference(rid);
 		if(reference == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -62,14 +66,17 @@ public class ReferenceAction extends ActionSupport{
 		
 		flag = ReferenceService.DeleteReference(reference);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
+			jo.put("result", "Success");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		else {
-			out.println("Fail");
+			jo.put("result", "Fail");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -98,7 +105,9 @@ public class ReferenceAction extends ActionSupport{
 		String factor_id = request.getParameter("factor_id");
 		
 		if(!cutil.IsNumber(factor_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -116,14 +125,17 @@ public class ReferenceAction extends ActionSupport{
 		
 		flag = ReferenceService.AddReference(reference);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
+			jo.put("result", "Success");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		else {
-			out.println("Fail");
+			jo.put("result", "Fail");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -145,7 +157,9 @@ public class ReferenceAction extends ActionSupport{
 		String factor_id = request.getParameter("factor_id");
 		
 		if(!cutil.IsNumber(factor_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -178,11 +192,65 @@ public class ReferenceAction extends ActionSupport{
 			ReferenceService.AddReference(refer);
 		}
 		
-		out.println("Success");
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;
 		
 	}
 	
+
+	//根据因子查询参考信息
+	public void QueryReferenceByFactor() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String factor_id = request.getParameter("factor_id");
+		
+		if(!cutil.IsNumber(factor_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("Count", "0");
+			jos.put("rows", "0");
+			jos.put("PageSize", "0");
+			jos.put("Array", "null");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int fid = Integer.valueOf(factor_id);
+		
+		List<Reference> rlist = ReferenceService.QueryReferenceByFactor(fid);
+		
+		JSONObject jo = new JSONObject();
+
+		if (rlist.size() == 0) {
+			jo.put("Count", "0");
+			jo.put("rows", "0");
+			jo.put("PageSize", "0");
+			jo.put("Array", "null");
+		} 
+		else {
+			JSONArray ja = JSONArray.fromObject(rlist);
+			jo.put("Count", rlist.size());
+			jo.put("rows", 1);
+			jo.put("PageSize", rlist.size());
+			jo.put("Array", ja.toString());
+		}
+		
+		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
+		
+	}
 }

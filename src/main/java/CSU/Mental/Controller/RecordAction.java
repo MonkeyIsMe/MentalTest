@@ -170,7 +170,9 @@ public class RecordAction extends ActionSupport{
 		String record_id = request.getParameter("record_id");
 		
 		if(!cutil.IsNumber(record_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -181,7 +183,9 @@ public class RecordAction extends ActionSupport{
 		record = RecordService.QueryRecord(rid);
 		
 		if(record == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -189,17 +193,20 @@ public class RecordAction extends ActionSupport{
 		
 		flag = RecordService.DeleteRecord(record);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 	}
 }

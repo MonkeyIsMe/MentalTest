@@ -124,7 +124,10 @@ public class FactorAction extends ActionSupport{
 		}
 		
 		
-		out.println("Success");
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;
@@ -143,7 +146,9 @@ public class FactorAction extends ActionSupport{
 		String factor_id = request.getParameter("factor_id");
 		
 		if(!cutil.IsNumber(factor_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -153,7 +158,9 @@ public class FactorAction extends ActionSupport{
 		
 		factor = FactorService.QueryFactor(fid);
 		if(factor == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -164,7 +171,10 @@ public class FactorAction extends ActionSupport{
 		ReferenceService.DeleteMutiplyReference(rlist);
 		FactorService.DeleteFactor(factor);
 		
-		out.println("Success");
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;
@@ -183,7 +193,10 @@ public class FactorAction extends ActionSupport{
 		String factor_id = request.getParameter("factor_id");
 		
 		if(!cutil.IsNumber(factor_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("FactorInfo", "Fail");
+			jos.put("ReferenceInfo", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -193,7 +206,10 @@ public class FactorAction extends ActionSupport{
 		
 		factor = FactorService.QueryFactor(fid);
 		if(factor == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("FactorInfo", "Fail");
+			jos.put("ReferenceInfo", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -239,7 +255,10 @@ public class FactorAction extends ActionSupport{
 			FactorService.DeleteFactor(factor);
 		}
 		
-		out.println("Success");
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;
@@ -284,7 +303,10 @@ public class FactorAction extends ActionSupport{
 			FactorService.UpdateFactor(factor);
 		}
 		
-		out.println("Success");
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;
@@ -375,7 +397,10 @@ public class FactorAction extends ActionSupport{
 			
 		}
 		
-		out.println("Success");
+		JSONObject jo = new JSONObject();
+		jo.put("result", "Success");
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;

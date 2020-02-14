@@ -78,9 +78,12 @@ public class TemplateAction extends ActionSupport{
 		
 		ChoiceService.AddMutiplyChoice(clist);
 		
-		out.println("Success");
+		JSONObject jos = new JSONObject();
+		jos.put("result", "Success");
+		out.println(jos.toString());
 		out.flush();
 		out.close();
+		return;
 		
 	}
 	
@@ -99,7 +102,9 @@ public class TemplateAction extends ActionSupport{
 		String template_id = request.getParameter("template_id");
 		
 		if(!cutil.IsNumber(template_id)) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -110,7 +115,9 @@ public class TemplateAction extends ActionSupport{
 		template = TemplateService.QueryTemplate(tid);
 		
 		if(template == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -121,17 +128,20 @@ public class TemplateAction extends ActionSupport{
 		List<Choice> del_list = ChoiceService.QueryChoiceByTemplate(tid);
 		ChoiceService.DeleteMutiplyChoice(del_list);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 	}
 	
@@ -163,7 +173,9 @@ public class TemplateAction extends ActionSupport{
 		template = TemplateService.QueryTemplate(tid);
 		
 		if(template == null) {
-			out.println("Fail");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -199,17 +211,20 @@ public class TemplateAction extends ActionSupport{
 		
 		flag = TemplateService.UpdateTemplate(template);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
-			out.flush();
-			out.close();
-			return;
-		}
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
 		else {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
 		}
 	}
 	
