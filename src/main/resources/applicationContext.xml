@@ -47,6 +47,9 @@
 		<property name="ReferenceService" ref="ReferenceService" ></property>
 		<property name="FactorProblemService" ref="FactorProblemService" ></property>
 	</bean>
+	<bean name="FactorProblemAction" class="CSU.Mental.Controller.FactorProblemAction" scope="prototype" >
+		<property name="FactorProblemService" ref="FactorProblemService" ></property>
+	</bean>
 	<bean name="FkindAction" class="CSU.Mental.Controller.FkindAction" scope="prototype" >
 		<property name="FkindService" ref="FkindService" ></property>
 	</bean>

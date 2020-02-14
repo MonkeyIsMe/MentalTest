@@ -28,6 +28,73 @@ public class ReferenceAction extends ActionSupport{
 	public void setReferenceService(ReferenceService referenceService) {
 		ReferenceService = referenceService;
 	}
+	//更新参考选项
+	public void UpdateReference() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		boolean flag = true;
+		
+		String reference_id = request.getParameter("reference_id"); 
+		String reference_bscore = request.getParameter("refer_bscore");
+		String reference_escore = request.getParameter("refer_escore");
+		String reference_sex = request.getParameter("refer_sex");
+		String reference_bage = request.getParameter("refer_bage");
+		String reference_eage = request.getParameter("refer_eage");
+		String reference_suggestion = request.getParameter("refer_suggestion");
+		
+		if(!cutil.IsNumber(reference_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int rid = Integer.valueOf(reference_id);
+	
+		reference = ReferenceService.QueryReference(rid);
+		
+		if(reference == null) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		reference.setReferenceBeginScore(Integer.valueOf(reference_bscore));
+		reference.setReferenceEndScore(Integer.valueOf(reference_escore));
+		reference.setReferenceSex(reference_sex);
+		reference.setReferenceBeginAge(Integer.valueOf(reference_bage));
+		reference.setReferenceEndAge(Integer.valueOf(reference_eage));
+		reference.setReferenceSuggestion(reference_suggestion);
+		
+		flag = ReferenceService.UpdateReference(reference);
+		
+		JSONObject jo = new JSONObject();
+		if(flag) {
+			jo.put("result", "Success");
+			out.println(jo.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		else {
+			jo.put("result", "Fail");
+			out.println(jo.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+	}
 	
 	//删除一个参考选项
 	public void DeteleReference() throws Exception{

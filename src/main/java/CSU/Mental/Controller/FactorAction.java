@@ -49,6 +49,74 @@ public class FactorAction extends ActionSupport{
 		FactorProblemService = factorProblemService;
 	}
 	
+	//更新一个因子
+	public void UpdateFactor() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		boolean flag = true;
+		
+		String factor_name = request.getParameter("factor_name");
+		String factor_info = request.getParameter("factor_info");
+		String factor_balance = request.getParameter("factor_balance");
+		String factor_den = request.getParameter("factor_den");
+		String factor_formula = request.getParameter("factor_formula");
+		String factor_order = request.getParameter("factor_order");
+		String factor_id = request.getParameter("factor_id");
+		
+		if(!cutil.IsNumber(factor_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int fid = Integer.valueOf(factor_id);
+		
+		factor = FactorService.QueryFactor(fid);
+		if(factor == null) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		//处理因子
+		factor.setFactorName(factor_name);
+		factor.setFactorInfo(factor_info);
+		factor.setFactorBalance(Double.valueOf(factor_balance));
+		factor.setFactorDen(Double.valueOf(factor_den));
+		factor.setFactorFormula(factor_formula);
+		factor.setFactorOrder(factor_order);
+		
+		flag = FactorService.UpdateFactor(factor);
+		
+		JSONObject jo = new JSONObject();
+		if(flag) {
+			jo.put("result", "Success");
+			out.println(jo.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		else {
+			jo.put("result", "Fail");
+			out.println(jo.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+	}
+	
 	//增加一个因子
 	public void AddFactor() throws Exception{
 		
@@ -66,8 +134,6 @@ public class FactorAction extends ActionSupport{
 		String factor_formula = request.getParameter("factor_formula");
 		String factor_order = request.getParameter("factor_order");
 		String scale_id = request.getParameter("scale_id");		
-		String refer_info = request.getParameter("refer_info");
-		String problem_info = request.getParameter("problem_info");
 		
 		//处理因子
 		factor.setFactorName(factor_name);
@@ -79,50 +145,7 @@ public class FactorAction extends ActionSupport{
 		factor.setScaleId(Integer.valueOf(scale_id));
 		
 		int fid = FactorService.AddFactor(factor);
-		
-		//处理题目
-		JSONArray pja = JSONArray.fromObject(problem_info);
-		List<FactorProblem> fplist = new ArrayList<FactorProblem>();
-		for(int i = 0; i < pja.size(); i ++) {
-			
-			JSONObject jo = pja.getJSONObject(i);
-			String problem_id = jo.getString("problem_id");
-			int pid = Integer.valueOf(problem_id);
-			
-			FactorProblem fp = new FactorProblem();
-			fp.setFactorId(fid);
-			fp.setProblemId(pid);
-			
-			fplist.add(fp);
-		}
-		
-		FactorProblemService.AddMutiplyFactorProblem(fplist);
-		
-		//处理参考信息
-		JSONArray rja = JSONArray.fromObject(refer_info);
-		List<Reference> rlist = new ArrayList<Reference>();
-		for(int i = 0; i < rja.size(); i ++) {
-			
-			JSONObject jo = rja.getJSONObject(i);
-			String reference_bscore = jo.getString("refer_bscore");
-			String reference_escore = jo.getString("refer_escore");
-			String reference_sex = jo.getString("refer_sex");
-			String reference_bage = jo.getString("refer_bage");
-			String reference_eage = jo.getString("refer_eage");
-			String reference_suggestion = jo.getString("refer_suggestion");
-			
-			Reference refer = new Reference();
-			refer.setReferenceBeginScore(Integer.valueOf(reference_bscore));
-			refer.setReferenceEndScore(Integer.valueOf(reference_escore));
-			refer.setReferenceSex(reference_sex);
-			refer.setReferenceBeginAge(Integer.valueOf(reference_bage));
-			refer.setReferenceEndAge(Integer.valueOf(reference_eage));
-			refer.setReferenceSuggestion(reference_suggestion);
-			refer.setFactorId(fid);
-			
-			ReferenceService.AddReference(refer);
-		}
-		
+
 		
 		JSONObject jo = new JSONObject();
 		jo.put("result", "Success");
@@ -405,6 +428,43 @@ public class FactorAction extends ActionSupport{
 		out.close();
 		return;
 		
+	}
+	
+	//根据量表查因子
+	public void QueryFactorByScale() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String scale_id = request.getParameter("scale_id");
+		
+		int sid = Integer.valueOf(scale_id);
+		
+		List<Factor> flist = FactorService.QueryFactorByScale(sid); 
+		
+		JSONObject jo = new JSONObject();
+		if (flist.size() == 0) {
+			jo.put("Count", "0");
+			jo.put("rows", "0");
+			jo.put("PageSize", "0");
+			jo.put("Array", "null");
+		} 
+		else {
+			JSONArray ja = JSONArray.fromObject(flist);
+			jo.put("Count", flist.size());
+			jo.put("rows", 1);
+			jo.put("PageSize", flist.size());
+			jo.put("Array", ja.toString());
+		}
+		
+		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
 	}
 
 }

@@ -69,7 +69,7 @@ public class ProblemAction extends ActionSupport{
 		String template_id = request.getParameter("template_id");
 		String problem_flag = request.getParameter("problem_flag");
 		String problem_number = request.getParameter("problem_number");
-		String ChoiceInfo = request.getParameter("choice_info"); //选项信息
+		//String ChoiceInfo = request.getParameter("choice_info"); //选项信息
 		
 		if(!cutil.IsNumber(problem_id)) {
 			JSONObject jos = new JSONObject();
@@ -111,7 +111,7 @@ public class ProblemAction extends ActionSupport{
 		
 		ProblemService.UpdateProblem(problem);
 		
-		if(tid == 0) {
+/*		if(tid == 0) {
 			//处理选项
 			JSONArray cja = JSONArray.fromObject(ChoiceInfo);
 			List<Choice> clist = new ArrayList<Choice>();
@@ -149,7 +149,7 @@ public class ProblemAction extends ActionSupport{
 			}
 			
 			ChoiceService.AddMutiplyChoice(clist);
-		}
+		}*/
 		
 		JSONObject jo = new JSONObject();
 		jo.put("result", "Success");
@@ -278,7 +278,7 @@ public class ProblemAction extends ActionSupport{
 		String template_id = request.getParameter("template_id");
 		String problem_flag = request.getParameter("problem_flag");
 		String problem_number = request.getParameter("problem_number");
-		String ChoiceInfo = request.getParameter("choice_info"); //选项信息
+		//String ChoiceInfo = request.getParameter("choice_info"); //选项信息
 		
 		if(!cutil.IsNumber(scale_id)) {
 			JSONObject jos = new JSONObject();
@@ -309,7 +309,7 @@ public class ProblemAction extends ActionSupport{
 		problem.setProblemNumber(problem_number);
 		
 		int pid = ProblemService.AddProblem(problem);
-		if(tid == 0){
+/*		if(tid == 0){
 			//处理选项
 			List<Choice> clist = new ArrayList<Choice>();
 			JSONArray cja = JSONArray.fromObject(ChoiceInfo);
@@ -332,7 +332,7 @@ public class ProblemAction extends ActionSupport{
 			}
 			
 			ChoiceService.AddMutiplyChoice(clist);
-		}
+		}*/
 		
 		JSONObject jo = new JSONObject();
 		jo.put("result", "Success");

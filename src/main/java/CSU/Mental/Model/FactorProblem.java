@@ -22,7 +22,10 @@ public class FactorProblem {
 	private int FactorId;  // 因子编号
 	
 	@Column(name="problem_id")
-	private int ProblemId;  // 问题编号
+	private int ProblemId;  // 问题主键
+	
+	@Column(name="problem_number")
+	private String ProblemNumber;  // 问题编号
 
 	public int getFactorProblemId() {
 		return FactorProblemId;
@@ -47,12 +50,21 @@ public class FactorProblem {
 	public void setProblemId(int problemId) {
 		ProblemId = problemId;
 	}
-	
+
+	public String getProblemNumber() {
+		return ProblemNumber;
+	}
+
+	public void setProblemNumber(String problemNumber) {
+		ProblemNumber = problemNumber;
+	}
+
 	public JSONObject toJSON() {
 		JSONObject jo = new JSONObject();
 		jo.put("FactorId", this.FactorId);
 		jo.put("ProblemId", this.ProblemId);
 		jo.put("FactorProblemId", this.FactorProblemId);
+		jo.put("ProblemNumber", this.ProblemNumber);
 		return jo;
 	}
 

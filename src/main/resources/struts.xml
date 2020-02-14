@@ -48,6 +48,14 @@
 		</action>
 		<action name="QuerySingleFactor" class="FactorAction" method="QuerySingleFactor" >
 		</action>
+		<action name="QueryFactorByScale" class="FactorAction" method="QueryFactorByScale" >
+		</action>
+		<action name="UpdateFactor" class="FactorAction" method="UpdateFactor" >
+		</action>
+		
+		<!-- 题目因子关联 -->
+		<action name="AddOrUpdateFactorProblem" class="FactorProblemAction" method="AddOrUpdateFactorProblem" >
+		</action>
 		
 		<!-- 大类 -->
 		<action name="QueryAllFkind" class="FkindAction" method="QueryAllFkind" >
@@ -113,6 +121,8 @@
 		<action name="AddMutiplyReference" class="ReferenceAction" method="AddMutiplyReference" >
 		</action>
 		<action name="QueryReferenceByFactor" class="ReferenceAction" method="QueryReferenceByFactor" >
+		</action>
+		<action name="UpdateReference" class="ReferenceAction" method="UpdateReference" >
 		</action>
 		
 		<!-- 量表 -->
