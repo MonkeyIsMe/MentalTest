@@ -56,6 +56,8 @@
 		<!-- 题目因子关联 -->
 		<action name="AddOrUpdateFactorProblem" class="FactorProblemAction" method="AddOrUpdateFactorProblem" >
 		</action>
+		<action name="QueryProblemByFactor" class="FactorProblemAction" method="QueryProblemByFactor" >
+		</action>
 		
 		<!-- 大类 -->
 		<action name="QueryAllFkind" class="FkindAction" method="QueryAllFkind" >
@@ -89,6 +91,8 @@
 		<action name="VaguePatientPageSize" class="PatientAction" method="VaguePatientPageSize" >
 		</action>
 		<action name="CountVaugePatient" class="PatientAction" method="CountVaugePatient" >
+		</action>
+		<action name="QuerySinglePatient" class="PatientAction" method="QuerySinglePatient" >
 		</action>
 		
 		<!-- 题目 -->

@@ -28,6 +28,50 @@ public class PatientAction extends ActionSupport{
 		PatientService = patientService;
 	}
 
+	//查询单一病人
+	public void QuerySinglePatient() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		boolean flag = true;
+		
+		String patient_id = request.getParameter("patient_id");
+		
+		if(!cutil.IsNumber(patient_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "null");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int pid = Integer.valueOf(patient_id);
+		
+		patient = PatientService.QueryPatient(pid);
+		
+		if(patient == null) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "null");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		JSONObject jo = new JSONObject();
+		jo.put("result", patient.toString());
+		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
+	}
+	
 	//删除一个病人
 	public void DeletePatient() throws Exception{
 		

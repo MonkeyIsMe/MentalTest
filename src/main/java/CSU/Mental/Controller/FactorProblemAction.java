@@ -73,4 +73,41 @@ public class FactorProblemAction extends ActionSupport{
 		return;
 	}
 	
+	//根据因子查题目
+	public void QueryProblemByFactor() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String factor_id = request.getParameter("factor_id"); 
+		
+		int fid = Integer.valueOf(factor_id);
+		
+		List<FactorProblem> fplist = FactorProblemService.QueryFactorProblemByFactor(fid);
+		
+		JSONObject jo = new JSONObject();
+		if (fplist.size() == 0) {
+			jo.put("Count", "0");
+			jo.put("rows", "0");
+			jo.put("PageSize", "0");
+			jo.put("Array", "null");
+		} 
+		else {
+			JSONArray ja = JSONArray.fromObject(fplist);
+			jo.put("Count", fplist.size());
+			jo.put("rows", 1);
+			jo.put("PageSize", fplist.size());
+			jo.put("Array", ja.toString());
+		}
+		
+		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
+	}
+	
 }

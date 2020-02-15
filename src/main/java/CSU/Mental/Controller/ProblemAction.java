@@ -211,6 +211,7 @@ public class ProblemAction extends ActionSupport{
 		}
 	}
 	
+	//查询单一问题
 	public void QuerySingleProblem() throws Exception{
 		
 		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
