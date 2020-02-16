@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link href="css/common.css" type="text/css" rel="styleSheet">
+    <link href="css/problem.css" type="text/css" rel="styleSheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/modules/layer/default/layer.css">
+    <link href="css/bootstrap-theme.css" type="text/css" rel="styleSheet">
+    <link href="css/bootstrap.css" type="text/css" rel="styleSheet">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/problem.js"></script>
+</head>
+<body>
+<div class="left">
+	<table class="layui-table" id="myTable">
+		<thead>
+			<tr align="center" class="table_header" height="22">
+				<th style="width: 5%; text-align: center">名称</th>
+			</tr>
+		</thead>
+		<tbody id="ProbelmList" bgcolor="#D7EBFF" align="center" style="color: black">
+		</tbody>
+	</table>
+	<div style="margin-left: 30%;margin-top:10px">
+        <button type="button" class="layui-btn" id="add_problem">添加</button>
+        <button type="button" class="layui-btn" id="del_problem">删除</button>
+    </div>
+</div>
+<div class="right">
+    <div style="margin: 1%">
+        <div style="float: left;margin-top: 10px" >试题编号:</div>
+        <input type="text" style="height: 4%;width: 5%;margin-left: 10px" class="form-control" id="ProblemNumber">
+    </div>
+    <div style="margin: 1%">
+        <div style="float: left;margin-top: 10px">内容格式:</div>
+        <select class="form-control" style="height: 4%;width: 10%;margin-left: 10px;font-size: 14px">
+            <option value="1">文本</option>
+            <option value="2">图片</option>
+            <option value="3">音乐</option>
+        </select>
+    </div>
+    <div style="margin: 1%">
+        <div style="margin-top: 10px">题目内容:</div>
+        <textarea style="width: 95%;height: 20%;resize:none" id="ProblemInfo">
+
+        </textarea>
+    </div>
+    <div style="margin: 1%">
+        <div style="margin-top: 10px">题目类型:</div>
+        <select class="form-control" style="height: 5%;float: left;width: 20%;margin-left: 10px;font-size: 14px" id="PrblemType">
+            <option value="1">单选</option>
+            <option value="2">多选</option>
+            <option value="3">填空</option>
+        </select>
+        <div style="margin-top: 1%;margin-left: 10px;float: left">题目类型:</div>
+        <label><input name="pflag" type="checkbox" value="" style="margin-top: 10px;margin-left: 10px"/>必做</label>
+        <button type="button" class="layui-btn" style="float: right;" id="save_problem">保存</button>
+    </div>
+</div>
+<div class="right_down" style="margin-top: 10px" id="clist">
+</div>
+
+</body>
+</html>

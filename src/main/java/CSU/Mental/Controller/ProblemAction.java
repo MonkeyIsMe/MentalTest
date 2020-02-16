@@ -360,6 +360,8 @@ public class ProblemAction extends ActionSupport{
 		String problem_name = request.getParameter("problem_name");
 		String problem_type = request.getParameter("problem_type");
 		String template_id = request.getParameter("template_id");
+		String problem_number = request.getParameter("problem_number");
+		String problem_flag = request.getParameter("problem_flag");
 		
 		if(!cutil.IsNumber(problem_id)) {
 			JSONObject jos = new JSONObject();
@@ -396,6 +398,8 @@ public class ProblemAction extends ActionSupport{
 		problem.setProblemName(problem_name);
 		problem.setProblemType(problem_type);
 		problem.setTemplateId(tid);
+		problem.setProblemFlag(Integer.valueOf(problem_flag));
+		problem.setProblemNumber(problem_number);
 		
 		flag = ProblemService.UpdateProblem(problem);
 		
@@ -506,4 +510,39 @@ public class ProblemAction extends ActionSupport{
 		return;
 	}
 
+	//根据量表查询题目
+	public void QueryProblemByScale() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String scale_id = request.getParameter("scale_id");
+		
+		int sid = Integer.valueOf(scale_id);
+		
+		List<Problem> plist = ProblemService.QueryProblemByScale(sid);
+		JSONObject jo = new JSONObject();
+		if (plist.size() == 0) {
+			jo.put("Count", "0");
+			jo.put("rows", "0");
+			jo.put("PageSize", "0");
+			jo.put("Array", "null");
+		} 
+		else {
+			JSONArray ja = JSONArray.fromObject(plist);
+			jo.put("Count", plist.size());
+			jo.put("rows", 1);
+			jo.put("PageSize", plist.size());
+			jo.put("Array", ja.toString());
+		}
+		
+		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
+	}
 }

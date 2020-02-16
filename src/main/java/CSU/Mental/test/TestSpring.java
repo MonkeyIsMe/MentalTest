@@ -59,6 +59,7 @@ public class TestSpring {
 		System.out.println(FkindService.QueryAllFkind().size());
 	}
 	
+	
 	@Test
 	public void CountScale() {
 		System.out.println(ScaleService.CountScale());
@@ -88,9 +89,18 @@ public class TestSpring {
 	
 	@Test
 	public void QueryProblemByScale() {
-		List<Problem> plist = ProblemService.QueryProblemByScale(1);
-		for(Problem p : plist) {
-			System.out.println(p.toString());
+		List<Object[]> plist = ProblemService.QuerySingleProblemByScale(1);
+		for(Object[]  obj : plist) {
+			JSONObject jo = new JSONObject();
+			Object id = obj[0];
+			Object name = obj[1];
+			Object submission = obj[2];
+			Object accept = obj[3];
+			jo.put("ProblemId", id);
+			jo.put("ProblemName", name);
+			jo.put("SubmissionTimes",submission);
+			jo.put("AcceptTimes", accept);
+			System.out.println(jo.toString());
 		}
 	}
 

@@ -1,0 +1,25 @@
+html,body{
+    height: 100%;
+}
+.left{
+    width: 20%;
+    height: 100%;
+    border:1px solid black;
+    float: left;
+}
+
+.right{
+    margin-left: 40px;
+    width: 75%;
+    height: 35%;
+    border:1px solid black;
+    float: left;
+}
+
+.right_down{
+    margin-left: 40px;
+    width: 75%;
+    height: 55%;
+    border:1px solid black;
+    float: left;
+}

@@ -203,5 +203,52 @@ public class ChoiceAction extends ActionSupport{
 		return;
 
 	}
+	
+	//通过题目查询选项
+	public void QueryChoiceByProblem() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+	
+		String problem_id = request.getParameter("problem_id");
+		
+		if(!cutil.IsNumber(problem_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int pid = Integer.valueOf(problem_id);
+		
+		List<Choice> clist = ChoiceService.QueryChoiceByProblem(pid);
+		
+		JSONObject jo = new JSONObject();
+		if (clist.size() == 0) {
+			jo.put("Count", "0");
+			jo.put("rows", "0");
+			jo.put("PageSize", "0");
+			jo.put("Array", "null");
+		} 
+		else {
+			JSONArray ja = JSONArray.fromObject(clist);
+			jo.put("Count", clist.size());
+			jo.put("rows", 1);
+			jo.put("PageSize", clist.size());
+			jo.put("Array", ja.toString());
+		}
+		
+		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
+
+	}
 
 }

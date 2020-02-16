@@ -30,7 +30,9 @@
 		</action>
 		<action name="AddMutiplyChoice" class="ChoiceAction" method="AddMutiplyChoice" >
 		</action>
-		  		
+		<action name="QueryChoiceByProblem" class="ChoiceAction" method="QueryChoiceByProblem" >
+		</action>
+	
 		<!-- 激活 -->
 		<action name="AddOrUpdateDeadLine" class="DeadlineAction" method="AddOrUpdateDeadLine" >
 		</action>
@@ -107,6 +109,8 @@
 		<action name="AddProblem" class="ProblemAction" method="AddProblem" >
 		</action>
 		<action name="UpdateProblem" class="ProblemAction" method="UpdateProblem" >
+		</action>
+		<action name="QueryProblemByScale" class="ProblemAction" method="QueryProblemByScale" >
 		</action>
 				
 		<!-- 记录 -->
