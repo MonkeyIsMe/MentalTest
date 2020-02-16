@@ -21,6 +21,14 @@ public class UserAction extends ActionSupport{
 	private UserService UserService;
 	private User user = new User();
 	
+	public UserService getUserService() {
+		return UserService;
+	}
+
+	public void setUserService(UserService userService) {
+		UserService = userService;
+	}
+
 	//增加一个用户
 	public void AddUser() throws Exception{
 		
@@ -37,8 +45,9 @@ public class UserAction extends ActionSupport{
 		String user_account = request.getParameter("user_account");
 		String user_password = request.getParameter("user_password");
 		String user_role = request.getParameter("user_role");
-		
+		//System.out.println(user_account);
 		boolean exist = UserService.QueryUserIsExist(user_account);
+		//System.out.println(exist);
 		if(exist) {
 			JSONObject jos = new JSONObject();
 			jos.put("result", "Already");
@@ -88,9 +97,8 @@ public class UserAction extends ActionSupport{
 		
 		String user_id = request.getParameter("user_id");
 		String user_name = request.getParameter("user_name");
-		String user_account = request.getParameter("user_account");
 		String user_role = request.getParameter("user_role");
-		
+		//System.out.println(user_id);
 		if(!cutil.IsNumber(user_id)) {
 			JSONObject jo = new JSONObject();
 			jo.put("result", "Fail");
@@ -104,7 +112,7 @@ public class UserAction extends ActionSupport{
 		int uid = Integer.valueOf(user_id);
 		
 		user = UserService.QueryUser(uid);
-		
+		//System.out.println(user.toString());
 		if(user == null) {
 			JSONObject jo = new JSONObject();
 			jo.put("result", "Fail");
@@ -115,7 +123,6 @@ public class UserAction extends ActionSupport{
 			return;
 		}
 		
-		user.setUserAccount(user_account);
 		user.setUserName(user_name);
 		user.setUserRole(user_role);
 		
@@ -182,6 +189,63 @@ public class UserAction extends ActionSupport{
 		user.setUserPassword(password);
 		
 		flag = UserService.UpdateUser(user);
+		
+		JSONObject jo = new JSONObject();
+		if(flag) {
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
+		else {
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		}
+	}
+	
+	//删除用户
+	public void DeleteUser() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		boolean flag = true;
+		
+		String user_id = request.getParameter("user_id");
+		//System.out.println(user_id);
+		if(!cutil.IsNumber(user_id)) {
+			JSONObject jo = new JSONObject();
+			jo.put("result", "Fail");
+			
+			out.println(jo.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int uid = Integer.valueOf(user_id);
+		
+		user = UserService.QueryUser(uid);
+		
+		if(user == null) {
+			JSONObject jo = new JSONObject();
+			jo.put("result", "Fail");
+			
+			out.println(jo.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		flag = UserService.DeleteUser(user);
 		
 		JSONObject jo = new JSONObject();
 		if(flag) {

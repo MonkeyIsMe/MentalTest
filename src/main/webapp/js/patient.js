@@ -96,28 +96,32 @@ function PrevPage(){
 	            function(data) {
 	                var data = JSON.parse(data);
 	                //console.log(data);
-	                    for( var i = 0; i < data.Array.length; i++ ) {
-	                        //动态创建一个tr行标签,并且转换成jQuery对象
-	                        var $trTemp = $("<tr ></tr>");
-	                        //往行里面追加 td单元格
-	                        var nid = data.Array[i].PatientNation;
-	                        nid --;
-	                        var nation = nations[nid];
-	    			        $trTemp.append("<td style=" + "text-align:center"  + ">"+ data.Array[i].PatientId +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientName +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientBirthday +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center"  + ">" +data.Array[i].PatientGender  +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientIndentity +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + nation +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center"  + ">" +data.Array[i].PatientPlace  +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientNumber +"</td>");
-	    			        $trTemp.append("<td>" + 
-	    			        		'<a><span class="delete glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#del_myModal"></span></a>'
-	    			        		 + '<a><span class="update glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#myModal"></span></a>'
-	    			        		+"</td>");
-	                        // $("#J_TbData").append($trTemp);
-	                        $trTemp.appendTo("#PatientList");
-	                    }
+	                for( var i = 0; i < data.Array.length; i++ ) {
+	                    //动态创建一个tr行标签,并且转换成jQuery对象
+	                    var $trTemp = $("<tr ></tr>");
+	                    //往行里面追加 td单元格
+	                    var nid = data.Array[i].PatientNation;
+	                    nid --;
+	                    var nation = nations[nid];
+	                    
+	                    var sex = "男";
+	                    if(data.Array[i].PatientGender == 2) sex = "女";
+	                    
+				        $trTemp.append("<td style=" + "text-align:center"  + ">"+ data.Array[i].PatientId +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientName +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientBirthday +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center"  + ">" + sex  +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientIndentity +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + nation +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center"  + ">" +data.Array[i].PatientPlace  +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientNumber +"</td>");
+				        $trTemp.append("<td>" + 
+				        		'<a><span class="delete glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#del_myModal"></span></a>'
+				        		 + '<a><span class="update glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#up_Modal"></span></a>'
+				        		+"</td>");
+	                    // $("#J_TbData").append($trTemp);
+	                    $trTemp.appendTo("#PatientList");
+	                }
 	            }
 	        );
 	}
@@ -140,28 +144,32 @@ function NextPage(){
 	            function(data) {
 	                var data = JSON.parse(data);
 	                //console.log(data);
-	                    for( var i = 0; i < data.Array.length; i++ ) {
-	                        //动态创建一个tr行标签,并且转换成jQuery对象
-	                        var $trTemp = $("<tr ></tr>");
-	                        //往行里面追加 td单元格
-	                        var nid = data.Array[i].PatientNation;
-	                        nid --;
-	                        var nation = nations[nid];
-	    			        $trTemp.append("<td style=" + "text-align:center"  + ">"+ data.Array[i].PatientId +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientName +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientBirthday +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center"  + ">" +data.Array[i].PatientGender  +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientIndentity +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + nation +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center"  + ">" +data.Array[i].PatientPlace  +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientNumber +"</td>");
-	    			        $trTemp.append("<td>" + 
-	    			        		'<a><span class="delete glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#del_myModal"></span></a>'
-	    			        		 + '<a><span class="update glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#myModal"></span></a>'
-	    			        		+"</td>");
-	                        // $("#J_TbData").append($trTemp);
-	                        $trTemp.appendTo("#PatientList");
-	                    }
+	                for( var i = 0; i < data.Array.length; i++ ) {
+	                    //动态创建一个tr行标签,并且转换成jQuery对象
+	                    var $trTemp = $("<tr ></tr>");
+	                    //往行里面追加 td单元格
+	                    var nid = data.Array[i].PatientNation;
+	                    nid --;
+	                    var nation = nations[nid];
+	                    
+	                    var sex = "男";
+	                    if(data.Array[i].PatientGender == 2) sex = "女";
+	                    
+				        $trTemp.append("<td style=" + "text-align:center"  + ">"+ data.Array[i].PatientId +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientName +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientBirthday +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center"  + ">" + sex  +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientIndentity +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + nation +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center"  + ">" +data.Array[i].PatientPlace  +"</td>");
+				        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].PatientNumber +"</td>");
+				        $trTemp.append("<td>" + 
+				        		'<a><span class="delete glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#del_myModal"></span></a>'
+				        		 + '<a><span class="update glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#up_Modal"></span></a>'
+				        		+"</td>");
+	                    // $("#J_TbData").append($trTemp);
+	                    $trTemp.appendTo("#PatientList");
+	                }
 	            }
 	        );
 	}

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>用户信息</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="js/jquery.min.js"></script>
+<link rel="stylesheet" href="css/layui.css">
+<link rel="stylesheet" href="css/modules/layer/default/layer.css">
+<link href="css/bootstrap-theme.css" type="text/css" rel="styleSheet">
+<link href="css/bootstrap.css" type="text/css" rel="styleSheet">
+<script src="js/bootstrap.min.js"></script>
+<script src="js/user.js"></script>
+<link href="css/common.css" type="text/css" rel="styleSheet">
+<script src="js/layui/layui.js"></script>
+
+</head>
+
+</head>
+<body>
+	<div id="ahead"></div>
+	<button type="button" class="btn btn-default btn-sm"
+		style="margin: 10px" onclick="refresh()">
+		<span class="glyphicon glyphicon-refresh"></span> 刷新界面
+	</button>
+	<button type="button" class="btn btn-default btn-sm"
+		style="margin: 10px" data-toggle="modal" data-target="#add_Modal">
+		<span class="glyphicon glyphicon-plus"></span> 添加用户
+	</button>
+	<table class="layui-table" id="myTable">
+		<thead>
+			<tr align="center" class="table_header" height="22">
+				<th style="width: 20%; text-align: center">编号</th>
+				<th style="width: 20%; text-align: center">姓名</th>
+				<th style="width: 20%; text-align: center">账号</th>
+				<th style="width: 20%; text-align: center">职称</th>
+				<th style="width: 20%; text-align: center">删除-更新-密码</th>
+			</tr>
+		</thead>
+		<tbody id="UserList" bgcolor="#D7EBFF" align="center"
+			style="color: black">
+		</tbody>
+	</table>
+	<div style="float: left; margin-left: 42%">
+		<button type="button" class="layui-btn" onclick="PrevPage()">上一页</button>
+		<button type="button" class="layui-btn" onclick="NextPage()">下一页</button>
+	</div>
+	<div id="TotalPage"
+		style="float: left; margin-top: 10px; font-size: 18px; margin-left: 5px"></div>
+	<div id="NowPage"
+		style="float: left; margin-top: 10px; font-size: 18px; margin-left: 5px"></div>
+	<div class="modal fade" id="del_myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">删除界面</h4>
+				</div>
+				<div class="modal-body" id="del_user_info"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" id="del_user">确定</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+	<div class="modal fade" id="add_Modal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">添加界面</h4>
+				</div>
+				<div class="form-group big_input">
+					<label>用户名称：</label> <input type="text" class="form-control"
+						placeholder="请输入用户名称" id="add_name">
+				</div>
+				<div class="form-group big_input">
+					<label>用户账号：</label> <input type="text" class="form-control"
+						placeholder="请输入用户账号" id="add_account">
+				</div>
+				<div class="form-group big_input">
+					<label>密码：</label> <input type="password" class="form-control"
+						placeholder="请输入密码" id="add_password">
+				</div>
+				<div class="form-group big_input">
+					<label>职称：</label> <input type="text" class="form-control"
+						placeholder="请输入职称" id="add_role">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" id="add_user">确定</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+
+	<div class="modal fade" id="up_Modal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">添加界面</h4>
+				</div>
+				<div class="form-group big_input">
+					<label>用户名称：</label> <input type="text" class="form-control"
+						placeholder="请输入用户名称" id="up_name">
+				</div>
+				<div class="form-group big_input">
+					<label>职称：</label> <input type="text" class="form-control"
+						placeholder="请输入职称" id="up_role">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" id="up_user">确定</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">更新密码</h4>
+				</div>
+				<div class="form-group big_input">
+					<label>用户密码：</label> <input type="text" class="form-control"
+						placeholder="请输入用户密码" id="up_password">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" id="up_pwd">确定</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</body>
+<script>
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+
+		//执行一个laydate实例
+		laydate.render({
+			elem : '#add_birthday' //指定元素
+			,
+			type : 'date'
+		});
+	});
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+
+		//执行一个laydate实例
+		laydate.render({
+			elem : '#up_birthday' //指定元素
+			,
+			type : 'date'
+		});
+	});
+	$("#ahead").load("head.html");
+</script>
+</html>

@@ -9,18 +9,43 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import CSU.Mental.Model.Patient;
 import CSU.Mental.Model.Record;
+import CSU.Mental.Model.Scale;
+import CSU.Mental.Service.PatientService;
 import CSU.Mental.Service.RecordService;
+import CSU.Mental.Service.ScaleService;
 import CSU.Mental.Utils.CommonUtils;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class RecordAction extends ActionSupport{
 
 	private CommonUtils cutil = new CommonUtils();
 	private RecordService RecordService;
+	private PatientService PatientService;
+	private ScaleService ScaleService;
+	private Scale scale = new Scale();
+	private Patient patient = new Patient();
 	private Record record = new Record();
 	
 	
+	public PatientService getPatientService() {
+		return PatientService;
+	}
+
+	public void setPatientService(PatientService patientService) {
+		PatientService = patientService;
+	}
+
+	public ScaleService getScaleService() {
+		return ScaleService;
+	}
+
+	public void setScaleService(ScaleService scaleService) {
+		ScaleService = scaleService;
+	}
+
 	public RecordService getRecordService() {
 		return RecordService;
 	}
@@ -135,6 +160,28 @@ public class RecordAction extends ActionSupport{
 			RecordList = RecordService.QueryRecordPageSize(rows, PageSize);
 		}
 		
+		JSONArray ja = new JSONArray();
+		for(Record r : RecordList) {
+			JSONObject jo = new JSONObject();
+			int pid = r.getPatientId();
+			int sid = r.getScaleId();
+			//System.out.println(pid);
+			jo.put("PatientId", pid);
+			jo.put("ScaleId", sid);
+			//System.out.println(pid);
+			patient = PatientService.QueryPatient(pid);
+			scale = ScaleService.QueryScale(sid);
+			jo.put("RecordFator", r.getRecordFactor());
+			jo.put("RecordId", r.getRecordId());
+			jo.put("RecordInfo", r.getRecordInfo());
+			jo.put("RecordProblem", r.getRecordProblem());
+			jo.put("RecordTime", r.getRecordTime());
+			jo.put("UserId", r.getUserId());
+			jo.put("PatientName", patient.getPatientName());
+			jo.put("ScaleName", scale.getScaleName());
+			ja.add(jo);
+		}
+		
 		JSONObject jo = new JSONObject();
 		if(RecordList.size() == 0) {
 			jo.put("Count", "0");
@@ -146,7 +193,7 @@ public class RecordAction extends ActionSupport{
 			jo.put("Count", count);
 			jo.put("rows", rows);
 			jo.put("PageSize", PageSize);
-			jo.put("Array", RecordList.toString());
+			jo.put("Array", ja.toString());
 		}
 		
 		out.println(jo.toString());

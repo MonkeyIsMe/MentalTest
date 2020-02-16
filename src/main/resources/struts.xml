@@ -180,6 +180,8 @@
 		<!-- 用户 -->
 		<action name="AddUser" class="UserAction" method="AddUser" >
 		</action>
+		<action name="DeleteUser" class="UserAction" method="DeleteUser" >
+		</action>
 		<action name="UpdateUserInfo" class="UserAction" method="UpdateUserInfo" >
 		</action>
 		<action name="UpdateUserPassword" class="UserAction" method="UpdateUserPassword" >

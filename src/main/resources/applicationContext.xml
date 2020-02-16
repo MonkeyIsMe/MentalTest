@@ -66,6 +66,8 @@
 	</bean>
 	<bean name="RecordAction" class="CSU.Mental.Controller.RecordAction" scope="prototype" >
 		<property name="RecordService" ref="RecordService" ></property>
+		<property name="PatientService" ref="PatientService" ></property>
+		<property name="ScaleService" ref="ScaleService" ></property>
 	</bean>	
 	<bean name="ReferenceAction" class="CSU.Mental.Controller.ReferenceAction" scope="prototype" >
 		<property name="ReferenceService" ref="ReferenceService" ></property>
