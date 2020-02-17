@@ -32,6 +32,8 @@
 		</action>
 		<action name="QueryChoiceByProblem" class="ChoiceAction" method="QueryChoiceByProblem" >
 		</action>
+		<action name="UpdateChoice" class="ChoiceAction" method="UpdateChoice" >
+		</action>
 	
 		<!-- 激活 -->
 		<action name="AddOrUpdateDeadLine" class="DeadlineAction" method="AddOrUpdateDeadLine" >

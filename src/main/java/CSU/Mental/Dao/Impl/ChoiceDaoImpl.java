@@ -72,7 +72,7 @@ public class ChoiceDaoImpl extends HibernateDaoSupport implements ChoiceDao{
 			e.printStackTrace();
 		}
 		
-		return null;
+		return result;
 	}
 
 	public List<Choice> QueryChoiceByProblem(final int ProblemId) {

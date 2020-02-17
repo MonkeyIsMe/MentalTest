@@ -44,6 +44,7 @@ public class ChoiceAction extends ActionSupport{
 		String choice_id = request.getParameter("choice_id"); 
 		
 		if(!cutil.IsNumber(choice_id)) {
+			///System.out.println(choice_id);
 			JSONObject jos = new JSONObject();
 			jos.put("result", "Fail");
 			out.println(jos.toString());
@@ -55,7 +56,7 @@ public class ChoiceAction extends ActionSupport{
 		int cid = Integer.valueOf(choice_id);
 		
 		choice = ChoiceService.QueryChoice(cid);
-		
+		//System.out.println(choice.toString());
 		if(choice == null) {
 			JSONObject jos = new JSONObject();
 			jos.put("result", "Fail");
@@ -251,4 +252,47 @@ public class ChoiceAction extends ActionSupport{
 
 	}
 
+	//更新选项
+	public void UpdateChoice() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+	
+		String choice_id = request.getParameter("choice_id");
+		String choice_name = request.getParameter("choice_name");
+		String choice_score = request.getParameter("choice_score");
+		
+		int cid = Integer.valueOf(choice_id);
+		int score = Integer.valueOf(choice_score);
+		
+		choice = ChoiceService.QueryChoice(cid);
+		
+		boolean flag = true;
+		
+		choice.setChoiceInfo(choice_name);
+		choice.setChoiceScore(score);
+		
+		flag = ChoiceService.UpdateChoice(choice);
+		
+		JSONObject jo = new JSONObject();
+		if(flag) {
+			jo.put("result", "Success");
+			out.println(jo.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		else {
+			jo.put("result", "Fail");
+			out.println(jo.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+	}
 }

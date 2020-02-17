@@ -46,41 +46,11 @@ function InitProblemTable(){
         );
 }
 
-function InitChoiceTable(){
-    $.post(
-            "MentalTest/QueryChoiceByProblem",
-            {
-            	problem_id:pid
-            },
-            function(data) {
-                var data = JSON.parse(data);
-                //console.log(data);
-                if(data.Count != 0){
-                    for( var i = 0; i < data.Array.length; i++ ) {
-                        //动态创建一个tr行标签,并且转换成jQuery对象
-                        var $trTemp = $("<tr ></tr>");
-                        //往行里面追加 td单元格
-    			        $trTemp.append("<td style=" + "text-align:center"  + ">"+ data.Array[i].choiceId +"</td>");
-    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].choiceInfo +"</td>");
-    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].choiceScore +"</td>");
-    			        $trTemp.append("<td>" + 
-    			        		'<a><span class="delete glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#del_myModal"></span></a>'
-    			        		 + '<a><span class="update glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#up_Modal"></span></a>'
-    			        		+"</td>");
-                        // $("#J_TbData").append($trTemp);
-                        $trTemp.appendTo("#ChoiceList");
-                    }
-                }
 
-            }
-        );
-}
 
 
 
 $(document).ready(function(){
-	
-	  
 	  $("#myTable").on('click','.pro',function(){
 		    //获得当前行
 		    var currentRow=$(this).closest("tr"); 
@@ -126,9 +96,10 @@ $(document).ready(function(){
 	        			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].choiceInfo +"</td>");
 	        			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].choiceScore +"</td>");
 	        			        $trTemp.append("<td>" + 
-	        			        		'<a><span class="delete glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#del_myModal"></span></a>'
-	        			        		 + '<a><span class="update glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#up_Modal"></span></a>'
-	        			        		+"</td>");
+	        			        		'<a><span class="delete_choice glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#delchoice_Modal"></span></a>'
+	        			        		 + '<a><span class="update_choice glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#upchoice_Modal"></span></a>'
+	        			        		 + '<a><span class="glyphicon glyphicon-eye-open" style="cursor:pointer;margin-left:18px" ></span></a>'
+	        			        		 +"</td>");
 	                            // $("#J_TbData").append($trTemp);
 	                            $trTemp.appendTo("#ChoiceList");
 	                        }
@@ -196,12 +167,12 @@ $(document).ready(function(){
 							var data = JSON.parse(data);
 							var result = data.result;
 							if(result == "Success"){
-								alert("添加成功");
+								alert("添加题目成功");
 								$("#ProbelmList").html("");
 								InitProblemTable();
 							}
 							else{
-								alert("添加失败！");
+								alert("添加题目失败！");
 							}
 						}
 			        );
@@ -227,12 +198,12 @@ $(document).ready(function(){
 							var data = JSON.parse(data);
 							var result = data.result;
 							if(result == "Success"){
-								alert("更新成功");
+								alert("更新题目成功");
 								$("#ProbelmList").html("");
 								InitProblemTable();
 							}
 							else{
-								alert("更新失败！");
+								alert("更新题目失败！");
 							}
 						}
 			        );
