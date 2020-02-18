@@ -16,6 +16,8 @@ public interface TemplateService {
 	
 	public int CountTemplate();
 	
+	public int CountVagueTemplate(String name);
+	
 	public List<Template> QueryAllTemplate();
 	
 	public List<Template> VagueTemplatePageSize(String name,int PageSize,int rows);

@@ -24,3 +24,14 @@
     width: 480px;
     margin-top:10px;
 }
+
+.temp{
+    margin: 5px;
+    width:auto;
+    height: auto;
+    border: 1px solid black;
+}
+
+.float{
+    float: left;
+}

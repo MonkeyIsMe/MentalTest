@@ -114,7 +114,9 @@
 		</action>
 		<action name="QueryProblemByScale" class="ProblemAction" method="QueryProblemByScale" >
 		</action>
-				
+		<action name="ChooseTemplate" class="ProblemAction" method="ChooseTemplate" >
+		</action>
+			
 		<!-- 记录 -->
 		<action name="CountRecord" class="RecordAction" method="CountRecord" >
 		</action>

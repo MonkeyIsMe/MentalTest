@@ -48,7 +48,32 @@ function InitProblemTable(){
 
 
 
-
+function  ChooseTemplate(id) {
+    //alert(id);
+	if(pid == 0){
+		alert("请先选择题目"); 
+	}
+	else{
+		//alert(pid + " " + id);
+	    $.post(
+	            "MentalTest/ChooseTemplate",
+	            {
+	            	problem_id:pid,
+	            	template_id:id,
+	            },
+	            function(data) {
+	                var data = JSON.parse(data);
+	                var result = data.result;
+					if(result == "Success"){
+						alert("选择成功");
+					}
+					else{
+						alert("选择失败！");
+					}
+	            }
+	        );
+	}
+}
 
 $(document).ready(function(){
 	  $("#myTable").on('click','.pro',function(){
@@ -71,9 +96,19 @@ $(document).ready(function(){
 		            function(data) {
 		                var data = JSON.parse(data);
 		                //console.log(data);
-		                //console.log(data.ProblemInfo.ProblemNumber);
+		                console.log(data.ProblemInfo.ProblemFlag);
 		                $("#ProblemInfo").val("");
 		                $("#ProblemNumber").val("");
+		                if(data.ProblemInfo.ProblemFlag == 1){
+		                	$("#ProblemFlag").prop('checked', true)
+		                	//alert(1);
+		                }
+		                else{
+		                	//alert(0);
+		                	$("#ProblemFlag").prop('checked', false);
+		                }
+		               
+		                $("#ProblemType").find("option[value='"+ data.ProblemInfo.ProblemType +"']").attr("selected",true);
 		                $("#ProblemInfo").val(data.ProblemInfo.ProblemName);
 		                $("#ProblemNumber").val(data.ProblemInfo.ProblemNumber);
 		            }
@@ -96,9 +131,9 @@ $(document).ready(function(){
 	        			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].choiceInfo +"</td>");
 	        			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].choiceScore +"</td>");
 	        			        $trTemp.append("<td>" + 
-	        			        		'<a><span class="delete_choice glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#delchoice_Modal"></span></a>'
-	        			        		 + '<a><span class="update_choice glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#upchoice_Modal"></span></a>'
-	        			        		 + '<a><span class="glyphicon glyphicon-eye-open" style="cursor:pointer;margin-left:18px" ></span></a>'
+	        			        		/*'<a><span class="delete_choice glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#delchoice_Modal"></span></a>'
+	        			        		 + '<a><span class="update_choice glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#upchoice_Modal"></span></a>'*/
+	        			        		  '<a><span class="glyphicon glyphicon-eye-open" style="cursor:pointer;margin-left:18px" ></span></a>'
 	        			        		 +"</td>");
 	                            // $("#J_TbData").append($trTemp);
 	                            $trTemp.appendTo("#ChoiceList");

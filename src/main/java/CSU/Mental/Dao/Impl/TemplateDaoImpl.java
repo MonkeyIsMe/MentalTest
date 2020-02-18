@@ -144,4 +144,17 @@ public class TemplateDaoImpl extends HibernateDaoSupport implements TemplateDao{
 		return null;
 	}
 
+	public int CountVagueTemplate(String name) {
+		// TODO Auto-generated method stub
+		int count = - 1;
+		try {
+			String hql = "select count(*) from Template as template where template_name like '%"+ name +"%'"; 
+			return ((Long)getHibernateTemplate().iterate(hql).next()).intValue();
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return count;
+	}
+
 }

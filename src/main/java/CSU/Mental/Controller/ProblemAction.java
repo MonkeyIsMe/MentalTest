@@ -53,6 +53,47 @@ public class ProblemAction extends ActionSupport{
 		FactorProblemService = factorProblemService;
 	}
 
+	//选择模板
+	public void ChooseTemplate() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		boolean flag = true;
+		
+		String problem_id = request.getParameter("problem_id");
+		String template_id = request.getParameter("template_id");
+		
+		int pid = Integer.valueOf(problem_id);
+		int tid = Integer.valueOf(template_id);
+		
+		problem = ProblemService.QueryProblem(pid);
+		
+		problem.setTemplateId(tid);
+		
+		flag = ProblemService.UpdateProblem(problem);
+		
+		JSONObject jo = new JSONObject();
+		if(flag) {
+		   jo.put("result", "Success");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		 }
+		else {
+		   jo.put("result", "Fail");
+		   out.println(jo.toString());
+		   out.flush();
+		   out.close();
+		   return;
+		}
+	}
+	
 	//更新一个问题
 	public void UpdateProblem() throws Exception{
 		
@@ -251,7 +292,9 @@ public class ProblemAction extends ActionSupport{
 			return;
 		}
 		
-		List<Choice> clist = ChoiceService.QueryChoiceByProblem(pid);
+		int tid = problem.getTemplateId();
+		
+		List<Choice> clist = ChoiceService.QueryChoiceByProblem(tid);
 		
 		JSONObject jo = new JSONObject();
 		jo.put("ProblemInfo", problem.toString());

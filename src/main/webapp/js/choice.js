@@ -1,5 +1,27 @@
-var cid,cname,cscore;
+var cid,cname,cscore,count;
 var op = 2;
+var row = 1;
+
+$(function(){
+	$.ajaxSettings.async = false;
+	$.post(
+			"MentalTest/CountTemplate",
+			{
+				template_name:"",
+			},
+			function(data){
+				var data = JSON.parse(data);
+				//console.log(data);
+				var sum = data.Count;
+				count = Math.ceil(sum/25);
+				var total = "共" + Math.ceil(sum/25) + "页";
+				$("#TotalPage").append(total);
+				$("#NowPage").append("，当前第" + row + "页");
+			}
+			);
+
+	
+});
 
 $(function () {
     $("input[type='radio']").on("click",function () {
@@ -67,9 +89,9 @@ function InitChoiceTable(){
     			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].choiceInfo +"</td>");
     			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].choiceScore +"</td>");
     			        $trTemp.append("<td>" + 
-    			        		'<a><span class="delete_choice glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#delchoice_Modal"></span></a>'
+    			        		/*'<a><span class="delete_choice glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#delchoice_Modal"></span></a>'
     			        		 + '<a><span class="update_choice glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#upchoice_Modal"></span></a>'
-    			        		 + '<a><span class="glyphicon glyphicon-eye-open" style="cursor:pointer;margin-left:18px" ></span></a>'
+    			        		 +*/ '<a><span class="glyphicon glyphicon-eye-open" style="cursor:pointer;margin-left:18px" ></span></a>'
     			        		+"</td>");
                         // $("#J_TbData").append($trTemp);
                         $trTemp.appendTo("#ChoiceList");
@@ -80,7 +102,105 @@ function InitChoiceTable(){
         );
 }
 
+function NextPage(){
+	if(row == count){
+		alert("没有后一页了");
+	}
+	else{
+		$("#temp_info").html("");
+		row ++;
+		   $.post(
+			        "MentalTest/QueryTemplatePageSize",
+			        {
+			            page:row,
+			            limit:5,
+			            template_name:"",
+			        },
+			        function(data) {
+			            var data = JSON.parse(data);
+			            console.log(data.Array);
+			            for(var i = 0; i < data.Array.length; i ++){
+			                var html = "<div class='temp'>"
+			                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
+			                    html += "<div class='float'>选项内容：</div>";
+			                    html += "<div class='float'>" + data.Array[i].ChoiceList[j].ChoiceInfo + "</div>";
+			                    html += "<div class='float'>，</div>";
+			                    html += "<div class='float'>选项分值：</div>";
+			                    html += "<div>" + data.Array[i].ChoiceList[j].ChoiceScore + "</div>";
+			                }
+			                html += "<button class='btn btn-default btn-sm' style='margin-top: -32px;margin-right:10px;float: right' onclick='ChooseTemplate("+ data.Array[i].TemplateId +")'>选择</button>"
+			                html += "</div>";
+			                $("#temp_info").append(html);
+			            }
+			        }
+			    );
+	}
+}
+
+function PrevPage(){
+	if(row == 1){
+		alert("没有前一页了");
+	}
+	else{
+		$("#temp_info").html("");
+		row --;
+		   $.post(
+			        "MentalTest/QueryTemplatePageSize",
+			        {
+			            page:row,
+			            limit:5,
+			            template_name:"",
+			        },
+			        function(data) {
+			            var data = JSON.parse(data);
+			            console.log(data.Array);
+			            for(var i = 0; i < data.Array.length; i ++){
+			                var html = "<div class='temp'>"
+			                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
+			                    html += "<div class='float'>选项内容：</div>";
+			                    html += "<div class='float'>" + data.Array[i].ChoiceList[j].ChoiceInfo + "</div>";
+			                    html += "<div class='float'>，</div>";
+			                    html += "<div class='float'>选项分值：</div>";
+			                    html += "<div>" + data.Array[i].ChoiceList[j].ChoiceScore + "</div>";
+			                }
+			                html += "<button class='btn btn-default btn-sm' style='margin-top: -32px;margin-right:10px;float: right' onclick='ChooseTemplate("+ data.Array[i].TemplateId +")'>选择</button>"
+			                html += "</div>";
+			                $("#temp_info").append(html);
+			            }
+			        }
+			    );
+	}
+}
+
+
 $(document).ready(function(){
+	
+		//加载模板
+	   $.post(
+		        "MentalTest/QueryTemplatePageSize",
+		        {
+		            page:row,
+		            limit:5,
+		            template_name:"",
+		        },
+		        function(data) {
+		            var data = JSON.parse(data);
+		            console.log(data.Array);
+		            for(var i = 0; i < data.Array.length; i ++){
+		                var html = "<div class='temp'>"
+		                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
+		                    html += "<div class='float'>选项内容：</div>";
+		                    html += "<div class='float'>" + data.Array[i].ChoiceList[j].ChoiceInfo + "</div>";
+		                    html += "<div class='float'>，</div>";
+		                    html += "<div class='float'>选项分值：</div>";
+		                    html += "<div>" + data.Array[i].ChoiceList[j].ChoiceScore + "</div>";
+		                }
+		                html += "<button class='btn btn-default btn-sm' style='margin-top: -32px;margin-right:10px;float: right' onclick='ChooseTemplate("+ data.Array[i].TemplateId +")'>选择</button>"
+		                html += "</div>";
+		                $("#temp_info").append(html);
+		            }
+		        }
+		    );
 	
 	//增加模板
 	$("#add_temp").click(function(){
@@ -147,7 +267,6 @@ $(document).ready(function(){
 				}
 	        );
 	})
-	
 	
 	
 	//添加选项

@@ -24,7 +24,7 @@
         <th style="width: 10%; text-align: center">编号</th>
         <th style="width: 45%; text-align: center">名称</th>
         <th style="width: 10%; text-align: center">分值</th>
-        <th style="width: 40%; text-align: center">删除-更新-子选项</th>
+        <th style="width: 40%; text-align: center"><!-- 删除-更新- -->子选项</th>
     </tr>
     </thead>
     <tbody id="ChoiceList" bgcolor="#D7EBFF" align="center" style="color: black">
@@ -109,12 +109,12 @@
                 <h4 class="modal-title" id="myModalLabel">更新选项</h4>
             </div>
             <div class="form-group big_input">
-                <label>题目内容：</label> <input type="text" class="form-control"
-                                            placeholder="请输入题目内容" id="up_ch_info">
+                <label>题目内容：</label> 
+                <input type="text" class="form-control" placeholder="请输入题目内容" id="up_ch_info">
             </div>
             <div class="form-group big_input">
-                <label>题目分数：</label> <input type="text" class="form-control"
-                                            placeholder="请输入题目分数" id="up_ch_score">
+                <label>题目分数：</label> 
+                <input type="text" class="form-control" placeholder="请输入题目分数" id="up_ch_score">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -153,23 +153,15 @@
                         aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">选择</h4>
             </div>
-            <div class="modal-body" >
-                <table class="layui-table" id="templist">
-                    <thead>
-                    <tr align="center" class="table_header" height="22">
-                        <th style="width: 10%; text-align: center">编号</th>
-                        <th style="width: 45%; text-align: center">名称</th>
-                        <th style="width: 10%; text-align: center">分值</th>
-                        <th style="width: 40%; text-align: center">删除-更新-子选项</th>
-                    </tr>
-                    </thead>
-                    <tbody id="ChoiceList" bgcolor="#D7EBFF" align="center" style="color: black">
-                    </tbody>
-                </table>
+            <div class="modal-body" id="temp_info">
             </div>
+            <div style="float: left; margin-left: 42%">
+				<button type="button" class="layui-btn" onclick="PrevPage()">上一页</button>
+				<button type="button" class="layui-btn" onclick="NextPage()">下一页</button>
+			</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="del_choice" data-dismiss="modal">确定</button>
+                <button type="button" class="btn btn-primary" id="choose_temp" data-dismiss="modal">确定</button>
             </div>
         </div>
         <!-- /.modal-content -->

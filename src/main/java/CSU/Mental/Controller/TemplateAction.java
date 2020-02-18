@@ -239,7 +239,13 @@ public class TemplateAction extends ActionSupport{
 		PrintWriter out = null;
 		out = ServletActionContext.getResponse().getWriter();
 		
-		int count = TemplateService.CountTemplate();
+		String template_name = request.getParameter("template_name");
+		
+		int count = 0;
+		if(template_name == "" || template_name.equals("")) {
+			count = TemplateService.CountTemplate();
+		}
+		else count = TemplateService.CountVagueTemplate(template_name);
 		
 		JSONObject jo = new JSONObject();
 		
@@ -289,6 +295,7 @@ public class TemplateAction extends ActionSupport{
 		
 	}
 
+	
 	//分页查询模板
 	public void QueryTemplatePageSize() throws Exception{
 		
@@ -302,7 +309,7 @@ public class TemplateAction extends ActionSupport{
 		String page = request.getParameter("page");
 		String size = request.getParameter("limit");
 		String template_name = request.getParameter("template_name");
-		System.out.println(template_name);
+		//System.out.println(template_name);
 		int rows = 1;
 		int PageSize = 5;
 
@@ -324,9 +331,8 @@ public class TemplateAction extends ActionSupport{
 		for(Template temp : tlist) {
 			int tid = temp.getTemplateId();
 			List<Choice> clist = ChoiceService.QueryChoiceByTemplate(tid);
-			//JSONObject jo = JSONObject.fromObject(clist);
-			//JSONArray cja = JSONArray.fromObject(clist);
 			JSONObject jo = new JSONObject();
+			jo.put("TemplateId", tid);
 			jo.put("ChoiceList", clist.toString());
 			ja.add(jo);
  		}

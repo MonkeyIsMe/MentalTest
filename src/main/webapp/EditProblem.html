@@ -54,13 +54,15 @@
     </div>
     <div style="margin: 1%">
         <div style="margin-top: 10px">题目类型:</div>
-        <select class="form-control" style="height: 5%;float: left;width: 20%;margin-left: 10px;font-size: 14px" id="PrblemType">
+        <select class="form-control" style="height: 5%;float: left;width: 20%;margin-left: 10px;font-size: 14px" id="ProblemType">
             <option value="1">单选</option>
             <option value="2">多选</option>
             <option value="3">填空</option>
         </select>
         <div style="margin-top: 1%;margin-left: 10px;float: left">题目类型:</div>
-        <label><input name="pflag" type="checkbox" value="" style="margin-top: 10px;margin-left: 10px"/>必做</label>
+        <label>
+        	<input name="pflag" type="checkbox" value="pflag" style="margin-top: 10px;margin-left: 10px" id="ProblemFlag" />必做
+        </label>
         <button type="button" class="layui-btn" style="float: right;" id="save_problem">保存</button>
     </div>
 </div>
