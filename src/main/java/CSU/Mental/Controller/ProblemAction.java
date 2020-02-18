@@ -529,6 +529,8 @@ public class ProblemAction extends ActionSupport{
 		if (plist.size() == 0) {
 			jo.put("Count", "0");
 			jo.put("rows", "0");
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
 		} 
@@ -536,6 +538,8 @@ public class ProblemAction extends ActionSupport{
 			JSONArray ja = JSONArray.fromObject(plist);
 			jo.put("Count", plist.size());
 			jo.put("rows", 1);
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", plist.size());
 			jo.put("Array", ja.toString());
 		}

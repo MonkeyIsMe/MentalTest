@@ -17,14 +17,26 @@
     <script src="js/scale.js"></script>
 </head>
 <body>
+    <div class="form-group scale_search" style="float:left">
+    	<div style="float:left">
+    		<input type="text" class="form-control" placeholder="请输入量表名称" >
+    	</div>
+    	 <div style="float:left;margin-left:30px">
+    	 	<button type="button" class="btn btn-default btn-sm"> 搜索</button>
+    	 </div>
+	</div>
+	<button type="button" class="btn btn-default btn-sm"
+		style="margin:10px 30px 10px 0;float:right" data-toggle="modal" data-target="#add_Modal">
+		<span class="glyphicon glyphicon-plus"></span> 添加量表
+	</button>
 <table class="layui-table" id="myTable">
     <thead>
     <tr align="center" class="table_header" height="22">
         <th style="width:5%;text-align:center">编号</th>
         <th style="width:15%;text-align:center">量表名称</th>
-        <th style="width:30%;text-align:center">量表信息</th>
-        <th style="width:30%;text-align:center">量表指导语</th>
+        <th style="width:30%;text-align:center">使用次数</th>
         <th style="width:20%;text-align:center">更新时间</th>
+        <th style="width:20%;text-align:center">操作</th>
     </tr>
     </thead>
     <tbody id="ScaleList" bgcolor="#D7EBFF" align="center"  style="color: black">

@@ -38,6 +38,7 @@
 	<!-- 注意:Action对象作用范围一定是多例的.这样才符合struts2架构 -->
 	<bean name="ChoiceAction" class="CSU.Mental.Controller.ChoiceAction" scope="prototype" >
 		<property name="ChoiceService" ref="ChoiceService" ></property>
+		<property name="ProblemService" ref="ProblemService" ></property>
 	</bean>
 	<bean name="DeadlineAction" class="CSU.Mental.Controller.DeadlineAction" scope="prototype" >
 		<property name="DeadlineService" ref="DeadlineService" ></property>

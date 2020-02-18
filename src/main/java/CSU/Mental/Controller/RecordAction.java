@@ -187,11 +187,15 @@ public class RecordAction extends ActionSupport{
 			jo.put("Count", "0");
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("Array", "null");
 		}
 		else {
 			jo.put("Count", count);
 			jo.put("rows", rows);
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", PageSize);
 			jo.put("Array", ja.toString());
 		}

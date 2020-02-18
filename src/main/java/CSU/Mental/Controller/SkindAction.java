@@ -154,6 +154,8 @@ public class SkindAction extends ActionSupport{
 			jos.put("rows", "0");
 			jos.put("PageSize", "0");
 			jos.put("Array", "null");
+			jos.put("msg", "");
+			jos.put("code", 0);
 			
 			out.println(jos.toString());
 			out.flush();
@@ -171,12 +173,16 @@ public class SkindAction extends ActionSupport{
 		if(SkindList.size() == 0) {
 			jo.put("Count", "0");
 			jo.put("rows", "0");
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
 		}
 		else {
 			jo.put("Count", SkindList.size());
 			jo.put("rows", 1);
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", SkindList.size());
 			jo.put("Array", SkindList.toString());
 		}

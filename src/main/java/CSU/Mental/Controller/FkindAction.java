@@ -195,12 +195,16 @@ public class FkindAction extends ActionSupport{
 			jo.put("Count", "0");
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("Array", "null");
 		} 
 		else {
 			JSONArray ja = JSONArray.fromObject(FkindList);
 			jo.put("Count", FkindList.size());
 			jo.put("rows", 1);
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", FkindList.size());
 			jo.put("Array", ja.toString());
 		}

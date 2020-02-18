@@ -51,4 +51,14 @@ public class TemplateServiceImpl implements TemplateService{
 		return TemplateDao.QueryAllTemplate();
 	}
 
+	public List<Template> VagueTemplatePageSize(String name, int PageSize, int rows) {
+		// TODO Auto-generated method stub
+		return TemplateDao.VagueTemplatePageSize(name, PageSize, rows);
+	}
+
+	public List<Template> QueryTemplatePageSize(int PageSize, int rows) {
+		// TODO Auto-generated method stub
+		return TemplateDao.QueryTemplatePageSize(PageSize, rows);
+	}
+
 }

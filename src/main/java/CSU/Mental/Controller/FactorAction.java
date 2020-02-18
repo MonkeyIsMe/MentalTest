@@ -450,6 +450,8 @@ public class FactorAction extends ActionSupport{
 		if (flist.size() == 0) {
 			jo.put("Count", "0");
 			jo.put("rows", "0");
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
 		} 
@@ -457,6 +459,8 @@ public class FactorAction extends ActionSupport{
 			JSONArray ja = JSONArray.fromObject(flist);
 			jo.put("Count", flist.size());
 			jo.put("rows", 1);
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", flist.size());
 			jo.put("Array", ja.toString());
 		}

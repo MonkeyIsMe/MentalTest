@@ -1,4 +1,52 @@
 var cid,cname,cscore;
+var op = 2;
+
+$(function () {
+    $("input[type='radio']").on("click",function () {
+        op = $("input[type='radio']:checked").val();
+        //alert(op);
+        if(op == 2){
+            $("#ch_one").css("display","block");
+            $("#ch_two").css("display","block");
+            $("#ch_three").css("display","none");
+            $("#ch_four").css("display","none");
+            $("#ch_five").css("display","none");
+            $("#ch_six").css("display","none");
+        }
+        if(op == 3){
+            $("#ch_one").css("display","block");
+            $("#ch_two").css("display","block");
+            $("#ch_three").css("display","block");
+            $("#ch_four").css("display","none");
+            $("#ch_five").css("display","none");
+            $("#ch_six").css("display","none");
+        }
+        if(op == 4){
+            $("#ch_one").css("display","block");
+            $("#ch_two").css("display","block");
+            $("#ch_three").css("display","block");
+            $("#ch_four").css("display","block");
+            $("#ch_five").css("display","none");
+            $("#ch_six").css("display","none");
+        }
+        if(op == 5){
+            $("#ch_one").css("display","block");
+            $("#ch_two").css("display","block");
+            $("#ch_three").css("display","block");
+            $("#ch_four").css("display","block");
+            $("#ch_five").css("display","block");
+            $("#ch_six").css("display","none");
+        }
+        if(op == 6){
+            $("#ch_one").css("display","block");
+            $("#ch_two").css("display","block");
+            $("#ch_three").css("display","block");
+            $("#ch_four").css("display","block");
+            $("#ch_five").css("display","block");
+            $("#ch_six").css("display","block");
+        }
+    })
+})
 
 //初始化选项列表
 function InitChoiceTable(){
@@ -33,6 +81,74 @@ function InitChoiceTable(){
 }
 
 $(document).ready(function(){
+	
+	//增加模板
+	$("#add_temp").click(function(){
+		var tempinfo = [];
+		//alert(op);
+		if(op == 2){
+			for(var i = 1; i <= 2; i ++){
+				var name = $("#name" + i).val();
+				var score = $("#score" + i).val();
+				//console.log(name + " " + score);
+				tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
+			}
+		}
+		else if(op == 3){
+			for(var i = 1; i <= 3; i ++){
+				var name = $("#name" + i).val();
+				var score = $("#score" + i).val();
+				//console.log(name + " " + score);
+				tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
+			}
+		}
+		else if(op == 4){
+			for(var i = 1; i <= 4; i ++){
+				var name = $("#name" + i).val();
+				var score = $("#score" + i).val();
+				//console.log(name + " " + score);
+				tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
+			}
+		}
+		else if(op == 5){
+			for(var i = 1; i <= 5; i ++){
+				var name = $("#name" + i).val();
+				var score = $("#score" + i).val();
+				//console.log(name + " " + score);
+				tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
+			}
+		}
+		else if(op == 6){
+			for(var i = 1; i <= 6; i ++){
+				var name = $("#name" + i).val();
+				var score = $("#score" + i).val();
+				//console.log(name + " " + score);
+				tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
+			}
+		}
+		var temp_name = $("#temp_name").val();
+		var temp = JSON.stringify(tempinfo);
+		//console.log(temp);
+	    $.post(
+	            "MentalTest/AddTemplate",
+	            {
+	            	template_name:temp_name,
+	            	choice_info:temp,
+	            },
+				function(data){
+					var data = JSON.parse(data);
+					var result = data.result;
+					if(result == "Success"){
+						alert("添加成功");
+					}
+					else{
+						alert("添加失败！");
+					}
+				}
+	        );
+	})
+	
+	
 	
 	//添加选项
 	$("#add_choice").click(function(){

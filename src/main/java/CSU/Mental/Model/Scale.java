@@ -146,7 +146,7 @@ public class Scale implements Serializable{
 		jo.put("ScaleGuide", this.ScaleGuide);
 		jo.put("SkinId", this.SkinId);
 		jo.put("FkinId", this.FkinId);
-		jo.put("FkindName", this.ScaleUpdateTime);
+		jo.put("ScaleUpdateTime", this.ScaleUpdateTime);
 		jo.put("ScaleNumber", this.ScaleNumber);
 		jo.put("ScaleType2", this.ScaleType2);
 		jo.put("ScaleType3", this.ScaleType3);

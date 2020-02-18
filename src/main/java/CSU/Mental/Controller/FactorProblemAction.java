@@ -95,11 +95,15 @@ public class FactorProblemAction extends ActionSupport{
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
+			jo.put("msg", "");
+			jo.put("code", 0);
 		} 
 		else {
 			JSONArray ja = JSONArray.fromObject(fplist);
 			jo.put("Count", fplist.size());
 			jo.put("rows", 1);
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", fplist.size());
 			jo.put("Array", ja.toString());
 		}

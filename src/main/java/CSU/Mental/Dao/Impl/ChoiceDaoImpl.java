@@ -142,6 +142,7 @@ public class ChoiceDaoImpl extends HibernateDaoSupport implements ChoiceDao{
 			public Object doInHibernate(Session session) throws HibernateException {
 				// TODO Auto-generated method stub
 				for(int i = 0; i < list.size(); i ++) {
+					//System.out.println(list.get(i).toString());
 					session.save(list.get(i));
                     if (i % 50 == 0) {  
                         session.flush();  

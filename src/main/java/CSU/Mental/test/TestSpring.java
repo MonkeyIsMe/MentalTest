@@ -71,6 +71,14 @@ public class TestSpring {
 	}
 	
 	@Test
+	public void QueryScale() {
+		List<Scale> ScaleList = ScaleService.QueryScalePageSize(5, 1);
+		for(Scale s: ScaleList) {
+			System.out.println(s.toString());
+		}
+	}
+	
+	@Test
 	public void AddFactor() {
 		Factor fac = new Factor();
 		fac.setFactorName("test_add");

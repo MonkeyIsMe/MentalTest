@@ -240,23 +240,40 @@ public class ReferenceAction extends ActionSupport{
 			
 			JSONObject jo = new JSONObject(); 
 			
+			String refer_id = jo.getString("refer_id");
 			String reference_bscore = jo.getString("refer_bscore");
-			String reference_escore = jo.getString("refer_escore");
+			String reference_escore = jo.getString("refer_bscore");
 			String reference_sex = jo.getString("refer_sex");
 			String reference_bage = jo.getString("refer_bage");
 			String reference_eage = jo.getString("refer_eage");
 			String reference_suggestion = jo.getString("refer_suggestion");
 			
-			Reference refer = new Reference();
-			refer.setReferenceBeginScore(Integer.valueOf(reference_bscore));
-			refer.setReferenceEndScore(Integer.valueOf(reference_escore));
-			refer.setReferenceSex(reference_sex);
-			refer.setReferenceBeginAge(Integer.valueOf(reference_bage));
-			refer.setReferenceEndAge(Integer.valueOf(reference_eage));
-			refer.setReferenceSuggestion(reference_suggestion);
-			refer.setFactorId(fid);
-			
-			ReferenceService.AddReference(refer);
+			int rid = Integer.valueOf(refer_id);
+			if(rid == 0) {
+				Reference refer = new Reference();
+				refer.setReferenceBeginScore(Integer.valueOf(reference_bscore));
+				refer.setReferenceEndScore(Integer.valueOf(reference_escore));
+				refer.setReferenceSex(reference_sex);
+				refer.setReferenceBeginAge(Integer.valueOf(reference_bage));
+				refer.setReferenceEndAge(Integer.valueOf(reference_eage));
+				refer.setReferenceSuggestion(reference_suggestion);
+				refer.setFactorId(fid);
+				
+				ReferenceService.AddReference(refer);
+			}
+			else {
+				Reference refer = ReferenceService.QueryReference(rid);
+				refer.setReferenceBeginScore(Integer.valueOf(reference_bscore));
+				refer.setReferenceEndScore(Integer.valueOf(reference_escore));
+				refer.setReferenceSex(reference_sex);
+				refer.setReferenceBeginAge(Integer.valueOf(reference_bage));
+				refer.setReferenceEndAge(Integer.valueOf(reference_eage));
+				refer.setReferenceSuggestion(reference_suggestion);
+				refer.setFactorId(fid);
+				
+				ReferenceService.UpdateReference(refer);
+			}
+
 		}
 		
 		JSONObject jo = new JSONObject();
@@ -288,6 +305,8 @@ public class ReferenceAction extends ActionSupport{
 			jos.put("rows", "0");
 			jos.put("PageSize", "0");
 			jos.put("Array", "null");
+			jos.put("msg", "");
+			jos.put("code", 0);
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -302,6 +321,8 @@ public class ReferenceAction extends ActionSupport{
 
 		if (rlist.size() == 0) {
 			jo.put("Count", "0");
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
@@ -309,6 +330,8 @@ public class ReferenceAction extends ActionSupport{
 		else {
 			JSONArray ja = JSONArray.fromObject(rlist);
 			jo.put("Count", rlist.size());
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("rows", 1);
 			jo.put("PageSize", rlist.size());
 			jo.put("Array", ja.toString());

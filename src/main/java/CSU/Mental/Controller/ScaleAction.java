@@ -487,8 +487,6 @@ public class ScaleAction extends ActionSupport{
 		
 		String page = request.getParameter("page");
 		String size = request.getParameter("limit");
-		String flag_id = request.getParameter("flag_id");
-		String scale_flag = request.getParameter("scale_flag");
 		
 		int rows = 1;
 		int PageSize = 5;
@@ -500,49 +498,24 @@ public class ScaleAction extends ActionSupport{
 			PageSize = Integer.valueOf(size);
 		}
 		
-		if(!cutil.IsNumber(flag_id)) {
-			
-			JSONObject jos = new JSONObject();
-			jos.put("Count", "0");
-			jos.put("rows", "0");
-			jos.put("PageSize", "0");
-			jos.put("Array", "null");
-			
-			out.println(jos.toString());
-			out.flush();
-			out.close();
-			return;
-		}
-		
-		int fid = Integer.valueOf(flag_id);
-		
-		int count = 0;
-		List<Scale> ScaleList = null;
-		
-		if(scale_flag.equals("skind")) {
-			count = ScaleService.CountScaleBySkind(fid);
-			ScaleList = ScaleService.QueryScaleBySkindPageSize(PageSize, rows, fid);
-		}
-		else if(scale_flag.equals("fkind")) {
-			count = ScaleService.CountScaleByFkind(fid);
-			ScaleList = ScaleService.QueryScaleByFkindPageSize(PageSize, rows, fid);
-		}
-		else {
-			count = ScaleService.CountScale();
-			ScaleList = ScaleService.QueryScalePageSize(PageSize, rows);
-		}
+		int count = ScaleService.CountScale();
+		List<Scale> ScaleList = ScaleService.QueryScalePageSize(PageSize, rows);
 		
 		JSONObject jo = new JSONObject();
 		if(ScaleList.size() == 0) {
 			jo.put("Count", "0");
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("Array", "null");
 		}
 		else {
 			jo.put("Count", count);
 			jo.put("rows", rows);
 			jo.put("PageSize", PageSize);
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("Array", ScaleList.toString());
 		}
 		

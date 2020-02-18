@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+
     <link href="css/common.css" type="text/css" rel="styleSheet">
     <link href="css/problem.css" type="text/css" rel="styleSheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,92 +19,162 @@
 </head>
 <body>
 <table class="layui-table" id="choiceTable">
-		<thead>
-			<tr align="center" class="table_header" height="22">
-				<th style="width: 10%; text-align: center">编号</th>
-				<th style="width: 45%; text-align: center">名称</th>
-				<th style="width: 10%; text-align: center">分值</th>
-				<th style="width: 40%; text-align: center">删除-更新-子选项</th>
-			</tr>
-		</thead>
-		<tbody id="ChoiceList" bgcolor="#D7EBFF" align="center" style="color: black">
-		</tbody>
-	</table>
-	<button type="button" class="btn btn-default btn-sm"
-		style="margin: 10px;margin-left:42%" data-toggle="modal" data-target="#add_Modal">
-		<span class="glyphicon glyphicon-plus"></span> 添加选项
-	</button>
-	</div>
-	<div class="modal fade" id="add_Modal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">添加选项</h4>
-				</div>
-				<div class="form-group big_input">
-					<label>选项内容：</label> <input type="text" class="form-control"
-						placeholder="请输入选项内容" id="pro_info">
-				</div>
-				<div class="form-group big_input">
-					<label>选项分数：</label> <input type="text" class="form-control"
-						placeholder="请输入选项分数" id="pro_score">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" id="add_choice" data-dismiss="modal">确定</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal -->
-	</div>
-		<div class="modal fade" id="upchoice_Modal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">更新选项</h4>
-				</div>
-				<div class="form-group big_input">
-					<label>题目内容：</label> <input type="text" class="form-control"
-						placeholder="请输入题目内容" id="up_ch_info">
-				</div>
-				<div class="form-group big_input">
-					<label>题目分数：</label> <input type="text" class="form-control"
-						placeholder="请输入题目分数" id="up_ch_score">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" id="up_choice" data-dismiss="modal">确定</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal -->
-	</div>
-		<div class="modal fade" id="delchoice_Modal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">删除界面</h4>
-				</div>
-				<div class="modal-body" id="del_choice_info"></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" id="del_choice" data-dismiss="modal">确定</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal -->
-	</div>
+    <thead>
+    <tr align="center" class="table_header" height="22">
+        <th style="width: 10%; text-align: center">编号</th>
+        <th style="width: 45%; text-align: center">名称</th>
+        <th style="width: 10%; text-align: center">分值</th>
+        <th style="width: 40%; text-align: center">删除-更新-子选项</th>
+    </tr>
+    </thead>
+    <tbody id="ChoiceList" bgcolor="#D7EBFF" align="center" style="color: black">
+    </tbody>
+</table>
+<button type="button" class="btn btn-default btn-sm"
+        style="margin: 10px;margin-left:42%" data-toggle="modal" data-target="#temp_Modal">
+    <span class="glyphicon glyphicon-check"></span> 选择模板
+</button>
+<button type="button" class="btn btn-default btn-sm"
+        style="margin: 10px;" data-toggle="modal" data-target="#add_Modal">
+    <span class="glyphicon glyphicon-plus"></span> 增加模板
+</button>
+</div>
+<div class="modal fade" id="add_Modal" tabindex="-1" role="dialog"aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" style="width:80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">添加选项</h4>
+            </div>
+            <div class="modal-body" >
+                <div style="margin-left: 5px;margin-top: 5px">
+                    <label style="margin-left: 5px"><input type="radio" name="choose" value="2">2个选项</label>
+                    <label style="margin-left: 5px"><input type="radio" name="choose" value="3">3个选项</label>
+                    <label style="margin-left: 5px"><input type="radio" name="choose" value="4">4个选项</label>
+                    <label style="margin-left: 5px"><input type="radio" name="choose" value="5">5个选项</label>
+                    <label style="margin-left: 5px"><input type="radio" name="choose" value="6">6个选项</label>
+                </div>
+				<div class="form-group tempname">
+                	<label>模板名称：</label> 
+                	<input type="text" class="form-control" placeholder="请输入模板名称" id="temp_name">
+            	</div>
+                <div style="float: left">
+                    <div style="border: 1px solid black;margin-left: 5px;margin-top: 5px" id="ch_one">
+                        <input type="text" class="choice_name" placeholder="选项题目一" id="name1">
+                        <input type="text" class="choice_score" placeholder="选项分数一" id="score1">
+                    </div>
+                    <div style="border: 1px solid black;margin-left: 5px;margin-top: 5px" id="ch_two">
+                        <input type="text" class="choice_name" placeholder="选项题目二" id="name2">
+                        <input type="text" class="choice_score" placeholder="选项分数二" id="score2">
+                    </div>
+                </div>
+                <div style="float: left">
+                    <div style="border: 1px solid black;margin-left: 5px;margin-top: 5px" id="ch_three">
+                        <input type="text" class="choice_name" placeholder="选项题目三" id="name3">
+                        <input type="text" class="choice_score" placeholder="选项分数三" id="score3">
+                    </div>
+                    <div style="border: 1px solid black;margin-left: 5px;margin-top: 5px" id="ch_four">
+                        <input type="text" class="choice_name" placeholder="选项题目四" id="name4">
+                        <input type="text" class="choice_score" placeholder="选项分数四" id="score4">
+                    </div>
+                </div>
+                <div style="float: left">
+                    <div style="border: 1px solid black;margin-left: 5px;margin-top: 5px" id="ch_five">
+                        <input type="text" class="choice_name" placeholder="选项题目五" id="name5">
+                        <input type="text" class="choice_score" placeholder="选项分数五" id="score5">
+                    </div>
+                    <div style="border: 1px solid black;margin-left: 5px;margin-top: 5px" id="ch_six">
+                        <input type="text" class="choice_name" placeholder="选项题目六" id="name6">
+                        <input type="text" class="choice_score" placeholder="选项分数六" id="score6">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="add_temp" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+<div class="modal fade" id="upchoice_Modal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">更新选项</h4>
+            </div>
+            <div class="form-group big_input">
+                <label>题目内容：</label> <input type="text" class="form-control"
+                                            placeholder="请输入题目内容" id="up_ch_info">
+            </div>
+            <div class="form-group big_input">
+                <label>题目分数：</label> <input type="text" class="form-control"
+                                            placeholder="请输入题目分数" id="up_ch_score">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="up_choice" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+<div class="modal fade" id="delchoice_Modal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">删除界面</h4>
+            </div>
+            <div class="modal-body" id="del_choice_info"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="del_choice" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+<div class="modal fade" id="temp_Modal" tabindex="-1" role="dialog"aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:80%;height:1000px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">选择</h4>
+            </div>
+            <div class="modal-body" >
+                <table class="layui-table" id="templist">
+                    <thead>
+                    <tr align="center" class="table_header" height="22">
+                        <th style="width: 10%; text-align: center">编号</th>
+                        <th style="width: 45%; text-align: center">名称</th>
+                        <th style="width: 10%; text-align: center">分值</th>
+                        <th style="width: 40%; text-align: center">删除-更新-子选项</th>
+                    </tr>
+                    </thead>
+                    <tbody id="ChoiceList" bgcolor="#D7EBFF" align="center" style="color: black">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="del_choice" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
 </body>
 </html>

@@ -15,6 +15,7 @@ import CSU.Mental.Model.Template;
 import CSU.Mental.Service.ChoiceService;
 import CSU.Mental.Service.TemplateService;
 import CSU.Mental.Utils.CommonUtils;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -50,7 +51,7 @@ public class TemplateAction extends ActionSupport{
 		
 		String ChoiceInfo = request.getParameter("choice_info");
 		String template_name = request.getParameter("template_name");
-		
+		//System.out.println(ChoiceInfo);
 		template.setTemplateName(template_name);
 		
 		int tid = TemplateService.AddTemplate(template);
@@ -75,7 +76,7 @@ public class TemplateAction extends ActionSupport{
 			
 			clist.add(ch); 
 		}
-		
+		//System.out.println(clist.size());
 		ChoiceService.AddMutiplyChoice(clist);
 		
 		JSONObject jos = new JSONObject();
@@ -268,16 +269,87 @@ public class TemplateAction extends ActionSupport{
 			jo.put("Count", "0");
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("Array", "null");
 		}
 		else {
 			jo.put("Count", count);
 			jo.put("rows", 1);
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", count);
 			jo.put("Array", TemplateList.toString());
 		}
 		
 		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
+		
+	}
+
+	//分页查询模板
+	public void QueryTemplatePageSize() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String page = request.getParameter("page");
+		String size = request.getParameter("limit");
+		String template_name = request.getParameter("template_name");
+		System.out.println(template_name);
+		int rows = 1;
+		int PageSize = 5;
+
+		if (!(page == null || page == "" || page.equals("")) && cutil.IsNumber(page)) {
+			rows = Integer.valueOf(page);
+		}
+		if (!(size == null || size == "" || size.equals("")) && cutil.IsNumber(size)) {
+			PageSize = Integer.valueOf(size);
+		}
+		
+		List<Template> tlist = null;
+		if(template_name == "" || template_name.equals("")) {
+			tlist = TemplateService.QueryTemplatePageSize(PageSize, rows);
+		}
+		else tlist = TemplateService.VagueTemplatePageSize(template_name, PageSize, rows);
+		
+		JSONArray ja = new JSONArray();
+		
+		for(Template temp : tlist) {
+			int tid = temp.getTemplateId();
+			List<Choice> clist = ChoiceService.QueryChoiceByTemplate(tid);
+			//JSONObject jo = JSONObject.fromObject(clist);
+			//JSONArray cja = JSONArray.fromObject(clist);
+			JSONObject jo = new JSONObject();
+			jo.put("ChoiceList", clist.toString());
+			ja.add(jo);
+ 		}
+		
+		JSONObject result = new JSONObject();
+		if(ja.size() == 0) {
+			result.put("Count", "0");
+			result.put("rows", "0");
+			result.put("msg", "");
+			result.put("code", 0);
+			result.put("PageSize", "0");
+			result.put("Array", "null");
+		}
+		else {
+			result.put("Count", ja.size());
+			result.put("rows", rows);
+			result.put("msg", "");
+			result.put("code", 0);
+			result.put("PageSize", PageSize);
+			result.put("Array", ja.toString());
+		}
+		
+		out.println(result.toString());
 		out.flush();
 		out.close();
 		return;

@@ -315,6 +315,8 @@ public class UserAction extends ActionSupport{
 		JSONObject jo = new JSONObject();
 		if(UserList.size() == 0) {
 			jo.put("Count", "0");
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
@@ -322,6 +324,8 @@ public class UserAction extends ActionSupport{
 		else {
 			jo.put("Count", count);
 			jo.put("rows", rows);
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", PageSize);
 			jo.put("Array", UserList.toString());
 		}

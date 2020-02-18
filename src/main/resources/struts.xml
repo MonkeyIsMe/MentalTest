@@ -182,7 +182,9 @@
 		</action>
 		<action name="QueryAllTemplate" class="TemplateAction" method="QueryAllTemplate" >
 		</action>
-				
+		<action name="QueryTemplatePageSize" class="TemplateAction" method="QueryTemplatePageSize" >
+		</action>
+			
 		<!-- 用户 -->
 		<action name="AddUser" class="UserAction" method="AddUser" >
 		</action>

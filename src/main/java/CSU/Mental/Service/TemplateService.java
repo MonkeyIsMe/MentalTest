@@ -18,4 +18,8 @@ public interface TemplateService {
 	
 	public List<Template> QueryAllTemplate();
 	
+	public List<Template> VagueTemplatePageSize(String name,int PageSize,int rows);
+	
+	public List<Template> QueryTemplatePageSize(int PageSize,int rows);
+	
 }

@@ -11,7 +11,9 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import CSU.Mental.Model.Choice;
+import CSU.Mental.Model.Problem;
 import CSU.Mental.Service.ChoiceService;
+import CSU.Mental.Service.ProblemService;
 import CSU.Mental.Utils.CommonUtils;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -20,8 +22,16 @@ public class ChoiceAction extends ActionSupport{
 
 	private CommonUtils cutil = new CommonUtils();
 	private ChoiceService ChoiceService;
+	private ProblemService ProblemService;
+	private Problem problem = new Problem();
 	private Choice choice = new Choice();
 	
+	public ProblemService getProblemService() {
+		return ProblemService;
+	}
+	public void setProblemService(ProblemService problemService) {
+		ProblemService = problemService;
+	}
 	public ChoiceService getChoiceService() {
 		return ChoiceService;
 	}
@@ -219,21 +229,34 @@ public class ChoiceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(problem_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("Count", "0");
+			jos.put("rows", "0");
+			jos.put("msg", "");
+			jos.put("code", 0);
+			jos.put("PageSize", "0");
+			jos.put("Array", "null");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		
+		List<Choice> clist = null;
 		int pid = Integer.valueOf(problem_id);
+		problem = ProblemService.QueryProblem(pid);
 		
-		List<Choice> clist = ChoiceService.QueryChoiceByProblem(pid);
+		int tid = problem.getTemplateId();
+		if(tid != 0) {
+			clist = ChoiceService.QueryChoiceByTemplate(tid);
+		}
+		else clist = ChoiceService.QueryChoiceByProblem(pid);
 		
 		JSONObject jo = new JSONObject();
 		if (clist.size() == 0) {
 			jo.put("Count", "0");
 			jo.put("rows", "0");
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
 		} 
@@ -241,6 +264,8 @@ public class ChoiceAction extends ActionSupport{
 			JSONArray ja = JSONArray.fromObject(clist);
 			jo.put("Count", clist.size());
 			jo.put("rows", 1);
+			jo.put("msg", "");
+			jo.put("code", 0);
 			jo.put("PageSize", clist.size());
 			jo.put("Array", ja.toString());
 		}

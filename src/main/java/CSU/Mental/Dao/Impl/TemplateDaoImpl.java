@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
 import CSU.Mental.Dao.TemplateDao;
+import CSU.Mental.Model.Scale;
 import CSU.Mental.Model.Template;
 
 @Transactional
@@ -89,6 +90,49 @@ public class TemplateDaoImpl extends HibernateDaoSupport implements TemplateDao{
 					// TODO Auto-generated method stub
 					String hql = "from Template";
 					Query query = session.createQuery(hql);
+					List<Template> list = query.list();
+					return list;
+				}
+			});
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<Template> VagueTemplatePageSize(final String name, final int PageSize, final int rows) {
+		// TODO Auto-generated method stub
+		try {
+			return getHibernateTemplate().execute(new HibernateCallback<List<Template>>() {
+
+				public List<Template> doInHibernate(Session session) throws HibernateException {
+					// TODO Auto-generated method stub
+					String hql = "from Template where template_name like :name";
+					Query query = session.createQuery(hql).setFirstResult(
+			                (rows - 1) * PageSize).setMaxResults(PageSize);
+					query.setString("name", "%"+ name +"%");
+					List<Template> list = query.list();
+					return list;
+				}
+			});
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public List<Template> QueryTemplatePageSize(final int PageSize, final int rows) {
+		// TODO Auto-generated method stub
+		try {
+			return getHibernateTemplate().execute(new HibernateCallback<List<Template>>() {
+
+				public List<Template> doInHibernate(Session session) throws HibernateException {
+					// TODO Auto-generated method stub
+					String hql = "from Template";
+					Query query = session.createQuery(hql).setFirstResult(
+			                (rows - 1) * PageSize).setMaxResults(PageSize);
 					List<Template> list = query.list();
 					return list;
 				}

@@ -58,7 +58,7 @@ public class ChoiceServiceImpl implements ChoiceService{
 
 	public Object AddMutiplyChoice(List<Choice> list) {
 		// TODO Auto-generated method stub
-		return ChoiceDao.DeleteMutiplyChoice(list);
+		return ChoiceDao.AddMutiplyChoice(list);
 	}
 
 }
