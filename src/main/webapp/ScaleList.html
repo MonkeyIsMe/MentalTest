@@ -25,8 +25,8 @@
     	 	<button type="button" class="btn btn-default btn-sm"> 搜索</button>
     	 </div>
 	</div>
-	<button type="button" class="btn btn-default btn-sm"
-		style="margin:10px 30px 10px 0;float:right" data-toggle="modal" data-target="#add_Modal">
+	<button type="button" class="btn btn-default btn-sm" onclick="AddScale()"
+		style="margin:10px 30px 10px 0;float:right">
 		<span class="glyphicon glyphicon-plus"></span> 添加量表
 	</button>
 <table class="layui-table" id="myTable">
@@ -48,75 +48,22 @@
 </div>
 <div id="TotalPage" style="float:left;margin-top:10px;font-size:18px;margin-left:5px"></div>
 <div id="NowPage" style="float:left;margin-top:10px;font-size:18px;margin-left:5px"></div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="del_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">删除界面</h4>
             </div>
-            <div class="modal-body" id="relation_id"></div>
+            <div class="modal-body" id="scale_id"></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="del_relation">确定</button>
+                <button type="button" class="btn btn-primary" id="del_scale">确定</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
 
-<div class="modal fade" id="add_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">添加界面</h4>
-            </div>
-        	<div class="form-group big_input">
-	            <label>场地编号：</label>
-	            <input type="text" class="form-control" placeholder="请输入场地编号" id="add_place_id">
-	        </div>
-	        <div class="form-group big_input">
-	            <label>场地名称：</label>
-	            <input type="text" class="form-control" placeholder="请输入场地名称" id="add_place_name">
-	        </div>
-	       	<div class="form-group big_input">
-	            <label>区域编号：</label>
-	            <input type="text" class="form-control" placeholder="请输入区域编号" id="add_place_area">
-	        </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="add_relation">确定</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
-
-<div class="modal fade" id="update_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">更新界面</h4>
-            </div>
-        	<div class="form-group big_input">
-	            <label>场地编号：</label>
-	            <input type="text" class="form-control" placeholder="请输入场地编号" id="up_place_id">
-	        </div>
-	        <div class="form-group big_input">
-	            <label>场地名称：</label>
-	            <input type="text" class="form-control" placeholder="请输入场地名称" id="up_place_name">
-	        </div>
-	       	<div class="form-group big_input">
-	            <label>区域编号：</label>
-	            <input type="text" class="form-control" placeholder="请输入区域编号" id="up_place_area">
-	        </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="update_relation">确定</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
 
 </body>
 </html>

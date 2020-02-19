@@ -126,7 +126,7 @@
 		</action>
 				  
 		<!-- 选项 -->
-		<action name="DeteleReference" class="ReferenceAction" method="DeteleReference" >
+		<action name="DeleteReference" class="ReferenceAction" method="DeleteReference" >
 		</action>
 		<action name="AddReference" class="ReferenceAction" method="AddReference" >
 		</action>
@@ -157,6 +157,8 @@
 		<action name="CountScaleByFkindSkind" class="ScaleAction" method="CountScaleByFkindSkind" >
 		</action>
 		<action name="DeleteScale" class="ScaleAction" method="DeleteScale" >
+		</action>
+		<action name="QuerySingleScale" class="ScaleAction" method="QuerySingleScale" >
 		</action>
 		<action name="VagueScalePageSize" class="ScaleAction" method="VagueScalePageSize" >
 		</action>

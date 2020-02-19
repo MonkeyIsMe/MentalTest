@@ -22,6 +22,8 @@ public interface ProblemDao {
 	
 	public List<Integer> AddMutiplyProblem(List<Problem> list);
 	
+	public Object DeleteMutiplyProblem(List<Problem> list);
+	
 	public List<Object[]> QuerySingleProblemByScale(int ScaleId);
 	
 }

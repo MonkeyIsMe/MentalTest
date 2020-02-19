@@ -4,7 +4,7 @@
 
 var row = 1;  //页数
 var count; //总记录数
-var rid,rname,pid,rarea;
+var sid,sname;
 
 $(function(){
 	$.ajaxSettings.async = false;
@@ -51,7 +51,7 @@ $(function(){
 			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].ScaleNumber +"</td>");
 			        $trTemp.append("<td style=" + "text-align:center"  + ">" +data.Array[i].ScaleUpdateTime  +"</td>");
 			        $trTemp.append("<td>" + 
-			        		'<a><span class="delete" style="cursor:pointer;" data-toggle="modal" data-target="#delchoice_Modal">删除</span></a>'
+			        		'<a><span class="delete" style="cursor:pointer;" data-toggle="modal" data-target="#del_Modal">删除</span></a>'
 			        		 + '<a><span class="update" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#upchoice_Modal">修改</span></a>'
 			        		 + '<a><span class="see" style="cursor:pointer;margin-left:18px" ></span>查看</a>'
 			        		+"</td>");
@@ -137,3 +137,61 @@ function NextPage(){
 
 }
 
+$(document).ready(function(){
+	
+	  
+	  $("#myTable").on('click','.delete',function(){
+		    //获得当前行
+		    var currentRow=$(this).closest("tr"); 
+		    var col1 = currentRow.find("td:eq(0)").text(); //获得当前行第一个TD值
+		    var col2 = currentRow.find("td:eq(1)").text(); //获得当前行第一个TD值
+		    
+		    sid = col1;
+		    sname = col2;
+		    $("#scale_id").empty();
+		    $("#scale_id").append("是否删除名字为: "+ sname + "的量表");
+		  });
+	  
+	  $("#myTable").on('click','.update',function(){
+		    //获得当前行
+		    var currentRow=$(this).closest("tr"); 
+		    var col1 = currentRow.find("td:eq(0)").text(); //获得当前行第一个TD值
+		    
+		    sid = col1;
+		    //sname = col2;
+			var url = "EditScale.html?ScaleId=" + sid;
+			window.location.href = url;
+		  });
+	  
+	 
+	  $("#del_scale").click(function(){
+		  	$.post(
+					"MentalTest/DeleteScale",
+					{
+						scale_id:sid,
+					},
+					function(data){
+						var data = JSON.parse(data);
+						var result = data.result;
+						if(result == "Success"){
+							alert("删除成功！");
+						    var url = "ScaleList.html";
+						    window.location.replace(url);
+						}
+						else{
+							alert("删除失败！");
+						    var url = "ScaleList.html";
+						    window.location.replace(url);
+						}
+					}
+					);
+	  })
+	  
+
+
+	  
+});
+
+function AddScale(){
+	window.location.replace("tableBaseInfo.html");
+}

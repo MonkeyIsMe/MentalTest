@@ -153,14 +153,17 @@ public class ScaleAction extends ActionSupport{
 		
 		flag = ScaleService.UpdtaeScale(scale);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
+			jo.put("result", "Success");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		else {
-			out.println("Fail");
+			jo.put("result", "Fail");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -333,7 +336,28 @@ public class ScaleAction extends ActionSupport{
 		
 	}
 	
-
+	//查询单一量表
+	public void QuerySingleScale() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String scale_id = request.getParameter("scale_id");
+		
+		int sid = Integer.valueOf(scale_id);
+		
+		scale = ScaleService.QueryScale(sid);
+		
+		out.println(scale.toString());
+		out.flush();
+		out.close();
+		return;
+	}
+	
 	//更新量表信息
 	public void UpdateScale() throws Exception{
 		
@@ -401,14 +425,17 @@ public class ScaleAction extends ActionSupport{
 		
 		flag = ScaleService.UpdtaeScale(scale);
 		
+		JSONObject jo = new JSONObject();
 		if(flag) {
-			out.println("Success");
+			jo.put("result", "Success");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
 		}
 		else {
-			out.println("Fail");
+			jo.put("result", "Fail");
+			out.println(jo.toString());
 			out.flush();
 			out.close();
 			return;
@@ -724,7 +751,10 @@ public class ScaleAction extends ActionSupport{
 			return;
 		}
 		
+		
 		int sid = Integer.valueOf(scale_id);
+		
+		scale = ScaleService.QueryScale(sid);
 		
 		ScaleService.DeleteScale(scale);
 		
@@ -738,7 +768,7 @@ public class ScaleAction extends ActionSupport{
 			ChoiceService.DeleteMutiplyChoice(clist);
 		}
 		
-		ProblemService.AddMutiplyProblem(plist);
+		ProblemService.DeleteMutiplyProblem(plist);
 		
 		for(Factor fac : flist) {
 			int fid = fac.getFactorId();

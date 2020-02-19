@@ -24,4 +24,6 @@ public interface ProblemService {
 	
 	public List<Object[]> QuerySingleProblemByScale(int ScaleId);
 	
+	public Object DeleteMutiplyProblem(List<Problem> list);
+	
 }

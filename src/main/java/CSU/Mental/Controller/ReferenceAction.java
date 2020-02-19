@@ -97,7 +97,7 @@ public class ReferenceAction extends ActionSupport{
 	}
 	
 	//删除一个参考选项
-	public void DeteleReference() throws Exception{
+	public void DeleteReference() throws Exception{
 		
 		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
 		HttpServletRequest request= ServletActionContext.getRequest();

@@ -163,4 +163,23 @@ public class ProblemDaoImpl extends HibernateDaoSupport implements ProblemDao{
 		});
 	}
 
+	public Object DeleteMutiplyProblem(final List<Problem> list) {
+		// TODO Auto-generated method stub
+		return getHibernateTemplate().execute(new HibernateCallback<Object>() {
+
+			public Object doInHibernate(Session session) throws HibernateException {
+				// TODO Auto-generated method stub
+				for(int i = 0; i < list.size(); i ++) {
+					session.delete(list.get(i));
+                    if (i % 50 == 0) {  
+                        session.flush();  
+                        session.clear();  
+                    }  
+				}
+				return null;
+			}
+			
+		});
+	}
+
 }

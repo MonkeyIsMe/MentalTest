@@ -66,4 +66,9 @@ public class ProblemServiceImpl implements ProblemService{
 		return null;
 	}
 
+	public Object DeleteMutiplyProblem(List<Problem> list) {
+		// TODO Auto-generated method stub
+		return ProblemDao.DeleteMutiplyProblem(list);
+	}
+
 }

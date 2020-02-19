@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="css/tableBaseInfo.css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/editscale.js"></script>
+
+</head>
+<body>
+	<div style="font-size: 28px; margin-top: 10px; text-align: center;">量表基本信息</div>
+
+	<div class="second">
+		<span class="TableName">量表名称 :</span>
+		<textarea id="tableName" class="name_textarea" maxlength=100
+			placeholder="必填项"></textarea>
+		<span class="ClassName">所属类别 :</span> <select id="Select1"
+			class="select1">
+
+		</select> <select id="Select2" class="select2">
+
+		</select>
+	</div>
+
+	<div class="third">
+		<span class="tableIntroduction">量表介绍</span>
+		<textarea id="introInfo" class="introduction"></textarea>
+		<span class="tableInstruction">指导语</span>
+		<textarea id="guideInfo" class="Instruction"></textarea>
+		<button id="saveBtn" class="save">保存</button>
+		<button id="nextBtn" class="nextStep">下一步 (因子)</button>
+	</div>
+
+	<div class="fourth">
+		<span class="background1"></span> <span class="background2"></span>
+	</div>
+
+</body>
+</html>
