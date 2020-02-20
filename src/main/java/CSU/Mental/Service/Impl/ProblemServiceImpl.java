@@ -63,7 +63,7 @@ public class ProblemServiceImpl implements ProblemService{
 
 	public List<Object[]> QuerySingleProblemByScale(int ScaleId) {
 		// TODO Auto-generated method stub
-		return null;
+		return ProblemDao.QuerySingleProblemByScale(ScaleId);
 	}
 
 	public Object DeleteMutiplyProblem(List<Problem> list) {

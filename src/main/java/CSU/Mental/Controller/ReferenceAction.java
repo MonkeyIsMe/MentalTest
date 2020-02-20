@@ -57,6 +57,42 @@ public class ReferenceAction extends ActionSupport{
 			return;
 		}
 		
+		if(!cutil.IsNumber(reference_bscore)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		if(!cutil.IsNumber(reference_escore)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		if(!cutil.IsNumber(reference_bage)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		if(!cutil.IsNumber(reference_eage)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
 		int rid = Integer.valueOf(reference_id);
 	
 		reference = ReferenceService.QueryReference(rid);
@@ -172,6 +208,42 @@ public class ReferenceAction extends ActionSupport{
 		String factor_id = request.getParameter("factor_id");
 		
 		if(!cutil.IsNumber(factor_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		if(!cutil.IsNumber(reference_bscore)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		if(!cutil.IsNumber(reference_escore)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		if(!cutil.IsNumber(reference_bage)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		if(!cutil.IsNumber(reference_eage)) {
 			JSONObject jos = new JSONObject();
 			jos.put("result", "Fail");
 			out.println(jos.toString());

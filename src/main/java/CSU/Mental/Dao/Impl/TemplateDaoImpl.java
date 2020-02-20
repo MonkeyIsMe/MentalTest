@@ -130,7 +130,7 @@ public class TemplateDaoImpl extends HibernateDaoSupport implements TemplateDao{
 
 				public List<Template> doInHibernate(Session session) throws HibernateException {
 					// TODO Auto-generated method stub
-					String hql = "from Template";
+					String hql = "from Template order by TemplateNumber desc";
 					Query query = session.createQuery(hql).setFirstResult(
 			                (rows - 1) * PageSize).setMaxResults(PageSize);
 					List<Template> list = query.list();

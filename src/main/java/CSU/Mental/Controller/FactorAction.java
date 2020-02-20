@@ -78,6 +78,24 @@ public class FactorAction extends ActionSupport{
 			return;
 		}
 		
+		if(!cutil.IsNumeric(factor_balance)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		if(!cutil.IsNumeric(factor_den)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
 		int fid = Integer.valueOf(factor_id);
 		
 		factor = FactorService.QueryFactor(fid);
@@ -134,6 +152,24 @@ public class FactorAction extends ActionSupport{
 		String factor_formula = request.getParameter("factor_formula");
 		String factor_order = request.getParameter("factor_order");
 		String scale_id = request.getParameter("scale_id");		
+		
+		if(!cutil.IsNumeric(factor_balance)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		if(!cutil.IsNumeric(factor_den)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
 		
 		//处理因子
 		factor.setFactorName(factor_name);

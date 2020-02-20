@@ -38,6 +38,20 @@ public class CommonUtils {
 		return NowTime;
 	}
 	
+
+	public boolean IsNumeric(String str){
+		   for(int i=str.length();--i>=0;){
+		      int chr=str.charAt(i);
+		      //System.out.println(chr);
+		      if(chr<48 || chr>57) {
+		        if(chr != 46)
+		    	  return false;
+		      }
+		   }
+		   return true;
+		}
+
+	
 	public boolean IsNumber(String num) {
 		boolean flag = true;
 		

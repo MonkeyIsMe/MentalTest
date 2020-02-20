@@ -28,6 +28,7 @@ public class FactorProblemAction extends ActionSupport{
 		FactorProblemService = factorProblemService;
 	}
 	
+	//添加或更新题目因子关联
 	public void AddOrUpdateFactorProblem() throws Exception{
 		
 		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");

@@ -116,6 +116,8 @@
 		</action>
 		<action name="ChooseTemplate" class="ProblemAction" method="ChooseTemplate" >
 		</action>
+		<action name="QueryRelationProblem" class="ProblemAction" method="QueryRelationProblem" >
+		</action>
 			
 		<!-- 记录 -->
 		<action name="CountRecord" class="RecordAction" method="CountRecord" >

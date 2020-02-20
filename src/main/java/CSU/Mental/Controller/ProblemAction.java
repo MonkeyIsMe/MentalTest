@@ -14,9 +14,11 @@ import com.opensymphony.xwork2.ActionSupport;
 import CSU.Mental.Model.Choice;
 import CSU.Mental.Model.FactorProblem;
 import CSU.Mental.Model.Problem;
+import CSU.Mental.Model.Template;
 import CSU.Mental.Service.ChoiceService;
 import CSU.Mental.Service.FactorProblemService;
 import CSU.Mental.Service.ProblemService;
+import CSU.Mental.Service.TemplateService;
 import CSU.Mental.Utils.CommonUtils;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -27,7 +29,9 @@ public class ProblemAction extends ActionSupport{
 	private ProblemService ProblemService;
 	private FactorProblemService FactorProblemService;
 	private ChoiceService ChoiceService;
+	private TemplateService TemplateService;
 	private Problem problem = new Problem();
+	private Template template = new Template();
 	
 	public ProblemService getProblemService() {
 		return ProblemService;
@@ -53,6 +57,14 @@ public class ProblemAction extends ActionSupport{
 		FactorProblemService = factorProblemService;
 	}
 
+	public TemplateService getTemplateService() {
+		return TemplateService;
+	}
+
+	public void setTemplateService(TemplateService templateService) {
+		TemplateService = templateService;
+	}
+
 	//选择模板
 	public void ChooseTemplate() throws Exception{
 		
@@ -70,6 +82,12 @@ public class ProblemAction extends ActionSupport{
 		
 		int pid = Integer.valueOf(problem_id);
 		int tid = Integer.valueOf(template_id);
+		
+		template = TemplateService.QueryTemplate(tid);
+		int tnum = template.getTemplateNumber();
+		tnum++;
+		template.setTemplateNumber(tnum);
+		TemplateService.UpdateTemplate(template);
 		
 		problem = ProblemService.QueryProblem(pid);
 		
@@ -588,6 +606,61 @@ public class ProblemAction extends ActionSupport{
 		}
 		
 		out.println(jo.toString());
+		out.flush();
+		out.close();
+		return;
+	}
+
+	//关联题目查询
+	public void QueryRelationProblem() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		String scale_id = request.getParameter("scale_id");
+		
+		int sid = Integer.valueOf(scale_id);
+		
+		List<Object []> plist = ProblemService.QuerySingleProblemByScale(sid);
+		
+		JSONArray ja = new JSONArray();
+		
+		for(Object[] obj : plist) {
+			JSONObject jo = new JSONObject();
+			Object id = obj[0];
+			Object name = obj[1];
+			Object number = obj[2];
+			jo.put("ProblemId", id);
+			jo.put("ProblemName", name);
+			jo.put("ProblemNumber",number);
+			//System.out.println(jo.toString());
+			ja.add(jo);
+		}
+		
+		JSONObject result = new JSONObject();
+		
+		if (ja.size() == 0) {
+			result.put("Count", "0");
+			result.put("rows", "0");
+			result.put("msg", "");
+			result.put("code", 0);
+			result.put("PageSize", "0");
+			result.put("Array", "null");
+		} 
+		else {
+			result.put("Count", plist.size());
+			result.put("rows", 1);
+			result.put("msg", "");
+			result.put("code", 0);
+			result.put("PageSize", plist.size());
+			result.put("Array", ja.toString());
+		}
+		
+		out.println(result.toString());
 		out.flush();
 		out.close();
 		return;

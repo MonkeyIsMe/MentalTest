@@ -115,7 +115,7 @@ public class FactorProblemDaoImpl extends HibernateDaoSupport implements FactorP
 
 				public List<FactorProblem> doInHibernate(Session session) throws HibernateException {
 					// TODO Auto-generated method stub
-					String hql = "from FactorProblem where problem_id = ?";
+					String hql = "from FactorProblem where factor_id = ?";
 					Query query = session.createQuery(hql);
 					query.setParameter(0, FactorId);
 					List<FactorProblem> list = query.list();

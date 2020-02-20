@@ -26,6 +26,7 @@ import CSU.Mental.Service.ChoiceService;
 import CSU.Mental.Service.FkindService;
 import CSU.Mental.Service.ProblemService;
 import CSU.Mental.Service.ScaleService;
+import CSU.Mental.Utils.CommonUtils;
 import CSU.Mental.Service.PatientService;
 import CSU.Mental.Service.FactorService;
 import net.sf.json.JSONArray;
@@ -86,6 +87,12 @@ public class TestSpring {
 	}
 	
 	@Test
+	public void IsNumeric() {
+		CommonUtils cu = new CommonUtils();
+		System.out.println(cu.IsNumeric("a53.2"));
+	}
+	
+	@Test
 	public void QueryChoiceByProblem() {
 		System.out.println(ChoiceService.QueryChoiceByProblem(10));
 	}
@@ -97,17 +104,15 @@ public class TestSpring {
 	
 	@Test
 	public void QueryProblemByScale() {
-		List<Object[]> plist = ProblemService.QuerySingleProblemByScale(1);
-		for(Object[]  obj : plist) {
+		List<Object[]> plist = ProblemService.QuerySingleProblemByScale(2);
+		for(Object[] obj : plist) {
 			JSONObject jo = new JSONObject();
 			Object id = obj[0];
 			Object name = obj[1];
 			Object submission = obj[2];
-			Object accept = obj[3];
 			jo.put("ProblemId", id);
 			jo.put("ProblemName", name);
 			jo.put("SubmissionTimes",submission);
-			jo.put("AcceptTimes", accept);
 			System.out.println(jo.toString());
 		}
 	}

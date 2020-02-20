@@ -1,0 +1,188 @@
+.background1{
+	position: absolute;
+	margin-top: -100px;
+	width: 122px;
+	height: 1500px;
+	background-color: rgb(196,196,196);
+}
+.background2{
+	position: absolute;
+	margin-top: -100px;
+	margin-left: 91%;
+	width: 122px;
+	height: 1500px;
+	background-color: rgb(196,196,196);
+}
+.second{
+	margin-left: 150px;
+	margin-top: 30px;
+	width: 210px;
+	height: 800px;
+	border: 1px solid black;
+	font-size: 14px;
+}
+.col_table{
+	position: absolute;
+	margin-top: 80px;
+	line-height: 10px;
+}
+.third{
+	display: flex;
+	flex-direction: column;
+	margin-left: 200px;
+}
+.facName{
+	position: absolute;
+	margin-top: -800px;
+	margin-left: 220px;
+}
+.facNameTable{
+	position: absolute;
+	margin-top: -800px;
+	margin-left: 300px;
+	width:680px;
+	height: 18px;
+	resize: none;
+}
+.facIntroduction{
+	position: absolute;
+	margin-top: -760px;
+	margin-left: 220px;
+}
+.facIntroTable{
+	position: absolute;
+	margin-top: -760px;
+	margin-left: 300px;
+	width:680px;
+	height: 54px;
+	resize: none;
+}
+.levelFac{
+	position: absolute;
+	margin-top: -690px;
+	margin-left: 220px;
+}
+.levelFacTable{
+	position: absolute;
+	margin-top: -690px;
+	margin-left: 300px;
+	width:80px;
+	height: 18px;
+	font-size: 14px;
+	resize: none;
+}
+.facNum{
+	position: absolute;
+	margin-top: -690px;
+	margin-left: 410px;
+}
+.facNumTable{
+	position: absolute;
+	margin-top: -690px;
+	margin-left: 490px;
+	width:80px;
+	height: 18px;
+	font-size: 14px;
+	resize: none;
+}
+.formula{
+	position: absolute;
+	margin-top: -690px;
+	margin-left: 600px;
+}
+.formulaTable{
+	position: absolute;
+	margin-top: -690px;
+	margin-left: 680px;
+	width:300px;
+	height: 18px;
+	font-size: 14px;
+	resize: none;
+}
+.releQuestion{
+	position: absolute;
+	margin-top: -650px;
+	margin-left: 220px;
+}
+.queNum{
+	position: absolute;
+	margin-top: -650px;
+	margin-left: 320px;
+	width: 700px;
+	height: 180px;
+	overflow-y: auto;
+}
+.saveFacBtn{
+	position: absolute;
+	width: 122px;
+	height: 30px;
+	text-align: center;
+	background-color: rgb(255,204,51);
+	margin-top: -450px;
+	margin-left: 220px;
+	border: 2px solid gray;
+	border-radius: 5px;
+}
+/*.saveFac{
+	width: 122px;
+	height: 30px;
+	text-align: center;
+	background-color: rgb(255,204,51);
+	position: absolute;
+	margin-top: -450px;
+	margin-left: 655px;
+	border: 2px solid gray;
+	border-radius: 5px;
+}*/
+.selBtn{
+	width: 122px;
+	height: 30px;
+	text-align: center;
+	background-color: rgb(255,204,51);
+	position: absolute;
+	margin-top: -450px;
+	margin-left: 855px;
+	border: 2px solid gray;
+	border-radius: 5px;
+}
+.fourth{
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	overflow-x:hidden;
+	font-size: 14px;
+	width: 800px;
+	height: 630px;
+	border: 1px solid black;
+	margin-left: 420px;
+	margin-top: -390px;
+	background-color: rgb(225,230,235);
+}
+.fifth{
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
+	margin-left: 420px;
+	margin-top: -30px;
+}
+.addTable{
+	position: absolute;
+	width: 150px;
+	height: 30px;
+	margin-top: 60px;
+	margin-left: 450px;
+	border: 2px solid gray;
+	border-radius: 5px;
+	background-color: rgb(255,204,51);
+}
+.next{
+	position: absolute;
+	width: 120px;
+	height: 30px;
+	margin-top: 60px;
+	margin-left: 640px;
+	border: 2px solid gray;
+	border-radius: 5px;
+	background-color: rgb(255,204,51);
+}
+

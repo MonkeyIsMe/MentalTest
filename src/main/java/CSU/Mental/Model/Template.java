@@ -22,6 +22,9 @@ public class Template implements Serializable{
 	
 	@Column(name="template_name")
 	private String TemplateName;  // 模板名称
+	
+	@Column(name="template_number")
+	private int TemplateNumber;  // 关联题目数量
 
 	public int getTemplateId() {
 		return TemplateId;
@@ -39,10 +42,19 @@ public class Template implements Serializable{
 		TemplateName = templateName;
 	}
 	
+	public int getTemplateNumber() {
+		return TemplateNumber;
+	}
+
+	public void setTemplateNumber(int templateNumber) {
+		TemplateNumber = templateNumber;
+	}
+
 	public JSONObject toJSON() {
 		JSONObject jo = new JSONObject();
 		jo.put("TemplateId", this.TemplateId);
 		jo.put("TemplateName", this.TemplateName);
+		jo.put("TemplateNumber", this.TemplateNumber);
 		return jo;
 	}
 	
