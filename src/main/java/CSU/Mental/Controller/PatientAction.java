@@ -44,7 +44,7 @@ public class PatientAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(patient_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "null");
+			jos.put("result", "Fail");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -57,7 +57,7 @@ public class PatientAction extends ActionSupport{
 		
 		if(patient == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "null");
+			jos.put("result", "Fail");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -181,14 +181,14 @@ public class PatientAction extends ActionSupport{
 			jo.put("Count", "0");
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
-			jo.put("msg", "");
+			jo.put("msg", "NoData");
 			jo.put("code", 0);
 			jo.put("Array", "null");
 		}
 		else {
 			jo.put("Count", count);
 			jo.put("rows", rows);
-			jo.put("msg", "");
+			jo.put("msg", "Accept");
 			jo.put("code", 0);
 			jo.put("PageSize", PageSize);
 			jo.put("Array", PatientList.toString());
@@ -360,7 +360,7 @@ public class PatientAction extends ActionSupport{
 			
 			JSONObject jos = new JSONObject();
 			jos.put("Count", "0");
-			jos.put("msg", "");
+			jos.put("msg", "NoUserId");
 			jos.put("code", 0);
 			jos.put("rows", "0");
 			jos.put("PageSize", "0");
@@ -381,7 +381,7 @@ public class PatientAction extends ActionSupport{
 		if(PatientList.size() == 0) {
 			jo.put("Count", "0");
 			jo.put("rows", "0");
-			jo.put("msg", "");
+			jo.put("msg", "NoData");
 			jo.put("code", 0);
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
@@ -389,7 +389,7 @@ public class PatientAction extends ActionSupport{
 		else {
 			jo.put("Count", count);
 			jo.put("rows", rows);
-			jo.put("msg", "");
+			jo.put("msg", "Accept");
 			jo.put("code", 0);
 			jo.put("PageSize", PageSize);
 			jo.put("Array", PatientList.toString());
@@ -434,7 +434,7 @@ public class PatientAction extends ActionSupport{
 		if(PatientList.size() == 0) {
 			jo.put("Count", "0");
 			jo.put("rows", "0");
-			jo.put("msg", "");
+			jo.put("msg", "NoData");
 			jo.put("code", 0);
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
@@ -442,7 +442,7 @@ public class PatientAction extends ActionSupport{
 		else {
 			jo.put("Count", count);
 			jo.put("rows", rows);
-			jo.put("msg", "");
+			jo.put("msg", "Accept");
 			jo.put("code", 0);
 			jo.put("PageSize", PageSize);
 			jo.put("Array", PatientList.toString());

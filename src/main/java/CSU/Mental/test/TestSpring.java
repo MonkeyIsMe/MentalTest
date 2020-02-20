@@ -26,6 +26,7 @@ import CSU.Mental.Service.ChoiceService;
 import CSU.Mental.Service.FkindService;
 import CSU.Mental.Service.ProblemService;
 import CSU.Mental.Service.ScaleService;
+import CSU.Mental.Service.TemplateService;
 import CSU.Mental.Utils.CommonUtils;
 import CSU.Mental.Service.PatientService;
 import CSU.Mental.Service.FactorService;
@@ -49,6 +50,9 @@ public class TestSpring {
 	@Resource(name="ProblemService")
 	private ProblemService ProblemService;
 	
+	@Resource(name="TemplateService")
+	private TemplateService TemplateService;
+	
 	@Resource(name="PatientService")
 	private PatientService PatientService;
 	
@@ -60,6 +64,10 @@ public class TestSpring {
 		System.out.println(FkindService.QueryAllFkind().size());
 	}
 	
+	@Test
+	public void QueryTemplate() {
+		System.out.println(TemplateService.QueryTemplate(3));
+	}
 	
 	@Test
 	public void CountScale() {

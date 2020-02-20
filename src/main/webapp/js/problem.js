@@ -1,3 +1,11 @@
+/*
+ * 获取url参数
+ * */
+var url = decodeURI(window.location.href);
+ 
+var argsIndex = url .split("?ScaleId=");
+var sid = argsIndex[1];
+
 var problem = [];
 var choice = [];
 var pid = 0,page = 0;
@@ -7,7 +15,7 @@ $(function(){
     $.post(
         "MentalTest/QueryProblemByScale",
         {
-        	scale_id:1
+        	scale_id:sid
         },
         function(data) {
             var data = JSON.parse(data);
@@ -29,7 +37,7 @@ function InitProblemTable(){
     $.post(
             "MentalTest/QueryProblemByScale",
             {
-            	scale_id:1
+            	scale_id:sid
             },
             function(data) {
                 var data = JSON.parse(data);
@@ -65,10 +73,12 @@ function  ChooseTemplate(id) {
 	                var data = JSON.parse(data);
 	                var result = data.result;
 					if(result == "Success"){
-						alert("选择成功");
+						$("#ChoiceList").html("");
+						InitChoiceTable();
+						alert("选择模板成功");
 					}
 					else{
-						alert("选择失败！");
+						alert("选择模板失败！");
 					}
 	            }
 	        );
@@ -191,7 +201,7 @@ $(document).ready(function(){
 			    $.post(
 			            "MentalTest/AddProblem",
 			            {
-			            	scale_id:1,
+			            	scale_id:sid,
 			            	problem_name:problem_name,
 			            	problem_type:problem_type,
 			            	problem_flag:problem_flag,

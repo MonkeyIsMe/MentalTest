@@ -79,7 +79,7 @@ public class ProblemAction extends ActionSupport{
 		
 		String problem_id = request.getParameter("problem_id");
 		String template_id = request.getParameter("template_id");
-		
+		//System.out.println(template_id);
 		int pid = Integer.valueOf(problem_id);
 		int tid = Integer.valueOf(template_id);
 		
@@ -583,6 +583,21 @@ public class ProblemAction extends ActionSupport{
 		
 		String scale_id = request.getParameter("scale_id");
 		
+		if(!cutil.IsNumber(scale_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("Count", "0");
+			jos.put("rows", "0");
+			jos.put("msg", "NoScaleId");
+			jos.put("code", 0);
+			jos.put("PageSize", "0");
+			jos.put("Array", "null");
+			
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
 		int sid = Integer.valueOf(scale_id);
 		
 		List<Problem> plist = ProblemService.QueryProblemByScale(sid);
@@ -590,7 +605,7 @@ public class ProblemAction extends ActionSupport{
 		if (plist.size() == 0) {
 			jo.put("Count", "0");
 			jo.put("rows", "0");
-			jo.put("msg", "");
+			jo.put("msg", "NoData");
 			jo.put("code", 0);
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
@@ -599,7 +614,7 @@ public class ProblemAction extends ActionSupport{
 			JSONArray ja = JSONArray.fromObject(plist);
 			jo.put("Count", plist.size());
 			jo.put("rows", 1);
-			jo.put("msg", "");
+			jo.put("msg", "Accept");
 			jo.put("code", 0);
 			jo.put("PageSize", plist.size());
 			jo.put("Array", ja.toString());
@@ -622,6 +637,21 @@ public class ProblemAction extends ActionSupport{
 		out = ServletActionContext.getResponse().getWriter();
 		
 		String scale_id = request.getParameter("scale_id");
+		
+		if(!cutil.IsNumber(scale_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("Count", "0");
+			jos.put("rows", "0");
+			jos.put("msg", "NoScaleId");
+			jos.put("code", 0);
+			jos.put("PageSize", "0");
+			jos.put("Array", "null");
+			
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
 		
 		int sid = Integer.valueOf(scale_id);
 		
@@ -646,7 +676,7 @@ public class ProblemAction extends ActionSupport{
 		if (ja.size() == 0) {
 			result.put("Count", "0");
 			result.put("rows", "0");
-			result.put("msg", "");
+			result.put("msg", "NoData");
 			result.put("code", 0);
 			result.put("PageSize", "0");
 			result.put("Array", "null");
@@ -654,7 +684,7 @@ public class ProblemAction extends ActionSupport{
 		else {
 			result.put("Count", plist.size());
 			result.put("rows", 1);
-			result.put("msg", "");
+			result.put("msg", "Accept");
 			result.put("code", 0);
 			result.put("PageSize", plist.size());
 			result.put("Array", ja.toString());

@@ -231,7 +231,7 @@ public class ChoiceAction extends ActionSupport{
 			JSONObject jos = new JSONObject();
 			jos.put("Count", "0");
 			jos.put("rows", "0");
-			jos.put("msg", "");
+			jos.put("msg", "NoProblemId");
 			jos.put("code", 0);
 			jos.put("PageSize", "0");
 			jos.put("Array", "null");
@@ -255,7 +255,7 @@ public class ChoiceAction extends ActionSupport{
 		if (clist.size() == 0) {
 			jo.put("Count", "0");
 			jo.put("rows", "0");
-			jo.put("msg", "");
+			jo.put("msg", "NoData");
 			jo.put("code", 0);
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
@@ -264,7 +264,7 @@ public class ChoiceAction extends ActionSupport{
 			JSONArray ja = JSONArray.fromObject(clist);
 			jo.put("Count", clist.size());
 			jo.put("rows", 1);
-			jo.put("msg", "");
+			jo.put("msg", "Accept");
 			jo.put("code", 0);
 			jo.put("PageSize", clist.size());
 			jo.put("Array", ja.toString());

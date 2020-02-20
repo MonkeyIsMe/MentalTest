@@ -195,7 +195,7 @@ public class FkindAction extends ActionSupport{
 			jo.put("Count", "0");
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
-			jo.put("msg", "");
+			jo.put("msg", "NoData");
 			jo.put("code", 0);
 			jo.put("Array", "null");
 		} 

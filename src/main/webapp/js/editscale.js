@@ -158,3 +158,8 @@ function getSaveData() {
 		});*/
 	}
 }
+
+function EditProblem(){
+	var next_url = "EditProblem.html?ScaleId=" + sid;
+	window.location.href = next_url;
+}

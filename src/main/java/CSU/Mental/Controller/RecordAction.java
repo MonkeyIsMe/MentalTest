@@ -165,10 +165,10 @@ public class RecordAction extends ActionSupport{
 			JSONObject jo = new JSONObject();
 			int pid = r.getPatientId();
 			int sid = r.getScaleId();
-			//System.out.println(pid);
+			
 			jo.put("PatientId", pid);
 			jo.put("ScaleId", sid);
-			//System.out.println(pid);
+			
 			patient = PatientService.QueryPatient(pid);
 			scale = ScaleService.QueryScale(sid);
 			jo.put("RecordFator", r.getRecordFactor());
@@ -187,14 +187,14 @@ public class RecordAction extends ActionSupport{
 			jo.put("Count", "0");
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
-			jo.put("msg", "");
+			jo.put("msg", "NoData");
 			jo.put("code", 0);
 			jo.put("Array", "null");
 		}
 		else {
 			jo.put("Count", count);
 			jo.put("rows", rows);
-			jo.put("msg", "");
+			jo.put("msg", "Accept");
 			jo.put("code", 0);
 			jo.put("PageSize", PageSize);
 			jo.put("Array", ja.toString());

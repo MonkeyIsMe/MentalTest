@@ -53,6 +53,7 @@ public class TemplateAction extends ActionSupport{
 		String template_name = request.getParameter("template_name");
 		//System.out.println(ChoiceInfo);
 		template.setTemplateName(template_name);
+		template.setTemplateNumber(0);
 		
 		int tid = TemplateService.AddTemplate(template);
 		
@@ -275,14 +276,14 @@ public class TemplateAction extends ActionSupport{
 			jo.put("Count", "0");
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
-			jo.put("msg", "");
+			jo.put("msg", "NoData");
 			jo.put("code", 0);
 			jo.put("Array", "null");
 		}
 		else {
 			jo.put("Count", count);
 			jo.put("rows", 1);
-			jo.put("msg", "");
+			jo.put("msg", "Accept");
 			jo.put("code", 0);
 			jo.put("PageSize", count);
 			jo.put("Array", TemplateList.toString());
@@ -341,7 +342,7 @@ public class TemplateAction extends ActionSupport{
 		if(ja.size() == 0) {
 			result.put("Count", "0");
 			result.put("rows", "0");
-			result.put("msg", "");
+			result.put("msg", "NoData");
 			result.put("code", 0);
 			result.put("PageSize", "0");
 			result.put("Array", "null");
@@ -349,7 +350,7 @@ public class TemplateAction extends ActionSupport{
 		else {
 			result.put("Count", ja.size());
 			result.put("rows", rows);
-			result.put("msg", "");
+			result.put("msg", "Accept");
 			result.put("code", 0);
 			result.put("PageSize", PageSize);
 			result.put("Array", ja.toString());

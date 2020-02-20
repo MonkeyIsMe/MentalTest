@@ -89,9 +89,13 @@ function PrevPage(){
 	                        //往行里面追加 td单元格
 	    			        $trTemp.append("<td style=" + "text-align:center"  + ">"+ data.Array[i].ScaleId +"</td>");
 	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].ScaleName +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].ScaleInfo +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center"  + ">" +data.Array[i].ScaleGuide  +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].FkindName +"</td>");
+	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].ScaleNumber +"</td>");
+	    			        $trTemp.append("<td style=" + "text-align:center"  + ">" +data.Array[i].ScaleUpdateTime  +"</td>");
+	    			        $trTemp.append("<td>" + 
+	    			        		'<a><span class="delete" style="cursor:pointer;" data-toggle="modal" data-target="#del_Modal">删除</span></a>'
+	    			        		 + '<a><span class="update" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#upchoice_Modal">修改</span></a>'
+	    			        		 + '<a><span class="see" style="cursor:pointer;margin-left:18px" ></span>查看</a>'
+	    			        		+"</td>");
 	                        // $("#J_TbData").append($trTemp);
 	                        $trTemp.appendTo("#ScaleList");
 	                    }
@@ -125,9 +129,13 @@ function NextPage(){
 	                        //往行里面追加 td单元格
 	    			        $trTemp.append("<td style=" + "text-align:center"  + ">"+ data.Array[i].ScaleId +"</td>");
 	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].ScaleName +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].ScaleInfo +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center"  + ">" +data.Array[i].ScaleGuide  +"</td>");
-	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].FkindName +"</td>");
+	    			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].ScaleNumber +"</td>");
+	    			        $trTemp.append("<td style=" + "text-align:center"  + ">" +data.Array[i].ScaleUpdateTime  +"</td>");
+	    			        $trTemp.append("<td>" + 
+	    			        		'<a><span class="delete" style="cursor:pointer;" data-toggle="modal" data-target="#del_Modal">删除</span></a>'
+	    			        		 + '<a><span class="update" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#upchoice_Modal">修改</span></a>'
+	    			        		 + '<a><span class="see" style="cursor:pointer;margin-left:18px" ></span>查看</a>'
+	    			        		+"</td>");
 	                        // $("#J_TbData").append($trTemp);
 	                        $trTemp.appendTo("#ScaleList");
 	                    }

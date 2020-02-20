@@ -63,6 +63,7 @@
 	<bean name="ProblemAction" class="CSU.Mental.Controller.ProblemAction" scope="prototype" >
 		<property name="ProblemService" ref="ProblemService" ></property>
 		<property name="ChoiceService" ref="ChoiceService" ></property>
+		<property name="TemplateService" ref="TemplateService" ></property>
 		<property name="FactorProblemService" ref="FactorProblemService" ></property>
 	</bean>
 	<bean name="RecordAction" class="CSU.Mental.Controller.RecordAction" scope="prototype" >

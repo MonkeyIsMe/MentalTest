@@ -13,8 +13,8 @@ $(function(){
 				var data = JSON.parse(data);
 				//console.log(data);
 				var sum = data.Count;
-				count = Math.ceil(sum/25);
-				var total = "共" + Math.ceil(sum/25) + "页";
+				count = Math.ceil(sum/5);
+				var total = "共" + Math.ceil(sum/5) + "页";
 				$("#TotalPage").append(total);
 				$("#NowPage").append("，当前第" + row + "页");
 			}
@@ -103,6 +103,7 @@ function InitChoiceTable(){
 }
 
 function NextPage(){
+	//alert(count);
 	if(row == count){
 		alert("没有后一页了");
 	}
@@ -118,7 +119,7 @@ function NextPage(){
 			        },
 			        function(data) {
 			            var data = JSON.parse(data);
-			            console.log(data.Array);
+			            //console.log(data.Array);
 			            for(var i = 0; i < data.Array.length; i ++){
 			                var html = "<div class='temp'>"
 			                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
@@ -172,6 +173,53 @@ function PrevPage(){
 	}
 }
 
+function ReloadTemplateList(){
+	
+	$.ajaxSettings.async = false;
+	$.post(
+			"MentalTest/CountTemplate",
+			{
+				template_name:"",
+			},
+			function(data){
+				var data = JSON.parse(data);
+				//console.log(data);
+				var sum = data.Count;
+				count = Math.ceil(sum/5);
+				var total = "共" + Math.ceil(sum/5) + "页";
+				$("#TotalPage").append(total);
+				$("#NowPage").append("，当前第" + row + "页");
+			}
+			);
+	
+	$("#temp_info").html("");
+	   $.post(
+		        "MentalTest/QueryTemplatePageSize",
+		        {
+		            page:row,
+		            limit:5,
+		            template_name:"",
+		        },
+		        function(data) {
+		            var data = JSON.parse(data);
+		            //console.log(data.Array);
+		            for(var i = 0; i < data.Array.length; i ++){
+		                var html = "<div class='temp'>"
+		                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
+		                    html += "<div class='float'>选项内容：</div>";
+		                    html += "<div class='float'>" + data.Array[i].ChoiceList[j].ChoiceInfo + "</div>";
+		                    html += "<div class='float'>，</div>";
+		                    html += "<div class='float'>选项分值：</div>";
+		                    html += "<div>" + data.Array[i].ChoiceList[j].ChoiceScore + "</div>";
+		                }
+		                html += "<button class='btn btn-default btn-sm' style='margin-top: -32px;margin-right:10px;float: right' onclick='ChooseTemplate("+ data.Array[i].TemplateId +")'>选择</button>"
+		                html += "</div>";
+		                $("#temp_info").append(html);
+		            }
+		        }
+		    );
+}
+
 
 $(document).ready(function(){
 	
@@ -185,7 +233,7 @@ $(document).ready(function(){
 		        },
 		        function(data) {
 		            var data = JSON.parse(data);
-		            console.log(data.Array);
+		            //console.log(data.Array);
 		            for(var i = 0; i < data.Array.length; i ++){
 		                var html = "<div class='temp'>"
 		                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
@@ -205,13 +253,21 @@ $(document).ready(function(){
 	//增加模板
 	$("#add_temp").click(function(){
 		var tempinfo = [];
+		var flag = 1;
 		//alert(op);
 		if(op == 2){
 			for(var i = 1; i <= 2; i ++){
 				var name = $("#name" + i).val();
 				var score = $("#score" + i).val();
-				//console.log(name + " " + score);
-				tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
+				if(name == "" || name == null || score == null || score == ""){
+					alert("所填项均为非空");
+					for(var i in tempinfo){
+						delete tempinfo[i];
+						flag = 0;
+						return ;
+					}
+				}
+				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
 			}
 		}
 		else if(op == 3){
@@ -219,7 +275,15 @@ $(document).ready(function(){
 				var name = $("#name" + i).val();
 				var score = $("#score" + i).val();
 				//console.log(name + " " + score);
-				tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
+				if(name == "" || name == null || score == null || score == ""){
+					alert("所填项均为非空");
+					for(var i in tempinfo){
+						delete tempinfo[i];
+						flag = 0;
+						return ;
+					}
+				}
+				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
 			}
 		}
 		else if(op == 4){
@@ -227,7 +291,15 @@ $(document).ready(function(){
 				var name = $("#name" + i).val();
 				var score = $("#score" + i).val();
 				//console.log(name + " " + score);
-				tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
+				if(name == "" || name == null || score == null || score == ""){
+					alert("所填项均为非空");
+					for(var i in tempinfo){
+						delete tempinfo[i];
+						flag = 0;
+						return ;
+					}
+				}
+				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
 			}
 		}
 		else if(op == 5){
@@ -235,7 +307,15 @@ $(document).ready(function(){
 				var name = $("#name" + i).val();
 				var score = $("#score" + i).val();
 				//console.log(name + " " + score);
-				tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
+				if(name == "" || name == null || score == null || score == ""){
+					alert("所填项均为非空");
+					for(var i in tempinfo){
+						delete tempinfo[i];
+						flag = 0;
+						return ;
+					}
+				}
+				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
 			}
 		}
 		else if(op == 6){
@@ -243,29 +323,41 @@ $(document).ready(function(){
 				var name = $("#name" + i).val();
 				var score = $("#score" + i).val();
 				//console.log(name + " " + score);
-				tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
-			}
-		}
-		var temp_name = $("#temp_name").val();
-		var temp = JSON.stringify(tempinfo);
-		//console.log(temp);
-	    $.post(
-	            "MentalTest/AddTemplate",
-	            {
-	            	template_name:temp_name,
-	            	choice_info:temp,
-	            },
-				function(data){
-					var data = JSON.parse(data);
-					var result = data.result;
-					if(result == "Success"){
-						alert("添加成功");
-					}
-					else{
-						alert("添加失败！");
+				if(name == "" || name == null || score == null || score == ""){
+					alert("所填项均为非空");
+					for(var i in tempinfo){
+						delete tempinfo[i];
+						flag = 0;
+						return ;
 					}
 				}
-	        );
+				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
+			}
+		}
+		if(flag == 1){
+			var temp_name = $("#temp_name").val();
+			var temp = JSON.stringify(tempinfo);
+			//console.log(temp);
+		    $.post(
+		            "MentalTest/AddTemplate",
+		            {
+		            	template_name:temp_name,
+		            	choice_info:temp,
+		            },
+					function(data){
+						var data = JSON.parse(data);
+						var result = data.result;
+						if(result == "Success"){
+							alert("添加模板成功");
+							ReloadTemplateList();
+						}
+						else{
+							alert("添加模板失败！");
+						}
+					}
+		        );
+		}
+
 	})
 	
 	

@@ -283,7 +283,7 @@ public class ScaleAction extends ActionSupport{
 		
 		String scale_id = request.getParameter("scale_id");
 		
-		if(scale_id == null || scale_id.equals("") || scale_id.isEmpty()) {
+		if(scale_id == null) {
 			out.println("Fail");
 			out.flush();
 			out.close();
@@ -533,7 +533,7 @@ public class ScaleAction extends ActionSupport{
 			jo.put("Count", "0");
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
-			jo.put("msg", "");
+			jo.put("msg", "NoData");
 			jo.put("code", 0);
 			jo.put("Array", "null");
 		}
@@ -541,7 +541,7 @@ public class ScaleAction extends ActionSupport{
 			jo.put("Count", count);
 			jo.put("rows", rows);
 			jo.put("PageSize", PageSize);
-			jo.put("msg", "");
+			jo.put("msg", "Accept");
 			jo.put("code", 0);
 			jo.put("Array", ScaleList.toString());
 		}
@@ -631,6 +631,8 @@ public class ScaleAction extends ActionSupport{
 			JSONObject jos = new JSONObject();
 			jos.put("Count", "0");
 			jos.put("rows", "0");
+			jos.put("msg", "NoFkindId");
+			jos.put("code", 0);
 			jos.put("PageSize", "0");
 			jos.put("Array", "null");
 			
@@ -644,6 +646,8 @@ public class ScaleAction extends ActionSupport{
 			JSONObject jos = new JSONObject();
 			jos.put("Count", "0");
 			jos.put("rows", "0");
+			jos.put("msg", "NoSkindId");
+			jos.put("code", 0);
 			jos.put("PageSize", "0");
 			jos.put("Array", "null");
 			
@@ -663,12 +667,16 @@ public class ScaleAction extends ActionSupport{
 		if(ScaleList.size() == 0) {
 			jo.put("Count", "0");
 			jo.put("rows", "0");
+			jo.put("msg", "NoData");
+			jo.put("code", 0);
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
 		}
 		else {
 			jo.put("Count", count);
 			jo.put("rows", rows);
+			jo.put("msg", "Accept");
+			jo.put("code", 0);
 			jo.put("PageSize", PageSize);
 			jo.put("Array", ScaleList.toString());
 		}
@@ -818,12 +826,16 @@ public class ScaleAction extends ActionSupport{
 		if(ScaleList.size() == 0) {
 			jo.put("Count", "0");
 			jo.put("rows", "0");
+			jo.put("msg", "NoData");
+			jo.put("code", 0);
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
 		}
 		else {
 			jo.put("Count", count);
 			jo.put("rows", rows);
+			jo.put("msg", "Accept");
+			jo.put("code", 0);
 			jo.put("PageSize", PageSize);
 			jo.put("Array", ScaleList.toString());
 		}

@@ -41,6 +41,16 @@ public class FactorProblemAction extends ActionSupport{
 		String factor_id = request.getParameter("factor_id"); 
 		String problem_info = request.getParameter("problem_info");
 		
+		if(!cutil.IsNumber(factor_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("msg", "Fail");
+			
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
 		int fid = Integer.valueOf(factor_id);
 		
 		List<FactorProblem> add_fplist = new ArrayList<FactorProblem>();
@@ -86,6 +96,21 @@ public class FactorProblemAction extends ActionSupport{
 		
 		String factor_id = request.getParameter("factor_id"); 
 		
+		if(!cutil.IsNumber(factor_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("Count", "0");
+			jos.put("rows", "0");
+			jos.put("msg", "NoFactorId");
+			jos.put("code", 0);
+			jos.put("PageSize", "0");
+			jos.put("Array", "null");
+			
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
 		int fid = Integer.valueOf(factor_id);
 		
 		List<FactorProblem> fplist = FactorProblemService.QueryFactorProblemByFactor(fid);
@@ -96,14 +121,14 @@ public class FactorProblemAction extends ActionSupport{
 			jo.put("rows", "0");
 			jo.put("PageSize", "0");
 			jo.put("Array", "null");
-			jo.put("msg", "");
+			jo.put("msg", "NoData");
 			jo.put("code", 0);
 		} 
 		else {
 			JSONArray ja = JSONArray.fromObject(fplist);
 			jo.put("Count", fplist.size());
 			jo.put("rows", 1);
-			jo.put("msg", "");
+			jo.put("msg", "Accept");
 			jo.put("code", 0);
 			jo.put("PageSize", fplist.size());
 			jo.put("Array", ja.toString());
