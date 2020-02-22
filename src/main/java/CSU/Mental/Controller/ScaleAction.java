@@ -348,6 +348,13 @@ public class ScaleAction extends ActionSupport{
 		
 		String scale_id = request.getParameter("scale_id");
 		
+		if(!cutil.IsNumber(scale_id)) {
+			out.println();
+			out.flush();
+			out.close();
+			return;
+		}
+		
 		int sid = Integer.valueOf(scale_id);
 		
 		scale = ScaleService.QueryScale(sid);

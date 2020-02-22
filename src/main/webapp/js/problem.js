@@ -8,9 +8,10 @@ var sid = argsIndex[1];
 
 var problem = [];
 var choice = [];
-var pid = 0,page = 0;
+var pid = 0,page = 0,pname = "";
 
 $(function(){
+	$('#ProblemFlag').attr('checked', 'checked');
 	$("#clist").load("clist.html");
     $.post(
         "MentalTest/QueryProblemByScale",
@@ -24,7 +25,7 @@ $(function(){
                     //动态创建一个tr行标签,并且转换成jQuery对象
                     var $trTemp = $("<tr ></tr>");
                     problem.push({ProblemName: data.Array[i].problemName, ProblemId: data.Array[i].problemId});
-			        $trTemp.append("<td class=pro style=" + "text-align:center"  + ">"+  data.Array[i].problemName +"</td>");
+			        $trTemp.append("<td class=pro style=" + "width:200px;font-size:12px;"  + ">"+ data.Array[i].problemId + "."+ data.Array[i].problemName +"</td>");
                     // $("#J_TbData").append($trTemp);
                     $trTemp.appendTo("#ProbelmList");
                 }
@@ -85,14 +86,22 @@ function  ChooseTemplate(id) {
 	}
 }
 
+
 $(document).ready(function(){
 	  $("#myTable").on('click','.pro',function(){
 		    //获得当前行
-		    var currentRow=$(this).closest("tr"); 
+		    var currentRow= $(this).closest("tr");
+		    
 		    var col1 = currentRow.find("td:eq(0)").text(); //获得当前行第一个TD值
+		    
+		    var s =  col1.split(".");
+		    console.log(s);
+		    
+		    pname = s[1];
+		    //alert(pname);
 		    for (var i in problem) {
 		    	//console.log(problem[i]);
-		    	if(problem[i].ProblemName == col1){
+		    	if(problem[i].ProblemName == pname){
 		    		pid = problem[i].ProblemId;
 		    	}
 		    	$("#ChoiceList").html("");
@@ -105,7 +114,7 @@ $(document).ready(function(){
 		            },
 		            function(data) {
 		                var data = JSON.parse(data);
-		                //console.log(data);
+		                console.log(data);
 		                console.log(data.ProblemInfo.ProblemFlag);
 		                $("#ProblemInfo").val("");
 		                $("#ProblemNumber").val("");
@@ -123,7 +132,7 @@ $(document).ready(function(){
 		                $("#ProblemNumber").val(data.ProblemInfo.ProblemNumber);
 		            }
 		        );
-		    
+		    //alert(pid);
 		    $.post(
 		            "MentalTest/QueryChoiceByProblem",
 		            {
@@ -158,6 +167,7 @@ $(document).ready(function(){
 	  
 	  $("#add_problem").click(function(){
 		  pid = 0;
+		  pname = "";
           $("#ProblemInfo").val("");
           $("#ProblemNumber").val("");
 	  })

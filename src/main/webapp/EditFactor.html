@@ -7,19 +7,29 @@
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript">
 
-			var advice,add,delBtn,addfac,lis;
+			var advice,add,delBtn,addfac,lis,saveQuesBtn;
 			var facArray,nowIndex=0,parLen=0,tabIndex;
 			var check1,check2,check3,check4;
             var next;
-			var facArr=new Array();
-			var paraArr=new Array();
+			var facArr=new Array();//因子信息
+			var paraArr=new Array();//参考表信息
+			var queArr=new Array();//总题目信息
+			var facQueArr=new Array();//因子关联的题号
+			var problem_info=new Array();
 			window.onload=function(){
 				next=document.getElementById("olClass");
 				advice=document.getElementById("adv_1");
 			    add=document.getElementById("addBtn");
 			    addfac=document.getElementById("addfacBtn");
+			    saveQuesBtn=document.getElementById("saveQueBtn");
+			    
+			    getAllQuestion();//查询所有题目
 			    
 			    queryFacTableInfo();
+			    
+			    saveQuesBtn.onclick=function(){
+			    	saveQuestionsBtn();
+			    }
 			    
 			    addfac.onclick=function(){//添加因子
 			    	addFac();
@@ -31,11 +41,158 @@
 				};	
 			}
 			/**
+			 * 获取当前因子已关联题目
+			 * */
+			function getNowquestions(){
+				if(nowIndex<facArr.length){
+					$.ajaxSettings.async=false;
+				$.post(
+					"/MentalTest/QueryProblemByFactor",
+					{
+						factor_id:facArr[nowIndex].factorId,
+					},
+					function(data){
+						 var data=JSON.parse(data);
+						 facQueArr=data.Array;
+                       	    console.log("关联题号：")
+                       	    console.log(facQueArr);
+                       	    if(facQueArr!=null){
+                       	    for(let i=0;i<facQueArr.length;i++){
+                       	    	for(let j=0;j<queArr.length;j++){
+                       	    		if(facQueArr[i].problemNumber==queArr[j].ProblemNumber){
+                       	    			var Que="q_"+j;
+                       	    			$("#"+Que).css("background-color",'rgb(65,199,219)');
+                       	    		}
+                       	    	}
+                       	      }
+                       	   }
+					}	
+				 )
+				}
+//				if(nowIndex<facArr.length){
+//					console.log(nowIndex);
+//						$.ajax({
+//                      type : "POST",
+//                      url : "/MentalTest/QueryProblemByFactor",
+//                      dataType : "json",
+//                      data : {
+//                         factor_id:facArr[nowIndex].factorId,
+//                       },
+//                     success : function(data) {
+//                     	    facQueArr=data.Array;
+//                     	    console.log("关联题号：")
+//                     	    console.log(facQueArr);
+//                     	    if(facQueArr!=null){
+//                     	    for(let i=0;i<facQueArr.length;i++){
+//                     	    	for(let j=0;j<queArr.length;j++){
+//                     	    		if(facQueArr[i].problemNumber==queArr[j].ProblemNumber){
+//                     	    			var Que="q_"+j;
+//                     	    			$("#"+Que).css("background-color",'rgb(65,199,219)');
+//                     	    		}
+//                     	    	}
+//                     	      }
+//                     	    }
+//              
+//                       }, 
+//                       fail:function(){
+//                       	console.log("获取因子关联题数失败！")
+//                       }
+//                    });
+//				}
+			}
+			/**
+			 * 响应保存题目按钮
+			 * */
+			function saveQuestionsBtn(){
+				   if(nowIndex<facArr.length){
+				   	  var question=new Array();
+					 for(let i=0;i<queArr.length;i++){
+                       	var Que="q_"+i;
+                       	var bgcValue=$('#'+Que).css('background-color');
+                       	   if(bgcValue=='rgb(65, 199, 219)'){
+                       	   var box={"problem_id":queArr[i].ProblemId,"problem_number":queArr[i].ProblemNumber};
+                     	    question.push(box);
+                       	    }
+                       	}
+					    problem_info=JSON.stringify(question);
+                       	$.ajax({
+                        type : "POST",
+                        url : "/MentalTest/AddOrUpdateFactorProblem",
+                        dataType : "json",
+                        data : {
+                           factor_id:facArr[nowIndex].factorId,
+                           problem_info:problem_info
+                         },
+                         success : function(data) {
+                         alert("保存题目成功")
+                       	  console.log(data);
+                         }, 
+                         fail:function(){
+                         	console.log("获取总题数失败！")
+                         }
+                      });
+				   }else{
+				   	alert("请先保存因子信息");
+				   }
+		}
+			/**
+			 * 获取总题数的接口
+			 * */
+			function getAllQuestion(){
+				$.ajax({
+                        type : "POST",
+                        url : "/MentalTest/QueryRelationProblem",
+                        dataType : "json",
+                        data : {
+                           scale_id:1,
+                         },
+                       success : function(data) {
+                       	   queArr=data.Array;
+                	       console.log(queArr);
+                	       var quesNum=document.getElementById("quesNum");
+                	       for(let i=0;i<queArr.length;i++){
+                	       	  var span=document.createElement("span");
+                	       	  span.innerHTML=queArr[i].ProblemNumber;
+                	       	  span.style.marginLeft="20px";
+                	       	  var Que="q_"+i;
+                	       	  span.setAttribute("id",Que);
+                	       	  span.setAttribute("class","allQue");
+                	       	  quesNum.appendChild(span);
+                	       }
+//              	       getNowquestions();
+                	       selQuestions();
+                         }, 
+                         fail:function(){
+                         	console.log("获取总题数失败！")
+                         }
+                      });
+			  }
+			/**
+			 * 题目选中响应事件
+			 * */
+			function selQuestions(){
+				var que=document.getElementsByClassName("allQue");
+				for(let i=0;i<que.length;i++){
+					que[i].onclick=function(){
+						var bgcValue=$(this).css('background-color');
+						if(bgcValue=='rgba(0, 0, 0, 0)'){
+							this.style.backgroundColor="rgb(65,199,219)";
+						}else{
+							var confir=confirm("确定取消该选题？");
+							if(confir){
+								this.style.backgroundColor="rgba(0, 0, 0, 0)";
+							}
+						}	
+					}
+				}
+			}
+			/**
 			 * 因子种类选择响应
 			 * */
 			function factClass(){
              var ol=document.getElementById("olClass");
              var fourth=document.getElementById("fourthDiv");
+             var quesNum=document.getElementById("quesNum");
              lis=document.getElementsByTagName("li");
               for(let i=0;i<lis.length;i++){
               	lis[i].onclick=function(){
@@ -53,24 +210,28 @@
               		fourth.innerHTML="";
               		getParaInfo(i);
               		}
+              		quesNum.innerHTML="";
+              		getAllQuestion();
+              		getNowquestions();
                     var now=this;
                     next.style.backgroundColor="transparent";
                     now.style.backgroundColor="rgb(65,199,219)";
-                    console.log(now);
-                    console.log(next);
                     next=now;
          
                  }
               }
               for(let i=0;i<lis.length;i++){
-                  lis[i].ondblclick=function(){
-                 	 var confir=confirm("确定删除因子？");
+                  lis[i].onmousedown=function(e){
+                  	if(e.button==2){
+                  		console.log("aaa");
+                 	 var confir=confirm("确定删除因子:"+$(this).text()+"?")
                  	 if(confir){
                  	 	ol.removeChild(this);
                  	 	if(i<facArr.length){
                  	 		getDeleteFac(i);
                  	 	}
                  	 }
+                  	}
                    }
                  }
             }
@@ -95,6 +256,7 @@
 			function saveFacInfo(){
 				var save=document.getElementById("saveFacBtn");
 				save.onclick=function(){
+					console.log("保存题目");
 					if(nowIndex<facArr.length){
 						getUpdateFac();
 					}
@@ -113,10 +275,10 @@
 				}else{
 					$.ajax({
                         type : "POST",
-                        url : "http://47.105.136.92/MentalTest/AddFactor",
+                        url : "/MentalTest/AddFactor",
                         dataType : "json",
                         data : {
-                           scale_id:39,
+                           scale_id:1,
                            factor_name:$('#facName').val(),
                            factor_info:$('#facIntro').val(),
                            factor_balance:$('#levelFac').val(),
@@ -125,6 +287,7 @@
                            factor_order:facArr.length,
                          },
                        success : function(data) {
+                       	   alert("添加成功！");
                        	   ol.innerHTML="";
                        	   queryFacTableInfo();
                            console.log("添加因子操作：")
@@ -142,10 +305,9 @@
 			 * 获取更新量表因子的接口
 			 * */
 			function getUpdateFac(){
-				console.log(nowIndex+1);
 				$.ajax({
                 type : "POST",
-                url : "http://47.105.136.92/MentalTest/UpdateFactor",
+                url : "http:localhost:8080/MentalTest/UpdateFactor",
                 dataType : "json",
                 data : {
                    factor_id:facArr[nowIndex].factorId,
@@ -157,6 +319,7 @@
                    factor_order:nowIndex+1,
                 },
                 success : function(data) {
+                	alert("更新成功！");
                 	console.log("更新因子信息：");
                 	console.log(data);
                 },  	
@@ -170,7 +333,7 @@
 				
 				$.ajax({
                 type : "POST",
-                url : "http://47.105.136.92/MentalTest/DeleteFactor",
+                url : "/MentalTest/DeleteFactor",
                 dataType : "json",
                 data : {
                    factor_id :factor_id,
@@ -186,10 +349,10 @@
 			function queryFacTableInfo(){
 				$.ajax({
                 type : "POST",
-                url : "http://47.105.136.92/MentalTest/QueryFactorByScale",
+                url : "/MentalTest/QueryFactorByScale",
                 dataType : "json",
                 data : {
-                    scale_id :39,
+                    scale_id :1,
                 },
                 success : function(data) {
                 	facArr=data.Array;
@@ -202,9 +365,10 @@
 				         ol.appendChild(li);
                 	 }
                 	 initialFacInfo(0);//初始化因子信息
-                	 getParaInfo(0);//获取因子信息
+                	 getParaInfo();//获取因子信息
                 	 saveFacInfo();//保存因子信息
-                	 factClass();
+                	 factClass();//因子种类选择
+            	     getNowquestions();//获取因子关联的题号
                    },	
                });
 			}
@@ -443,12 +607,12 @@
 			/**
 			 * 获取参考信息接口
 			 * */
-			function getParaInfo(index){
+			function getParaInfo(){
 				var factor_id=facArr[nowIndex].factorId;
 				console.log(factor_id);
 				$.ajax({
                 type : "POST",
-                url : "http://47.105.136.92/MentalTest/QueryReferenceByFactor",
+                url : "/MentalTest/QueryReferenceByFactor",
                 dataType : "json",
                 data : {
                    factor_id :factor_id,
@@ -479,7 +643,7 @@
 				console.log(reference_id);
 				$.ajax({
                 type : "POST",
-                url : "http://47.105.136.92/MentalTest/DeleteReference",
+                url : "/MentalTest/DeleteReference",
                 dataType : "json",
                 data : {
                    reference_id :reference_id,
@@ -516,6 +680,7 @@
 			 * 获取保存参考意见信息的接口
 			 * */
 			function getSaveParInfo(Info){
+				    var fourth=document.getElementById("fourthDiv");
 				    var refer_sex=-1;
 				    var scoreHead_1=$("#"+Info[0]).val();
 				    var scoreRear_1=$("#"+Info[1]).val();
@@ -542,7 +707,7 @@
 				    	if(paraArr==null){
 				    	$.ajax({
                        type : "POST",
-                       url : "http://47.105.136.92/MentalTest/AddReference",
+                       url : "/MentalTest/AddReference",
                        dataType : "json",
                        data : {
                             refer_bscore :scoreHead_1,
@@ -554,6 +719,9 @@
                             factor_id:facArr[nowIndex].factorId,
                             },
                       success : function(data) {
+                      	    alert("更新成功！");
+                          	fourth.innerHTML="";
+                      	    getParaInfo();
                  	        console.log("保存操作：");
                  	        console.log(data);
 //              	        getParaInfo(nowIndex);
@@ -563,7 +731,7 @@
 				    	if(tabIndex<paraArr.length){//执行更新操作
 				    	   $.ajax({
                          type : "POST",
-                         url : "http://47.105.136.92/MentalTest/UpdateReference",
+                         url : "/MentalTest/UpdateReference",
                          dataType : "json",
                          data : {
                               refer_bscore :scoreHead_1,
@@ -572,17 +740,20 @@
                               refer_bage:ageHead_1,
                               refer_eage:ageRear_1,
                               refer_suggestion:paraInfo_1,
-                              factor_id:facArr[nowIndex].factorId,
+                              reference_id:paraArr[tabIndex].referenceId,
                            },
                           success : function(data) {
-                	          console.log("更新操作：");
+                          	   alert("更新成功！");
+                          	   fourth.innerHTML="";
+                      	       getParaInfo();
+                	           console.log("更新操作：");
                 	           console.log(data);
                                 },	
                          });
 				    }else{//执行保存新表的操作
 				    	$.ajax({
                        type : "POST",
-                       url : "http://47.105.136.92/MentalTest/AddReference",
+                       url : "/MentalTest/AddReference",
                        dataType : "json",
                        data : {
                             refer_bscore :scoreHead_1,
@@ -594,6 +765,9 @@
                             factor_id:facArr[nowIndex].factorId,
                             },
                       success : function(data) {
+                      	    alert("保存成功！");
+                      	    fourth.innerHTML="";
+                      	    getParaInfo();
                  	        console.log("保存操作：");
                  	        console.log(data);
 //              	        getParaInfo(nowIndex);
@@ -657,24 +831,16 @@
 			<span class="formula">计算公式：</span>
 			<textarea id="formula" class="formulaTable" placeholder="选填，文本"></textarea>
 			<span class="releQuestion">已关联题号：</span>
-			<div class="queNum">
-				<span>1111 </span> <span>2222 </span>
-				<span>1111 </span> <span>2222 </span>
-				<span>1111 </span> <span>2222 </span>
-				<span>1111 </span> <span>2222 </span>
-				<span>1111 </span> <span>2222 </span>
-				<span>1111 </span> <span>2222 </span>
-				<span>1111 </span> <span>2222 </span>
+			<div class="queNum" id="quesNum">
+				
 			</div>
-			<button id="selBtn" class="selBtn">选择题目</button>	
+			<button id="saveQueBtn" class="selBtn">保存选题</button>	
 			<button id="saveFacBtn" class="saveFacBtn">保存因子信息</button>	
 		</div>
 		
 		<div id="fourthDiv" class="fourth"></div>
 			
 		<div id="fifthDiv" class="fifth">
-			<!--<button id="upMoveBtn" class="upMove">上移</button>-->
-			<!--<button id="downMoveBtn" class="downMove">下移</button>-->
 			<button id="addBtn" class="addTable">添加(参考意见表)</button>
 			<button id="nextBtn" class="next">下一步（试题）</button>
 		</div>

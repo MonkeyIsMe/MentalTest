@@ -18,20 +18,23 @@
     <script src="js/problem.js"></script>
 </head>
 <body>
-<div class="left">
-	<table class="layui-table" id="myTable">
-		<thead>
-			<tr align="center" class="table_header" height="22">
-				<th style="width: 5%; text-align: center">名称</th>
-			</tr>
-		</thead>
-		<tbody id="ProbelmList" bgcolor="#D7EBFF" align="center" style="color: black">
-		</tbody>
-	</table>
-	<div style="margin-left: 30%;margin-top:10px">
-        <button type="button" class="layui-btn" id="add_problem">添加</button>
-        <button type="button" class="layui-btn" id="del_problem">删除</button>
-    </div>
+<div class="left" >
+	<div style="width:100%;overflow-y:auto;height:100%">
+		<table class="layui-table" id="myTable" style="width:100%;">
+			<thead>
+				<tr align="center" class="table_header" height="18">
+					<th style="width: 5%; text-align: center">名称</th>
+				</tr>
+			</thead>
+			<tbody id="ProbelmList" bgcolor="#D7EBFF" align="center" style="color: black;">
+			</tbody>
+		</table>
+		<div style="margin-left: 30%;margin-top:10px">
+	        <button type="button" class="layui-btn" id="add_problem">添加</button>
+	        <button type="button" class="layui-btn" id="del_problem">删除</button>
+	    </div>
+	</div>
+
 </div>
 <div class="right">
     <div style="margin: 1%">

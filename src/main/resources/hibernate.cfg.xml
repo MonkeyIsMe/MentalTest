@@ -33,7 +33,7 @@
 <property name="hibernate.connection.url">jdbc:mysql:///mental_test?autoReconnect=true&amp;autoReconnectForPools=true&amp;characterEncoding=UTF-8
 </property>
 <property name="hibernate.connection.username">root</property>
-<property name="hibernate.connection.password">vlab214</property>
+<property name="hibernate.connection.password">421992850</property>
 <property name="current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</property>	
 <property name="connection.autoReconnect">true</property> 
 <property name="connection.autoReconnectForPools">true</property> 

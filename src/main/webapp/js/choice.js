@@ -249,7 +249,9 @@ $(document).ready(function(){
 		            }
 		        }
 		    );
-	
+	   
+
+	   
 	//增加模板
 	$("#add_temp").click(function(){
 		var tempinfo = [];
@@ -334,8 +336,16 @@ $(document).ready(function(){
 				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
 			}
 		}
+		
+		var temp_name = $("#temp_name").val();
+		
+		if(temp_name == null || temp_name == ""){
+			alert("模板名字非空！");
+			flag = 0;
+		}
+		
 		if(flag == 1){
-			var temp_name = $("#temp_name").val();
+			
 			var temp = JSON.stringify(tempinfo);
 			//console.log(temp);
 		    $.post(
@@ -464,6 +474,8 @@ $(document).ready(function(){
 		        );
 		})
 	  
+
+		
 	$("#del_choice").click(function(){
 	    $.post(
 	            "MentalTest/DeleteChoice",

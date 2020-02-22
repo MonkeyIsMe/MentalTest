@@ -243,7 +243,22 @@ public class ChoiceAction extends ActionSupport{
 		
 		List<Choice> clist = null;
 		int pid = Integer.valueOf(problem_id);
+		
 		problem = ProblemService.QueryProblem(pid);
+		
+		if(problem == null) {
+			JSONObject jos = new JSONObject();
+			jos.put("Count", "0");
+			jos.put("rows", "0");
+			jos.put("msg", "NoProblem");
+			jos.put("code", 0);
+			jos.put("PageSize", "0");
+			jos.put("Array", "null");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
 		
 		int tid = problem.getTemplateId();
 		if(tid != 0) {
