@@ -334,6 +334,7 @@ public class TemplateAction extends ActionSupport{
 			List<Choice> clist = ChoiceService.QueryChoiceByTemplate(tid);
 			JSONObject jo = new JSONObject();
 			jo.put("TemplateId", tid);
+			jo.put("TemplateName", temp.getTemplateName());
 			jo.put("ChoiceList", clist.toString());
 			ja.add(jo);
  		}

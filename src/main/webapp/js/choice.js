@@ -122,6 +122,8 @@ function NextPage(){
 			            //console.log(data.Array);
 			            for(var i = 0; i < data.Array.length; i ++){
 			                var html = "<div class='temp'>"
+						    html += "<div class='float'>模板名称：</div>";
+					        html += "<div class='float'>"+data.Array[i].TemplateName+"</div><br>";
 			                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
 			                    html += "<div class='float'>选项内容：</div>";
 			                    html += "<div class='float'>" + data.Array[i].ChoiceList[j].ChoiceInfo + "</div>";
@@ -157,6 +159,8 @@ function PrevPage(){
 			            console.log(data.Array);
 			            for(var i = 0; i < data.Array.length; i ++){
 			                var html = "<div class='temp'>"
+						    html += "<div class='float'>模板名称：</div>";
+					        html += "<div class='float'>"+data.Array[i].TemplateName+"</div><br>";
 			                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
 			                    html += "<div class='float'>选项内容：</div>";
 			                    html += "<div class='float'>" + data.Array[i].ChoiceList[j].ChoiceInfo + "</div>";
@@ -205,6 +209,8 @@ function ReloadTemplateList(){
 		            //console.log(data.Array);
 		            for(var i = 0; i < data.Array.length; i ++){
 		                var html = "<div class='temp'>"
+					    html += "<div class='float'>模板名称：</div>";
+				        html += "<div class='float'>"+data.Array[i].TemplateName+"</div><br>";
 		                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
 		                    html += "<div class='float'>选项内容：</div>";
 		                    html += "<div class='float'>" + data.Array[i].ChoiceList[j].ChoiceInfo + "</div>";
@@ -235,7 +241,9 @@ $(document).ready(function(){
 		            var data = JSON.parse(data);
 		            //console.log(data.Array);
 		            for(var i = 0; i < data.Array.length; i ++){
-		                var html = "<div class='temp'>"
+		                var html = "<div class='temp'>";
+				        html += "<div class='float'>模板名称：</div>";
+				        html += "<div class='float'>"+data.Array[i].TemplateName+"</div><br>";
 		                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
 		                    html += "<div class='float'>选项内容：</div>";
 		                    html += "<div class='float'>" + data.Array[i].ChoiceList[j].ChoiceInfo + "</div>";

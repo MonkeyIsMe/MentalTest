@@ -25,7 +25,7 @@ $(function(){
                     //动态创建一个tr行标签,并且转换成jQuery对象
                     var $trTemp = $("<tr ></tr>");
                     problem.push({ProblemName: data.Array[i].problemName, ProblemId: data.Array[i].problemId});
-			        $trTemp.append("<td class=pro style=" + "width:200px;font-size:12px;"  + ">"+ data.Array[i].problemId + "."+ data.Array[i].problemName +"</td>");
+			        $trTemp.append("<td class=pro style=" + "width:200px;font-size:12px;"  + ">"+ data.Array[i].problemNumber + "."+ data.Array[i].problemName +"</td>");
                     // $("#J_TbData").append($trTemp);
                     $trTemp.appendTo("#ProbelmList");
                 }
@@ -207,7 +207,9 @@ $(document).ready(function(){
 			 var problem_number = $("#ProblemNumber").val();
 			 var problem_type = $('#PrblemType option:selected') .val();
 			 var flag = $("input[type='checkbox']").is(':checked');
-			 if(flag == true) prblem_flag = 1;
+			 //alert(flag + " " + (flag == true) + " " + (flag == "true"));
+			 if(flag == true) problem_flag = 1;
+			 //alert(prblem_flag);
 			    $.post(
 			            "MentalTest/AddProblem",
 			            {
@@ -265,3 +267,8 @@ $(document).ready(function(){
 		 }
 	  })
 });
+
+function EditFactor(){
+	var edit_url = "EditFactor.html?ScaleId=" + sid;
+	window.location.href = edit_url;
+}

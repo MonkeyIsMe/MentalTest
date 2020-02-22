@@ -5,8 +5,15 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/tableFactorInfo.css"/>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<!-- <script type="text/javascript" src="js/editfactor.js"></script> -->
 		<script type="text/javascript">
-
+			
+		var url = decodeURI(window.location.href);
+		 
+		var argsIndex = url .split("?ScaleId=");
+		var sid = argsIndex[1];
+		//console.log("sid = " + sid);
+			
 			var advice,add,delBtn,addfac,lis,saveQuesBtn;
 			var facArray,nowIndex=0,parLen=0,tabIndex;
 			var check1,check2,check3,check4;
@@ -35,6 +42,8 @@
 			    	addFac();
 			    }
 			    
+			    saveFacInfo();//保存因子信息
+			    
 				add.onclick=function(){//添加参考意见表
                     addTable();
                     delBtn=document.getElementsByName("delBtn");
@@ -54,8 +63,8 @@
 					function(data){
 						 var data=JSON.parse(data);
 						 facQueArr=data.Array;
-                       	    console.log("关联题号：")
-                       	    console.log(facQueArr);
+                       	    //console.log("关联题号：")
+                       	    //console.log(facQueArr);
                        	    if(facQueArr!=null){
                        	    for(let i=0;i<facQueArr.length;i++){
                        	    	for(let j=0;j<queArr.length;j++){
@@ -69,36 +78,6 @@
 					}	
 				 )
 				}
-//				if(nowIndex<facArr.length){
-//					console.log(nowIndex);
-//						$.ajax({
-//                      type : "POST",
-//                      url : "/MentalTest/QueryProblemByFactor",
-//                      dataType : "json",
-//                      data : {
-//                         factor_id:facArr[nowIndex].factorId,
-//                       },
-//                     success : function(data) {
-//                     	    facQueArr=data.Array;
-//                     	    console.log("关联题号：")
-//                     	    console.log(facQueArr);
-//                     	    if(facQueArr!=null){
-//                     	    for(let i=0;i<facQueArr.length;i++){
-//                     	    	for(let j=0;j<queArr.length;j++){
-//                     	    		if(facQueArr[i].problemNumber==queArr[j].ProblemNumber){
-//                     	    			var Que="q_"+j;
-//                     	    			$("#"+Que).css("background-color",'rgb(65,199,219)');
-//                     	    		}
-//                     	    	}
-//                     	      }
-//                     	    }
-//              
-//                       }, 
-//                       fail:function(){
-//                       	console.log("获取因子关联题数失败！")
-//                       }
-//                    });
-//				}
 			}
 			/**
 			 * 响应保存题目按钮
@@ -144,11 +123,12 @@
                         url : "/MentalTest/QueryRelationProblem",
                         dataType : "json",
                         data : {
-                           scale_id:1,
+                           scale_id:sid,
                          },
                        success : function(data) {
-                       	   queArr=data.Array;
-                	       console.log(queArr);
+                       	   if(data.Array!=null){
+                       	   	 queArr=data.Array;
+                	       //console.log(queArr);
                 	       var quesNum=document.getElementById("quesNum");
                 	       for(let i=0;i<queArr.length;i++){
                 	       	  var span=document.createElement("span");
@@ -159,8 +139,8 @@
                 	       	  span.setAttribute("class","allQue");
                 	       	  quesNum.appendChild(span);
                 	       }
-//              	       getNowquestions();
                 	       selQuestions();
+                       	   }
                          }, 
                          fail:function(){
                          	console.log("获取总题数失败！")
@@ -256,7 +236,6 @@
 			function saveFacInfo(){
 				var save=document.getElementById("saveFacBtn");
 				save.onclick=function(){
-					console.log("保存题目");
 					if(nowIndex<facArr.length){
 						getUpdateFac();
 					}
@@ -278,7 +257,7 @@
                         url : "/MentalTest/AddFactor",
                         dataType : "json",
                         data : {
-                           scale_id:1,
+                           scale_id:sid,
                            factor_name:$('#facName').val(),
                            factor_info:$('#facIntro').val(),
                            factor_balance:$('#levelFac').val(),
@@ -287,10 +266,9 @@
                            factor_order:facArr.length,
                          },
                        success : function(data) {
-                       	   alert("添加成功！");
                        	   ol.innerHTML="";
                        	   queryFacTableInfo();
-                           console.log("添加因子操作：")
+                           console.log("添加因子成功：");
                 	       console.log(data);
                 	   
                          }, 
@@ -307,7 +285,7 @@
 			function getUpdateFac(){
 				$.ajax({
                 type : "POST",
-                url : "http:localhost:8080/MentalTest/UpdateFactor",
+                url : "/MentalTest/UpdateFactor",
                 dataType : "json",
                 data : {
                    factor_id:facArr[nowIndex].factorId,
@@ -319,10 +297,12 @@
                    factor_order:nowIndex+1,
                 },
                 success : function(data) {
-                	alert("更新成功！");
-                	console.log("更新因子信息：");
+                	console.log("更新因子信息成功：");
                 	console.log(data);
-                },  	
+                }, 
+                fail:function(){
+                	console.log("更新因子失败");
+                }
                   });
 			}
 			/**
@@ -339,6 +319,7 @@
                    factor_id :factor_id,
                 },
                 success : function(data) {
+                	console.log("删除因子成功");
                 	console.log(data);
                 },  	
                   });
@@ -352,9 +333,10 @@
                 url : "/MentalTest/QueryFactorByScale",
                 dataType : "json",
                 data : {
-                    scale_id :1,
+                    scale_id :sid,
                 },
                 success : function(data) {
+                	if(data.Array!=null){
                 	facArr=data.Array;
                 	console.log(facArr);
                 	var ol=document.getElementById("olClass");
@@ -363,12 +345,12 @@
 				         li.innerHTML=facArr[i].factorName;
 				         li.style.marginTop="10px";
 				         ol.appendChild(li);
-                	 }
-                	 initialFacInfo(0);//初始化因子信息
+                	}
                 	 getParaInfo();//获取因子信息
-                	 saveFacInfo();//保存因子信息
-                	 factClass();//因子种类选择
             	     getNowquestions();//获取因子关联的题号
+            	     initialFacInfo(0);//初始化因子信息
+                	}
+                	factClass();//因子种类选择
                    },	
                });
 			}
@@ -719,7 +701,7 @@
                             factor_id:facArr[nowIndex].factorId,
                             },
                       success : function(data) {
-                      	    alert("更新成功！");
+                      	    alert("保存成功！");
                           	fourth.innerHTML="";
                       	    getParaInfo();
                  	        console.log("保存操作：");
@@ -803,6 +785,11 @@
 					}
 				}
 			}
+			
+			function nextBtn(){
+				var next_url = "ScaleList.html";
+				window.location.href = next_url;
+			}
 		</script>
 	</head>
 	<body>
@@ -842,7 +829,7 @@
 			
 		<div id="fifthDiv" class="fifth">
 			<button id="addBtn" class="addTable">添加(参考意见表)</button>
-			<button id="nextBtn" class="next">下一步（试题）</button>
+			<button onclick="nextBtn()" class="next">完成</button>
 		</div>
 	</body>
 </html>
