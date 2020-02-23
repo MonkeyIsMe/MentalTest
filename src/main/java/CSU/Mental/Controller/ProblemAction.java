@@ -79,7 +79,25 @@ public class ProblemAction extends ActionSupport{
 		
 		String problem_id = request.getParameter("problem_id");
 		String template_id = request.getParameter("template_id");
-		//System.out.println(template_id);
+		
+		if(!cutil.IsNumber(template_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		if(!cutil.IsNumber(problem_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
 		int pid = Integer.valueOf(problem_id);
 		int tid = Integer.valueOf(template_id);
 		

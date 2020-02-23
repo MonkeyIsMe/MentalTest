@@ -16,6 +16,8 @@ public interface ProblemDao {
 	
 	public List<Problem> QueryProblemByScale(int ScaleId);
 	
+	public List<Problem> QueryProblemByTemplate(int TemplateId);
+	
 	public int CountProblemByScale(int ScaleId);
 	
 	public List<Problem> QueryProblemByScalePageSize(int ScaleId,int PageSize,int rows);
@@ -23,6 +25,8 @@ public interface ProblemDao {
 	public List<Integer> AddMutiplyProblem(List<Problem> list);
 	
 	public Object DeleteMutiplyProblem(List<Problem> list);
+	
+	public Object UpdateMutiplyProblem(List<Problem> list);
 	
 	public List<Object[]> QuerySingleProblemByScale(int ScaleId);
 	

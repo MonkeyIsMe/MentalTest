@@ -11,8 +11,10 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import CSU.Mental.Model.Choice;
+import CSU.Mental.Model.Problem;
 import CSU.Mental.Model.Template;
 import CSU.Mental.Service.ChoiceService;
+import CSU.Mental.Service.ProblemService;
 import CSU.Mental.Service.TemplateService;
 import CSU.Mental.Utils.CommonUtils;
 import net.sf.json.JSON;
@@ -23,6 +25,7 @@ public class TemplateAction extends ActionSupport{
 	
 	private CommonUtils cutil = new CommonUtils();
 	private TemplateService TemplateService;
+	private ProblemService ProblemService;
 	private ChoiceService ChoiceService;
 	private Template template = new Template();
 	
@@ -37,6 +40,13 @@ public class TemplateAction extends ActionSupport{
 	}
 	public void setTemplateService(TemplateService templateService) {
 		TemplateService = templateService;
+	}
+	
+	public ProblemService getProblemService() {
+		return ProblemService;
+	}
+	public void setProblemService(ProblemService problemService) {
+		ProblemService = problemService;
 	}
 	
 	//增加一个模板
@@ -127,8 +137,19 @@ public class TemplateAction extends ActionSupport{
 		
 		flag = TemplateService.DeleteTemplate(template);
 		
-		List<Choice> del_list = ChoiceService.QueryChoiceByTemplate(tid);
-		ChoiceService.DeleteMutiplyChoice(del_list);
+		//处理选项
+		List<Choice> del_clist = ChoiceService.QueryChoiceByTemplate(tid);
+		ChoiceService.DeleteMutiplyChoice(del_clist);
+		
+		//处理题目
+		List<Problem> del_plist = ProblemService.QueryProblemByTemplate(tid);
+		List<Problem> plist = new ArrayList<Problem>();
+		for(Problem pro : del_plist) {
+			pro.setTemplateId(0);
+			plist.add(pro);
+		}
+		
+		ProblemService.UpdateMutiplyProblem(plist);
 		
 		JSONObject jo = new JSONObject();
 		if(flag) {

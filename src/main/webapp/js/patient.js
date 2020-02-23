@@ -85,6 +85,8 @@ function PrevPage(){
 	}
 	else{
 		row--;
+		$("#NowPage").html("");
+		$("#NowPage").append("，当前第" + row + "页");
 		$("#PatientList").html("");
 	    $.post(
 	            "MentalTest/QueryPatientPageSize",
@@ -133,6 +135,9 @@ function NextPage(){
 	}
 	else{
 		row ++;
+		$("#NowPage").html("");
+		$("#NowPage").append("，当前第" + row + "页");
+		console.log(row);
 		$("#PatientList").html("");
 	    $.post(
 	            "MentalTest/QueryPatientPageSize",

@@ -26,4 +26,8 @@ public interface ProblemService {
 	
 	public Object DeleteMutiplyProblem(List<Problem> list);
 	
+	public Object UpdateMutiplyProblem(List<Problem> list);
+	
+	public List<Problem> QueryProblemByTemplate(int TemplateId);
+	
 }

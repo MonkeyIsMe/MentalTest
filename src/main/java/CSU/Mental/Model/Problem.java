@@ -24,7 +24,7 @@ public class Problem implements Serializable{
 	private String ProblemName;  // 题目
 	
 	@Column(name="problem_type")
-	private String ProblemType;  // 类型，0代表填空，1代表单选，2代表多选
+	private String ProblemType;  // 类型，1代表单选，2代表多选，0代表填空
 	
 	@Column(name="scale_id")
 	private int ScaleId;  // 量表编号

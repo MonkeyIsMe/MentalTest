@@ -47,7 +47,7 @@ function InitProblemTable(){
                         //动态创建一个tr行标签,并且转换成jQuery对象
                         var $trTemp = $("<tr ></tr>");
                         problem.push({ProblemName: data.Array[i].problemName, ProblemId: data.Array[i].problemId});
-    			        $trTemp.append("<td class=pro style=" + "text-align:center"  + ">"+  data.Array[i].problemName +"</td>");
+    			        $trTemp.append("<td class=pro style=" + "width:200px;font-size:12px;"  + ">"+ data.Array[i].problemNumber + "."+ data.Array[i].problemName +"</td>");
                         // $("#J_TbData").append($trTemp);
                         $trTemp.appendTo("#ProbelmList");
                     }
@@ -95,27 +95,27 @@ $(document).ready(function(){
 		    var col1 = currentRow.find("td:eq(0)").text(); //获得当前行第一个TD值
 		    
 		    var s =  col1.split(".");
-		    console.log(s);
+		    //console.log(s);
 		    
 		    pname = s[1];
 		    //alert(pname);
 		    for (var i in problem) {
-		    	//console.log(problem[i]);
+		    	//console.log(problem[i].ProblemName + "  +  " + pname);
 		    	if(problem[i].ProblemName == pname){
 		    		pid = problem[i].ProblemId;
 		    	}
 		    	$("#ChoiceList").html("");
 		    }
-		    
 		    $.post(
 		            "MentalTest/QuerySingleProblem",
 		            {
 		            	problem_id:pid
 		            },
 		            function(data) {
+		            	//console.log("1.data" + data);
 		                var data = JSON.parse(data);
-		                console.log(data);
-		                console.log(data.ProblemInfo.ProblemFlag);
+		                //console.log("2.data = " + data);
+		                //console.log(data.ProblemInfo.ProblemFlag);
 		                $("#ProblemInfo").val("");
 		                $("#ProblemNumber").val("");
 		                if(data.ProblemInfo.ProblemFlag == 1){
@@ -126,8 +126,9 @@ $(document).ready(function(){
 		                	//alert(0);
 		                	$("#ProblemFlag").prop('checked', false);
 		                }
-		               
-		                $("#ProblemType").find("option[value='"+ data.ProblemInfo.ProblemType +"']").attr("selected",true);
+		                //console.log("ProblemType = " + data.ProblemInfo.ProblemType);
+		                //$("#ProblemType").find("option[value='"+ data.ProblemInfo.ProblemType +"']").attr("selected",true);
+		                $("#ProblemType").get(0).value =  data.ProblemInfo.ProblemType;
 		                $("#ProblemInfo").val(data.ProblemInfo.ProblemName);
 		                $("#ProblemNumber").val(data.ProblemInfo.ProblemNumber);
 		            }
@@ -205,7 +206,8 @@ $(document).ready(function(){
 			 var problem_flag = 0;
 			 var problem_name = $("#ProblemInfo").val();
 			 var problem_number = $("#ProblemNumber").val();
-			 var problem_type = $('#PrblemType option:selected') .val();
+			 var problem_type = $('#ProblemType option:selected') .val();
+			// alert("type = " + problem_type);
 			 var flag = $("input[type='checkbox']").is(':checked');
 			 //alert(flag + " " + (flag == true) + " " + (flag == "true"));
 			 if(flag == true) problem_flag = 1;

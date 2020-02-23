@@ -182,4 +182,44 @@ public class ProblemDaoImpl extends HibernateDaoSupport implements ProblemDao{
 		});
 	}
 
+	public Object UpdateMutiplyProblem(final List<Problem> list) {
+		// TODO Auto-generated method stub
+		return getHibernateTemplate().execute(new HibernateCallback<Object>() {
+
+			public Object doInHibernate(Session session) throws HibernateException {
+				// TODO Auto-generated method stub
+				for(int i = 0; i < list.size(); i ++) {
+					session.update(list.get(i));
+                    if (i % 50 == 0) {  
+                        session.flush();  
+                        session.clear();  
+                    }  
+				}
+				return null;
+			}
+			
+		});
+	}
+
+	public List<Problem> QueryProblemByTemplate(final int TemplateId) {
+		// TODO Auto-generated method stub
+		try {
+			return getHibernateTemplate().execute(new HibernateCallback<List<Problem>>() {
+
+				public List<Problem> doInHibernate(Session session) throws HibernateException {
+					// TODO Auto-generated method stub
+					String hql = "from Problem where template_id = ?";
+					Query query = session.createQuery(hql);
+					query.setParameter(0, TemplateId);
+					List<Problem> list = query.list();
+					return list;
+				}
+			});
+		} catch (DataAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

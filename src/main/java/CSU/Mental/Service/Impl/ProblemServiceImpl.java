@@ -71,4 +71,14 @@ public class ProblemServiceImpl implements ProblemService{
 		return ProblemDao.DeleteMutiplyProblem(list);
 	}
 
+	public Object UpdateMutiplyProblem(List<Problem> list) {
+		// TODO Auto-generated method stub
+		return ProblemDao.UpdateMutiplyProblem(list);
+	}
+
+	public List<Problem> QueryProblemByTemplate(int TemplateId) {
+		// TODO Auto-generated method stub
+		return ProblemDao.QueryProblemByTemplate(TemplateId);
+	}
+
 }

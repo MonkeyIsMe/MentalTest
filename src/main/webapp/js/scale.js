@@ -70,6 +70,8 @@ function PrevPage(){
 	}
 	else{
 		row--;
+		$("#NowPage").html("");
+		$("#NowPage").append("，当前第" + row + "页");
 		$("#ScaleList").html("");
 	    $.post(
 	            "http://47.105.136.92/MentalTest/QueryScalePageSize",
@@ -110,6 +112,8 @@ function NextPage(){
 	}
 	else{
 		row ++;
+		$("#NowPage").html("");
+		$("#NowPage").append("，当前第" + row + "页");
 		$("#ScaleList").html("");
 	    $.post(
 	            "http://47.105.136.92/MentalTest/QueryScalePageSize",

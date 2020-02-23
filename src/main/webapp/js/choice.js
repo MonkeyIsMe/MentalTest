@@ -34,38 +34,68 @@ $(function () {
             $("#ch_four").css("display","none");
             $("#ch_five").css("display","none");
             $("#ch_six").css("display","none");
+            $("#ch_seven").css("display","none");
+            $("#ch_eight").css("display","none");
         }
-        if(op == 3){
+        else if(op == 3){
             $("#ch_one").css("display","block");
             $("#ch_two").css("display","block");
             $("#ch_three").css("display","block");
             $("#ch_four").css("display","none");
             $("#ch_five").css("display","none");
             $("#ch_six").css("display","none");
+            $("#ch_seven").css("display","none");
+            $("#ch_eight").css("display","none");
         }
-        if(op == 4){
+        else if(op == 4){
             $("#ch_one").css("display","block");
             $("#ch_two").css("display","block");
             $("#ch_three").css("display","block");
             $("#ch_four").css("display","block");
             $("#ch_five").css("display","none");
             $("#ch_six").css("display","none");
+            $("#ch_seven").css("display","none");
+            $("#ch_eight").css("display","none");
         }
-        if(op == 5){
+        else if(op == 5){
             $("#ch_one").css("display","block");
             $("#ch_two").css("display","block");
             $("#ch_three").css("display","block");
             $("#ch_four").css("display","block");
             $("#ch_five").css("display","block");
             $("#ch_six").css("display","none");
+            $("#ch_seven").css("display","none");
+            $("#ch_eight").css("display","none");
         }
-        if(op == 6){
+        else if(op == 6){
             $("#ch_one").css("display","block");
             $("#ch_two").css("display","block");
             $("#ch_three").css("display","block");
             $("#ch_four").css("display","block");
             $("#ch_five").css("display","block");
             $("#ch_six").css("display","block");
+            $("#ch_seven").css("display","none");
+            $("#ch_eight").css("display","none");
+        }
+        else if(op == 7){
+            $("#ch_one").css("display","block");
+            $("#ch_two").css("display","block");
+            $("#ch_three").css("display","block");
+            $("#ch_four").css("display","block");
+            $("#ch_five").css("display","block");
+            $("#ch_six").css("display","block");
+            $("#ch_seven").css("display","block");
+            $("#ch_eight").css("display","none");
+        }
+        else if(op == 8){
+            $("#ch_one").css("display","block");
+            $("#ch_two").css("display","block");
+            $("#ch_three").css("display","block");
+            $("#ch_four").css("display","block");
+            $("#ch_five").css("display","block");
+            $("#ch_six").css("display","block");
+            $("#ch_seven").css("display","block");
+            $("#ch_eight").css("display","block");
         }
     })
 })
@@ -344,6 +374,38 @@ $(document).ready(function(){
 				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
 			}
 		}
+		else if(op == 7){
+			for(var i = 1; i <= 6; i ++){
+				var name = $("#name" + i).val();
+				var score = $("#score" + i).val();
+				//console.log(name + " " + score);
+				if(name == "" || name == null || score == null || score == ""){
+					alert("所填项均为非空");
+					for(var i in tempinfo){
+						delete tempinfo[i];
+						flag = 0;
+						return ;
+					}
+				}
+				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
+			}
+		}
+		else if(op == 8){
+			for(var i = 1; i <= 6; i ++){
+				var name = $("#name" + i).val();
+				var score = $("#score" + i).val();
+				//console.log(name + " " + score);
+				if(name == "" || name == null || score == null || score == ""){
+					alert("所填项均为非空");
+					for(var i in tempinfo){
+						delete tempinfo[i];
+						flag = 0;
+						return ;
+					}
+				}
+				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
+			}
+		}
 		
 		var temp_name = $("#temp_name").val();
 		
@@ -353,7 +415,7 @@ $(document).ready(function(){
 		}
 		
 		if(flag == 1){
-			
+			//alert(123);
 			var temp = JSON.stringify(tempinfo);
 			//console.log(temp);
 		    $.post(
