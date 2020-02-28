@@ -19,6 +19,7 @@ import CSU.Mental.Model.Factor;
 import CSU.Mental.Model.FactorProblem;
 import CSU.Mental.Model.Patient;
 import CSU.Mental.Model.Problem;
+import CSU.Mental.Model.Record;
 import CSU.Mental.Model.Reference;
 import CSU.Mental.Model.Scale;
 import CSU.Mental.Service.ChoiceService;
@@ -259,6 +260,18 @@ public class ScaleAction extends ActionSupport{
             factor = FactorService.QueryFactor(key);
             jo.put(factor.getFactorName(), answer);
         }
+        
+        //保存一份记录
+        Record record = new Record();
+        record.setPatientId(PatientId);
+        record.setRecordInfo(jo.toString());
+        record.setScaleId(sid);
+        record.setRecordTime(cutil.GetNowDate());
+        record.setRecordProblem(choice_info);
+        record.setRecordFactor(mp.toString());
+        
+        RecordService.AddRecord(record);
+        
         
         JSONObject result = new JSONObject();
         result.put("ScaleInfo", scale.toString());

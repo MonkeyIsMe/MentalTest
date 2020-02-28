@@ -15,9 +15,11 @@
     <link href="css/bootstrap.css" type="text/css" rel="styleSheet">
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scale.js"></script>
+
 </head>
 <body>
-    <div class="form-group scale_search" style="float:left">
+<div id="ahead"></div>
+    <div class="form-group scale_search" style="float:left;margin-top:10px">
     	<div style="float:left">
     		<input type="text" class="form-control" placeholder="请输入量表名称" >
     	</div>
@@ -63,7 +65,8 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-
-
 </body>
+    <script type="text/javascript">
+    	$("#ahead").load("head.html");
+    </script>
 </html>

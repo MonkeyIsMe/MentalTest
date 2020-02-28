@@ -264,6 +264,15 @@ public class ProblemAction extends ActionSupport{
 		
 		problem = ProblemService.QueryProblem(pid);
 		
+		if(problem == null) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "Fail");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
 		flag = ProblemService.DeleteProblem(problem);
 		
 		if(flag) {

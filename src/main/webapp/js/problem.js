@@ -14,7 +14,7 @@ $(function(){
 	$('#ProblemFlag').attr('checked', 'checked');
 	$("#clist").load("clist.html");
     $.post(
-        "MentalTest/QueryProblemByScale",
+        "MentalTest/QueryRelationProblem",
         {
         	scale_id:sid
         },
@@ -24,8 +24,8 @@ $(function(){
                 for( var i = 0; i < data.Array.length; i++ ) {
                     //动态创建一个tr行标签,并且转换成jQuery对象
                     var $trTemp = $("<tr ></tr>");
-                    problem.push({ProblemName: data.Array[i].problemName, ProblemId: data.Array[i].problemId});
-			        $trTemp.append("<td class=pro style=" + "width:200px;font-size:12px;"  + ">"+ data.Array[i].problemNumber + "."+ data.Array[i].problemName +"</td>");
+                    problem.push({ProblemName: data.Array[i].ProblemName, ProblemId: data.Array[i].ProblemId});
+			        $trTemp.append("<td class=pro style=" + "width:200px;font-size:12px;"  + ">"+ data.Array[i].ProblemNumber + "#"+ data.Array[i].ProblemName +"</td>");
                     // $("#J_TbData").append($trTemp);
                     $trTemp.appendTo("#ProbelmList");
                 }
@@ -35,8 +35,9 @@ $(function(){
 });
 
 function InitProblemTable(){
+	problem.splice(0);
     $.post(
-            "MentalTest/QueryProblemByScale",
+            "MentalTest/QueryRelationProblem",
             {
             	scale_id:sid
             },
@@ -46,8 +47,8 @@ function InitProblemTable(){
                     for( var i = 0; i < data.Array.length; i++ ) {
                         //动态创建一个tr行标签,并且转换成jQuery对象
                         var $trTemp = $("<tr ></tr>");
-                        problem.push({ProblemName: data.Array[i].problemName, ProblemId: data.Array[i].problemId});
-    			        $trTemp.append("<td class=pro style=" + "width:200px;font-size:12px;"  + ">"+ data.Array[i].problemNumber + "."+ data.Array[i].problemName +"</td>");
+                        problem.push({ProblemName: data.Array[i].ProblemName, ProblemId: data.Array[i].ProblemId});
+    			        $trTemp.append("<td class=pro style=" + "width:200px;font-size:12px;"  + ">"+ data.Array[i].ProblemNumber + "#"+ data.Array[i].ProblemName +"</td>");
                         // $("#J_TbData").append($trTemp);
                         $trTemp.appendTo("#ProbelmList");
                     }
@@ -94,7 +95,7 @@ $(document).ready(function(){
 		    
 		    var col1 = currentRow.find("td:eq(0)").text(); //获得当前行第一个TD值
 		    
-		    var s =  col1.split(".");
+		    var s =  col1.split("#");
 		    //console.log(s);
 		    
 		    pname = s[1];

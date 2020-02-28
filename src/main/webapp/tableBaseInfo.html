@@ -9,11 +9,13 @@
 	var bigClassArr = new Array();//保存大类数据
 	var smallClassArr;//保存小类数据
 	var bidClassId, smallClassId;
+	var sid = 0;
 	window.onload = function() {
 		getBigClass(); //获取大类接口
 		var save = document.getElementById("saveBtn");
 		save.onclick = function() {
 			getSaveData();
+			//alert(sid);
 		}
 	}
 	/**
@@ -22,14 +24,14 @@
 	function getBigClass() {
 		$.ajax({
 			type : "POST",
-			url : "http://47.105.136.92/MentalTest/QueryAllFkind",
+			url : "/MentalTest/QueryAllFkind",
 			dataType : "json",
 			data : {},
 			success : function(data) {
 				var Select = document.getElementById("Select1");
 				var bigStr = "";
 				bigClassArr = data.Array;
-				console.log(bigClassArr);
+				//console.log(bigClassArr);
 				for (var i = 0; i < bigClassArr.length; i++) {
 					var bc = document.createElement("option");
 					bc.setAttribute("id", bigClassArr[i].fkindId);
@@ -53,7 +55,7 @@
 	function getSmallClass(fk_id) {
 		$.ajax({
 			type : "POST",
-			url : "http://47.105.136.92/MentalTest/QueryAllSkind",
+			url : "/MentalTest/QueryAllSkind",
 			dataType : "json",
 			data : {
 				fk_id : fk_id
@@ -61,7 +63,7 @@
 			success : function(data) {
 				var Select = document.getElementById("Select2");
 				smallClassArr = data.Array;
-				console.log(smallClassArr);
+				//console.log(smallClassArr);
 				$("#Select2").empty(); //创建前先清空select标签
 				for (var i = 0; i < smallClassArr.length; i++) {
 					var bc = document.createElement("option");
@@ -96,7 +98,7 @@
 		} else {
 			$.ajax({
 				type : "POST",
-				url : "http://47.105.136.92/MentalTest/AddScale",
+				url : "/MentalTest/AddScale",
 				dataType : "json",
 				data : {
 					scale_name : scale_name,
@@ -108,12 +110,21 @@
 				success : function(data) {
 					if (data != null) {
 						console.log(data);
+						sid = data.ScaleId;
 						alert("保存成功！");
 					} else {
 						alert("保存失败！")
 					}
 				},
 			});
+		}
+	}
+	
+	function nextBtn(){
+		if(sid == 0) alert("获取量表编号失败");
+		else{
+			var url = "EditProblem.html?ScaleId=" + sid;
+			window.location.href = url;
 		}
 	}
 </script>
@@ -140,7 +151,7 @@
 		<span class="tableInstruction">指导语</span>
 		<textarea id="guideInfo" class="Instruction"></textarea>
 		<button id="saveBtn" class="save">保存</button>
-		<button id="nextBtn" class="nextStep">下一步 (因子)</button>
+		<button id="nextBtn" class="nextStep" onclick="nextBtn()">下一步 </button>
 	</div>
 
 	<div class="fourth">
