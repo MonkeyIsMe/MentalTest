@@ -82,7 +82,7 @@ public class ProblemAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(template_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoTemplateId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -91,7 +91,7 @@ public class ProblemAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(problem_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoProblemId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -150,7 +150,7 @@ public class ProblemAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(problem_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoProblemId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -159,7 +159,7 @@ public class ProblemAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(template_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoTemplateId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -253,7 +253,7 @@ public class ProblemAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(problem_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoProblemId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -266,7 +266,7 @@ public class ProblemAction extends ActionSupport{
 		
 		if(problem == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoProblem");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -371,7 +371,7 @@ public class ProblemAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(scale_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoScaleId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -380,7 +380,7 @@ public class ProblemAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(template_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoTemplateId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -453,7 +453,7 @@ public class ProblemAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(problem_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoProblemId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -462,7 +462,7 @@ public class ProblemAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(template_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoTemplateId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -476,7 +476,7 @@ public class ProblemAction extends ActionSupport{
 		
 		if(problem == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoProblem");
 			out.println(jos.toString());
 			out.flush();
 			out.close();

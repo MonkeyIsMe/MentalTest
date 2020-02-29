@@ -222,7 +222,7 @@ public class RecordAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(record_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoRecordId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -235,7 +235,7 @@ public class RecordAction extends ActionSupport{
 		
 		if(record == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoRecord");
 			out.println(jos.toString());
 			out.flush();
 			out.close();

@@ -50,7 +50,7 @@ public class ReferenceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(reference_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoReferenceId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -59,7 +59,7 @@ public class ReferenceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(reference_bscore)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoReferenceBeginScore");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -68,7 +68,7 @@ public class ReferenceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(reference_escore)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoReferenceEndScore");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -77,7 +77,7 @@ public class ReferenceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(reference_bage)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoReferenceBeginAge");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -86,7 +86,7 @@ public class ReferenceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(reference_eage)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoReferenceEndAge");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -148,7 +148,7 @@ public class ReferenceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(reference_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoReferenceId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -160,7 +160,7 @@ public class ReferenceAction extends ActionSupport{
 		reference = ReferenceService.QueryReference(rid);
 		if(reference == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoReference");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -207,9 +207,12 @@ public class ReferenceAction extends ActionSupport{
 		String reference_suggestion = request.getParameter("refer_suggestion");
 		String factor_id = request.getParameter("factor_id");
 		
+		//System.out.println("reference_bage = " + reference_bage);
+		//System.out.println("reference_eage = " + reference_eage);
+		
 		if(!cutil.IsNumber(factor_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoFactorId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -218,7 +221,7 @@ public class ReferenceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(reference_bscore)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoReferenceBeginScore");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -227,7 +230,7 @@ public class ReferenceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(reference_escore)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoReferenceEndScore");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -236,7 +239,7 @@ public class ReferenceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(reference_bage)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoReferenceBeginAge");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -245,7 +248,7 @@ public class ReferenceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(reference_eage)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoReferenceEndAge");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -297,7 +300,7 @@ public class ReferenceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(factor_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoFactorId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -319,6 +322,9 @@ public class ReferenceAction extends ActionSupport{
 			String reference_bage = jo.getString("refer_bage");
 			String reference_eage = jo.getString("refer_eage");
 			String reference_suggestion = jo.getString("refer_suggestion");
+			
+			if(!cutil.IsNumber(reference_eage) || !cutil.IsNumber(reference_bage) || 
+					!cutil.IsNumber(reference_bscore) || !cutil.IsNumber(reference_escore)) continue;
 			
 			int rid = Integer.valueOf(refer_id);
 			if(rid == 0) {

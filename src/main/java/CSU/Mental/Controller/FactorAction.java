@@ -71,7 +71,7 @@ public class FactorAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(factor_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoFactorId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -80,7 +80,7 @@ public class FactorAction extends ActionSupport{
 		
 		if(!cutil.IsNumeric(factor_balance)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoBalance");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -89,7 +89,7 @@ public class FactorAction extends ActionSupport{
 		
 		if(!cutil.IsNumeric(factor_den)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoDen");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -101,7 +101,7 @@ public class FactorAction extends ActionSupport{
 		factor = FactorService.QueryFactor(fid);
 		if(factor == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoFactor");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -155,7 +155,7 @@ public class FactorAction extends ActionSupport{
 		
 		if(!cutil.IsNumeric(factor_balance)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoBalance");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -164,7 +164,7 @@ public class FactorAction extends ActionSupport{
 		
 		if(!cutil.IsNumeric(factor_den)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoDen");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -206,7 +206,7 @@ public class FactorAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(factor_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoFactorId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -218,7 +218,7 @@ public class FactorAction extends ActionSupport{
 		factor = FactorService.QueryFactor(fid);
 		if(factor == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoFactor");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -305,6 +305,9 @@ public class FactorAction extends ActionSupport{
 			JSONObject jo = ja.getJSONObject(i);
 			
 			String factor_id = jo.getString("factor_id");
+			
+			if(!cutil.IsNumber(factor_id)) continue;
+			
 			int fid = Integer.valueOf(factor_id);
 			factor = FactorService.QueryFactor(fid);
 			if(factor == null) continue;
@@ -347,6 +350,8 @@ public class FactorAction extends ActionSupport{
 			String factor_den = jo.getString("factor_den");
 			String factor_formula = jo.getString("factor_formula");
 			String factor_order = jo.getString("factor_order");
+			
+			if(!cutil.IsNumber(factor_id)) continue;
 			
 			int fid = Integer.valueOf(factor_id);
 			factor = FactorService.QueryFactor(fid);

@@ -115,7 +115,7 @@ public class TemplateAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(template_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoTemplateId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -128,7 +128,7 @@ public class TemplateAction extends ActionSupport{
 		
 		if(template == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoTemplate");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -185,7 +185,7 @@ public class TemplateAction extends ActionSupport{
 		String ChoiceInfo = request.getParameter("choice_info");
 		
 		if(!cutil.IsNumber(template_id)) {
-			out.println("Fail");
+			out.println("NoTemplateId");
 			out.flush();
 			out.close();
 			return;
@@ -197,7 +197,7 @@ public class TemplateAction extends ActionSupport{
 		
 		if(template == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoTemplate");
 			out.println(jos.toString());
 			out.flush();
 			out.close();

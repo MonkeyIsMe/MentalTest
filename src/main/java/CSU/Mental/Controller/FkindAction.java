@@ -80,7 +80,7 @@ public class FkindAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(fkind_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoFkindId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -133,7 +133,7 @@ public class FkindAction extends ActionSupport{
 		
 		boolean flag = true;
 		
-		String fkind_id = request.getParameter("fkind_id");
+		String fkind_id = request.getParameter("NoFkindId");
 		
 		if(!cutil.IsNumber(fkind_id)) {
 			JSONObject jos = new JSONObject();

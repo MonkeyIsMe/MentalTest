@@ -128,7 +128,7 @@ public class ScaleAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(scale_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoScaleId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -141,7 +141,7 @@ public class ScaleAction extends ActionSupport{
 		
 		if(scale == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoScale");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -187,14 +187,14 @@ public class ScaleAction extends ActionSupport{
 		String patient_id = request.getParameter("patient_id");
 		
 		if(!cutil.IsNumber(scale_id)) {
-			out.println("Fail");
+			out.println("NoScaleId");
 			out.flush();
 			out.close();
 			return;
 		}
 		
 		if(!cutil.IsNumber(patient_id)) {
-			out.println("Fail");
+			out.println("NoPatientId");
 			out.flush();
 			out.close();
 			return;
@@ -295,16 +295,9 @@ public class ScaleAction extends ActionSupport{
 		out = ServletActionContext.getResponse().getWriter();
 		
 		String scale_id = request.getParameter("scale_id");
-		
-		if(scale_id == null) {
-			out.println("Fail");
-			out.flush();
-			out.close();
-			return;
-		}
-		
+
 		if(!cutil.IsNumber(scale_id)) {
-			out.println("Fail");
+			out.println("NoScaleId");
 			out.flush();
 			out.close();
 			return;
@@ -362,7 +355,7 @@ public class ScaleAction extends ActionSupport{
 		String scale_id = request.getParameter("scale_id");
 		
 		if(!cutil.IsNumber(scale_id)) {
-			out.println();
+			out.println("NoScaleId");
 			out.flush();
 			out.close();
 			return;
@@ -398,7 +391,7 @@ public class ScaleAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(scale_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoScaleId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -407,7 +400,7 @@ public class ScaleAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(sk_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoSkindId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -416,7 +409,7 @@ public class ScaleAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(fk_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoFkindId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -771,7 +764,7 @@ public class ScaleAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(scale_id)) {
 			JSONObject jo = new JSONObject();
-			jo.put("result", "Fail");
+			jo.put("result", "NoScaleId");
 			
 			out.println(jo.toString());
 			out.flush();

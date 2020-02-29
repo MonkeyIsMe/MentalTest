@@ -56,7 +56,7 @@ public class ChoiceAction extends ActionSupport{
 		if(!cutil.IsNumber(choice_id)) {
 			///System.out.println(choice_id);
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoChoiceId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -69,7 +69,7 @@ public class ChoiceAction extends ActionSupport{
 		//System.out.println(choice.toString());
 		if(choice == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoChoice");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -116,7 +116,7 @@ public class ChoiceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(flag_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoFlagId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -173,7 +173,7 @@ public class ChoiceAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(problem_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoProblemId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();

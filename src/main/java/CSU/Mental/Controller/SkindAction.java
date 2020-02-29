@@ -44,7 +44,7 @@ public class SkindAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(fk_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoFkindId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -94,7 +94,7 @@ public class SkindAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(sk_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoSkindId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -210,7 +210,7 @@ public class SkindAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(sk_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoSkindId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();

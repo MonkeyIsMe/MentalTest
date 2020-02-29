@@ -7,6 +7,7 @@ import java.util.Random;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
+import net.sourceforge.jeval.Evaluator;
 
 import java.util.Calendar;
 import java.io.InputStream;
@@ -38,6 +39,17 @@ public class CommonUtils {
 		return NowTime;
 	}
 	
+	public double calculate(String s, double as) {
+		try {
+			String str = s.replace("AS", "#{a}");
+			Evaluator eva = new Evaluator();
+			eva.putVariable("a", "" + as);
+			return Double.parseDouble(eva.evaluate(str));
+		} catch (Exception e) {
+			System.out.println(" '''   ");
+		}
+		return -1;
+	}
 
 	public boolean IsNumeric(String str){
 		   for(int i=str.length();--i>=0;){
@@ -60,12 +72,24 @@ public class CommonUtils {
 		}
 		
 		char[] str = num.toCharArray();
-		for(char s : str) {
-			if(!(s >= '0' && s <= '9')) {
-				flag = false;
-				break;
+		
+		if(str[0] == '-') {
+			for(int i = 1; i < str.length; i ++) {
+				if(!(str[i] >= '0' && str[i] <= '9')) {
+					flag = false;
+					break;
+				}
 			}
 		}
+		else {
+			for(char s : str) {
+				if(!(s >= '0' && s <= '9')) {
+					flag = false;
+					break;
+				}
+			}
+		}
+
 		return flag;
 	}
 	

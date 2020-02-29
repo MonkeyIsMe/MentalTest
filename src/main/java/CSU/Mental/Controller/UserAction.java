@@ -101,7 +101,7 @@ public class UserAction extends ActionSupport{
 		//System.out.println(user_id);
 		if(!cutil.IsNumber(user_id)) {
 			JSONObject jo = new JSONObject();
-			jo.put("result", "Fail");
+			jo.put("result", "NoUserId");
 			
 			out.println(jo.toString());
 			out.flush();
@@ -115,7 +115,7 @@ public class UserAction extends ActionSupport{
 		//System.out.println(user.toString());
 		if(user == null) {
 			JSONObject jo = new JSONObject();
-			jo.put("result", "Fail");
+			jo.put("result", "NoUser");
 			
 			out.println(jo.toString());
 			out.flush();
@@ -164,7 +164,7 @@ public class UserAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(user_id)) {
 			JSONObject jo = new JSONObject();
-			jo.put("result", "Fail");
+			jo.put("result", "NoUserId");
 			
 			out.println(jo.toString());
 			out.flush();
@@ -178,7 +178,7 @@ public class UserAction extends ActionSupport{
 		
 		if(user == null) {
 			JSONObject jo = new JSONObject();
-			jo.put("result", "Fail");
+			jo.put("result", "NoUser");
 			
 			out.println(jo.toString());
 			out.flush();
@@ -223,7 +223,7 @@ public class UserAction extends ActionSupport{
 		//System.out.println(user_id);
 		if(!cutil.IsNumber(user_id)) {
 			JSONObject jo = new JSONObject();
-			jo.put("result", "Fail");
+			jo.put("result", "NoUserId");
 			
 			out.println(jo.toString());
 			out.flush();
@@ -237,7 +237,7 @@ public class UserAction extends ActionSupport{
 		
 		if(user == null) {
 			JSONObject jo = new JSONObject();
-			jo.put("result", "Fail");
+			jo.put("result", "NoUser");
 			
 			out.println(jo.toString());
 			out.flush();

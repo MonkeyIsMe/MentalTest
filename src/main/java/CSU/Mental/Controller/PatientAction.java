@@ -44,7 +44,7 @@ public class PatientAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(patient_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoPatientId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -57,7 +57,7 @@ public class PatientAction extends ActionSupport{
 		
 		if(patient == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoPatient");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -88,7 +88,7 @@ public class PatientAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(patient_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoPatientId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -101,7 +101,7 @@ public class PatientAction extends ActionSupport{
 		
 		if(patient == null) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoPatient");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -224,7 +224,7 @@ public class PatientAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(patient_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoPatientId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();
@@ -236,7 +236,7 @@ public class PatientAction extends ActionSupport{
 		patient = PatientService.QueryPatient(pid);
 		
 		if(patient == null) {
-			out.println("Fail");
+			out.println("NoPatient");
 			out.flush();
 			out.close();
 			return;
@@ -293,7 +293,7 @@ public class PatientAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(user_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("result", "Fail");
+			jos.put("result", "NoUserId");
 			out.println(jos.toString());
 			out.flush();
 			out.close();

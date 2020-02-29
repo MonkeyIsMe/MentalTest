@@ -65,6 +65,12 @@ public class TestSpring {
 	}
 	
 	@Test
+	public void TestFormula() {
+		CommonUtils cu = new CommonUtils();
+		System.out.println(cu.calculate("AS/300*100", 12));
+	}
+	
+	@Test
 	public void QueryTemplate() {
 		System.out.println(TemplateService.QueryTemplate(3));
 	}
@@ -98,6 +104,7 @@ public class TestSpring {
 	public void IsNumeric() {
 		CommonUtils cu = new CommonUtils();
 		System.out.println(cu.IsNumeric("a53.2"));
+		System.out.println(cu.IsNumber("100"));
 	}
 	
 	@Test
@@ -237,5 +244,8 @@ public class TestSpring {
 
 	}
 	
-	
+	@Test
+	public void CreatePDF() {
+		
+	}
 }

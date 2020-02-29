@@ -43,7 +43,7 @@ public class FactorProblemAction extends ActionSupport{
 		
 		if(!cutil.IsNumber(factor_id)) {
 			JSONObject jos = new JSONObject();
-			jos.put("msg", "Fail");
+			jos.put("msg", "NoFactorId");
 			
 			out.println(jos.toString());
 			out.flush();
@@ -63,6 +63,9 @@ public class FactorProblemAction extends ActionSupport{
 			JSONObject jo = ja.getJSONObject(i);
 			String problem_id = jo.getString("problem_id");
 			String problem_number = jo.getString("problem_number");
+			
+			if(!cutil.IsNumber(problem_id)) continue;
+			
 			int pid = Integer.valueOf(problem_id);
 			
 			FactorProblem fp = new FactorProblem();
