@@ -5,15 +5,17 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/tableFactorInfo.css"/>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<!-- <script type="text/javascript" src="js/editfactor.js"></script> -->
 		<script type="text/javascript">
-		
+			
 		var url = decodeURI(window.location.href);
 		 
 		var argsIndex = url .split("?ScaleId=");
 		var sid = argsIndex[1];
-		
+		//console.log("sid = " + sid);
+			
 			var advice,add,delBtn,addfac,lis,saveQuesBtn;
-			var facArray,nowIndex=0,parLen=0,tabIndex=0;
+			var facArray,nowIndex=0,parLen=0,tabIndex;
 			var check1,check2,check3,check4;
             var next;
 			var facArr=new Array();//因子信息
@@ -61,8 +63,8 @@
 					function(data){
 						 var data=JSON.parse(data);
 						 facQueArr=data.Array;
-                       	    console.log("关联题号：")
-                       	    console.log(facQueArr);
+                       	    //console.log("关联题号：")
+                       	    //console.log(facQueArr);
                        	    if(facQueArr!=null){
                        	    for(let i=0;i<facQueArr.length;i++){
                        	    	for(let j=0;j<queArr.length;j++){
@@ -126,7 +128,7 @@
                        success : function(data) {
                        	   if(data.Array!=null){
                        	   	 queArr=data.Array;
-                	       console.log(queArr);
+                	       //console.log(queArr);
                 	       var quesNum=document.getElementById("quesNum");
                 	       for(let i=0;i<queArr.length;i++){
                 	       	  var span=document.createElement("span");
@@ -400,18 +402,16 @@
 			 * */
 			function delTable(){
 				delBtn=document.getElementsByName("delBtn");
-				var fourth=document.getElementById("fourthDiv");
 				for(let i=0;i<delBtn.length;i++){
 					delBtn[i].onclick=function(){
 					 
 					 var div=this.parentNode.parentNode;
 					 var confir=confirm("确定删除？");
 					 if(confir){
-					 	div.parentNode.removeChild(div);
-					 	parLen--;
 					 	if(i<paraArr.length){
 					 		getDelParInter(i);
 					 	}
+					 	div.parentNode.removeChild(div);
 					 }
 					}
 				}
@@ -621,7 +621,6 @@
 			 * 获取删除参考意见表的接口
 			 * */
 			function getDelParInter(i){
-				var fourth=document.getElementById("fourthDiv");
 				var reference_id=paraArr[i].referenceId;
 				console.log(reference_id);
 				$.ajax({
@@ -632,8 +631,6 @@
                    reference_id :reference_id,
                 },
                 success : function(data) {
-                	fourth.innerHTML="";
-                	getParaInfo();
                 	console.log(data);
                 },  	
                   });
@@ -665,7 +662,6 @@
 			 * 获取保存参考意见信息的接口
 			 * */
 			function getSaveParInfo(Info){
-			      
 				    var fourth=document.getElementById("fourthDiv");
 				    var refer_sex=-1;
 				    var scoreHead_1=$("#"+Info[0]).val();
@@ -688,158 +684,85 @@
 				    }else{
 				    	refer_sex=male_1==true?1:0;
 				    }
-				    if(!refAge_1){
-				    	ageHead_1=-1;
-				    	ageRear_1=-1;
-				    }
-				    if(!scoreHead||!scoreRear){//得分输入的不是整数
-				    	alert('得分信息输入有误');
+				    console.log(paraArr);
+				    if(scoreHead&&scoreRear&&ageHead&&ageRear){
+				    	if(paraArr==null){
+				    	$.ajax({
+                       type : "POST",
+                       url : "/MentalTest/AddReference",
+                       dataType : "json",
+                       data : {
+                            refer_bscore :scoreHead_1,
+                            refer_escore:scoreRear_1,
+                            refer_sex:refer_sex,
+                            refer_bage:ageHead_1,
+                            refer_eage:ageRear_1,
+                            refer_suggestion:paraInfo_1,
+                            factor_id:facArr[nowIndex].factorId,
+                            },
+                      success : function(data) {
+                      	    alert("保存成功！");
+                          	fourth.innerHTML="";
+                      	    getParaInfo();
+                 	        console.log("保存操作：");
+                 	        console.log(data);
+//              	        getParaInfo(nowIndex);
+                           },	
+                        });
 				    }else{
-				    		if((ageHead_1==-1)&&(ageRear_1==-1)){
-				    			if(paraArr==null){
-				    	            $.ajax({
-                                       type : "POST",
-                                       url : "/MentalTest/AddReference",
-                                       dataType : "json",
-                                       data : {
-                                            refer_bscore :scoreHead_1,
-                                            refer_escore:scoreRear_1,
-                                            refer_sex:refer_sex,
-                                            refer_bage:ageHead_1,
-                                            refer_eage:ageRear_1,
-                                            refer_suggestion:paraInfo_1,
-                                            factor_id:facArr[nowIndex].factorId,
-                                         },
-                                       success : function(data) {
-                                       	    console.log(data);
-                      	                    alert("保存成功！");
-                          	                fourth.innerHTML="";
-                      	                    getParaInfo();
-                                        },	
-                                    });
-				                }else{
-				    	            if(tabIndex<paraArr.length){//执行更新操作
-				    	                   $.ajax({
-                                              type : "POST",
-                                              url : "/MentalTest/UpdateReference",
-                                              dataType : "json",
-                                              data : {
-                                                 refer_bscore :scoreHead_1,
-                                                 refer_escore:scoreRear_1,
-                                                 refer_sex:refer_sex,
-                                                 refer_bage:ageHead_1,
-                                                 refer_eage:ageRear_1,
-                                                 refer_suggestion:paraInfo_1,
-                                                 reference_id:paraArr[tabIndex].referenceId,
-                                               },
-                                              success : function(data) {
-                          	                     alert("更新成功！");
-                          	                     fourth.innerHTML="";
-                      	                         getParaInfo();
-                	                             console.log("更新操作：");
-                	                             console.log(data);
-                                               },	
-                                           });
-				                      }else{//执行保存新表的操作
-				           	             $.ajax({
-                                              type : "POST",
-                                              url : "/MentalTest/AddReference",
-                                              dataType : "json",
-                                              data : {
-                                                refer_bscore :scoreHead_1,
-                                                refer_escore:scoreRear_1,
-                                                refer_sex:refer_sex,
-                                                refer_bage:ageHead_1,
-                                                refer_eage:ageRear_1,
-                                                refer_suggestion:paraInfo_1,
-                                                factor_id:facArr[nowIndex].factorId,
-                                              },
-                                              success : function(data) {
-                      	                        alert("保存成功！");
-                      	                        fourth.innerHTML="";
-                      	                        getParaInfo();
-                 	                            console.log("保存操作：");
-                 	                            console.log(data);
-                                               },	
-                                           });
-				                        }
-				                     }
-				    		      }else{
-				    		      	  if(ageHead&&ageRear){//年龄头和年龄尾都是整数
-				    		      	  	   if(paraArr==null){
-				    	            $.ajax({
-                                       type : "POST",
-                                       url : "/MentalTest/AddReference",
-                                       dataType : "json",
-                                       data : {
-                                            refer_bscore :scoreHead_1,
-                                            refer_escore:scoreRear_1,
-                                            refer_sex:refer_sex,
-                                            refer_bage:ageHead_1,
-                                            refer_eage:ageRear_1,
-                                            refer_suggestion:paraInfo_1,
-                                            factor_id:facArr[nowIndex].factorId,
-                                         },
-                                       success : function(data) {
-                      	                    alert("保存成功！");
-                          	                fourth.innerHTML="";
-                      	                    getParaInfo();
-                                        },	
-                                    });
-				                }else{
-				    	            if(tabIndex<paraArr.length){//执行更新操作
-				    	                   $.ajax({
-                                              type : "POST",
-                                              url : "/MentalTest/UpdateReference",
-                                              dataType : "json",
-                                              data : {
-                                                 refer_bscore :scoreHead_1,
-                                                 refer_escore:scoreRear_1,
-                                                 refer_sex:refer_sex,
-                                                 refer_bage:ageHead_1,
-                                                 refer_eage:ageRear_1,
-                                                 refer_suggestion:paraInfo_1,
-                                                 reference_id:paraArr[tabIndex].referenceId,
-                                               },
-                                              success : function(data) {
-                          	                     alert("更新成功！");
-                          	                     fourth.innerHTML="";
-                      	                         getParaInfo();
-                	                             console.log("更新操作：");
-                	                             console.log(data);
-                                               },	
-                                           });
-				                      }else{//执行保存新表的操作
-				           	             $.ajax({
-                                              type : "POST",
-                                              url : "/MentalTest/AddReference",
-                                              dataType : "json",
-                                              data : {
-                                                refer_bscore :scoreHead_1,
-                                                refer_escore:scoreRear_1,
-                                                refer_sex:refer_sex,
-                                                refer_bage:ageHead_1,
-                                                refer_eage:ageRear_1,
-                                                refer_suggestion:paraInfo_1,
-                                                factor_id:facArr[nowIndex].factorId,
-                                              },
-                                              success : function(data) {
-                      	                        alert("保存成功！");
-                      	                        fourth.innerHTML="";
-                      	                        getParaInfo();
-                 	                            console.log("保存操作：");
-                 	                            console.log(data);
-                                               },	
-                                           });
-				                        }
-				                     }
-				    		      	  	   
-				    		      	  }else{
-				    		      	  	alert("年龄信息输入有误");
-				    		      	  }
-				    		      }
-				    	}
-		     }
+				    	if(tabIndex<paraArr.length){//执行更新操作
+				    	   $.ajax({
+                         type : "POST",
+                         url : "/MentalTest/UpdateReference",
+                         dataType : "json",
+                         data : {
+                              refer_bscore :scoreHead_1,
+                              refer_escore:scoreRear_1,
+                              refer_sex:refer_sex,
+                              refer_bage:ageHead_1,
+                              refer_eage:ageRear_1,
+                              refer_suggestion:paraInfo_1,
+                              reference_id:paraArr[tabIndex].referenceId,
+                           },
+                          success : function(data) {
+                          	   alert("更新成功！");
+                          	   fourth.innerHTML="";
+                      	       getParaInfo();
+                	           console.log("更新操作：");
+                	           console.log(data);
+                                },	
+                         });
+				    }else{//执行保存新表的操作
+				    	$.ajax({
+                       type : "POST",
+                       url : "/MentalTest/AddReference",
+                       dataType : "json",
+                       data : {
+                            refer_bscore :scoreHead_1,
+                            refer_escore:scoreRear_1,
+                            refer_sex:refer_sex,
+                            refer_bage:ageHead_1,
+                            refer_eage:ageRear_1,
+                            refer_suggestion:paraInfo_1,
+                            factor_id:facArr[nowIndex].factorId,
+                            },
+                      success : function(data) {
+                      	    alert("保存成功！");
+                      	    fourth.innerHTML="";
+                      	    getParaInfo();
+                 	        console.log("保存操作：");
+                 	        console.log(data);
+//              	        getParaInfo(nowIndex);
+                           },	
+                        });
+				      }
+				     }
+				    }else{
+				    	alert("输入信息有误");
+				    }
+				    
+		
+			}
 			/**
 			 * 性别选择和相关性事件响应
 			 * */
@@ -861,6 +784,11 @@
 						$("#"+male_1).attr('checked',false); 
 					}
 				}
+			}
+			
+			function nextBtn(){
+				var next_url = "ScaleList.html";
+				window.location.href = next_url;
 			}
 		</script>
 	</head>
@@ -901,7 +829,7 @@
 			
 		<div id="fifthDiv" class="fifth">
 			<button id="addBtn" class="addTable">添加(参考意见表)</button>
-			<button id="nextBtn" class="next">下一步（试题）</button>
+			<button onclick="nextBtn()" class="next">完成</button>
 		</div>
 	</body>
 </html>

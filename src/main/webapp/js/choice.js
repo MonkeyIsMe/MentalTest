@@ -1,5 +1,5 @@
 var cid,cname,cscore,count;
-var op = 2;
+var op = 12;
 var row = 1;
 
 $(function(){
@@ -36,6 +36,10 @@ $(function () {
             $("#ch_six").css("display","none");
             $("#ch_seven").css("display","none");
             $("#ch_eight").css("display","none");
+            $("#ch_nine").css("display","none");
+            $("#ch_ten").css("display","none");
+            $("#ch_eleven").css("display","none");
+            $("#ch_twelve").css("display","none");
         }
         else if(op == 3){
             $("#ch_one").css("display","block");
@@ -46,6 +50,10 @@ $(function () {
             $("#ch_six").css("display","none");
             $("#ch_seven").css("display","none");
             $("#ch_eight").css("display","none");
+            $("#ch_nine").css("display","none");
+            $("#ch_ten").css("display","none");
+            $("#ch_eleven").css("display","none");
+            $("#ch_twelve").css("display","none");
         }
         else if(op == 4){
             $("#ch_one").css("display","block");
@@ -56,6 +64,10 @@ $(function () {
             $("#ch_six").css("display","none");
             $("#ch_seven").css("display","none");
             $("#ch_eight").css("display","none");
+            $("#ch_nine").css("display","none");
+            $("#ch_ten").css("display","none");
+            $("#ch_eleven").css("display","none");
+            $("#ch_twelve").css("display","none");
         }
         else if(op == 5){
             $("#ch_one").css("display","block");
@@ -66,6 +78,10 @@ $(function () {
             $("#ch_six").css("display","none");
             $("#ch_seven").css("display","none");
             $("#ch_eight").css("display","none");
+            $("#ch_nine").css("display","none");
+            $("#ch_ten").css("display","none");
+            $("#ch_eleven").css("display","none");
+            $("#ch_twelve").css("display","none");
         }
         else if(op == 6){
             $("#ch_one").css("display","block");
@@ -76,6 +92,10 @@ $(function () {
             $("#ch_six").css("display","block");
             $("#ch_seven").css("display","none");
             $("#ch_eight").css("display","none");
+            $("#ch_nine").css("display","none");
+            $("#ch_ten").css("display","none");
+            $("#ch_eleven").css("display","none");
+            $("#ch_twelve").css("display","none");
         }
         else if(op == 7){
             $("#ch_one").css("display","block");
@@ -86,6 +106,10 @@ $(function () {
             $("#ch_six").css("display","block");
             $("#ch_seven").css("display","block");
             $("#ch_eight").css("display","none");
+            $("#ch_nine").css("display","none");
+            $("#ch_ten").css("display","none");
+            $("#ch_eleven").css("display","none");
+            $("#ch_twelve").css("display","none");
         }
         else if(op == 8){
             $("#ch_one").css("display","block");
@@ -96,6 +120,66 @@ $(function () {
             $("#ch_six").css("display","block");
             $("#ch_seven").css("display","block");
             $("#ch_eight").css("display","block");
+            $("#ch_nine").css("display","none");
+            $("#ch_ten").css("display","none");
+            $("#ch_eleven").css("display","none");
+            $("#ch_twelve").css("display","none");
+        }
+        else if(op == 9){
+            $("#ch_one").css("display","block");
+            $("#ch_two").css("display","block");
+            $("#ch_three").css("display","block");
+            $("#ch_four").css("display","block");
+            $("#ch_five").css("display","block");
+            $("#ch_six").css("display","block");
+            $("#ch_seven").css("display","block");
+            $("#ch_eight").css("display","block");
+            $("#ch_nine").css("display","block");
+            $("#ch_ten").css("display","none");
+            $("#ch_eleven").css("display","none");
+            $("#ch_twelve").css("display","none");
+        }
+        else if(op == 10){
+            $("#ch_one").css("display","block");
+            $("#ch_two").css("display","block");
+            $("#ch_three").css("display","block");
+            $("#ch_four").css("display","block");
+            $("#ch_five").css("display","block");
+            $("#ch_six").css("display","block");
+            $("#ch_seven").css("display","block");
+            $("#ch_eight").css("display","block");
+            $("#ch_nine").css("display","block");
+            $("#ch_ten").css("display","block");
+            $("#ch_eleven").css("display","none");
+            $("#ch_twelve").css("display","none");
+        }
+        else if(op == 11){
+            $("#ch_one").css("display","block");
+            $("#ch_two").css("display","block");
+            $("#ch_three").css("display","block");
+            $("#ch_four").css("display","block");
+            $("#ch_five").css("display","block");
+            $("#ch_six").css("display","block");
+            $("#ch_seven").css("display","block");
+            $("#ch_eight").css("display","block");
+            $("#ch_nine").css("display","block");
+            $("#ch_ten").css("display","block");
+            $("#ch_eleven").css("display","block");
+            $("#ch_twelve").css("display","none");
+        }
+        else if(op == 12){
+            $("#ch_one").css("display","block");
+            $("#ch_two").css("display","block");
+            $("#ch_three").css("display","block");
+            $("#ch_four").css("display","block");
+            $("#ch_five").css("display","block");
+            $("#ch_six").css("display","block");
+            $("#ch_seven").css("display","block");
+            $("#ch_eight").css("display","block");
+            $("#ch_nine").css("display","block");
+            $("#ch_ten").css("display","block");
+            $("#ch_eleven").css("display","block");
+            $("#ch_twelve").css("display","block");
         }
     })
 })
@@ -295,117 +379,21 @@ $(document).ready(function(){
 		var tempinfo = [];
 		var flag = 1;
 		//alert(op);
-		if(op == 2){
-			for(var i = 1; i <= 2; i ++){
-				var name = $("#name" + i).val();
-				var score = $("#score" + i).val();
-				if(name == "" || name == null || score == null || score == ""){
-					alert("所填项均为非空");
-					for(var i in tempinfo){
-						delete tempinfo[i];
-						flag = 0;
-						return ;
-					}
+		
+		for(var i = 1; i <= op; i ++){
+			var name = $("#name" + i).val();
+			var score = $("#score" + i).val();
+			if(name == "" || name == null || score == null || score == ""){
+				alert("所填项均为非空");
+				for(var i in tempinfo){
+					delete tempinfo[i];
+					flag = 0;
+					return ;
 				}
-				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
 			}
+			else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
 		}
-		else if(op == 3){
-			for(var i = 1; i <= 3; i ++){
-				var name = $("#name" + i).val();
-				var score = $("#score" + i).val();
-				//console.log(name + " " + score);
-				if(name == "" || name == null || score == null || score == ""){
-					alert("所填项均为非空");
-					for(var i in tempinfo){
-						delete tempinfo[i];
-						flag = 0;
-						return ;
-					}
-				}
-				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
-			}
-		}
-		else if(op == 4){
-			for(var i = 1; i <= 4; i ++){
-				var name = $("#name" + i).val();
-				var score = $("#score" + i).val();
-				//console.log(name + " " + score);
-				if(name == "" || name == null || score == null || score == ""){
-					alert("所填项均为非空");
-					for(var i in tempinfo){
-						delete tempinfo[i];
-						flag = 0;
-						return ;
-					}
-				}
-				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
-			}
-		}
-		else if(op == 5){
-			for(var i = 1; i <= 5; i ++){
-				var name = $("#name" + i).val();
-				var score = $("#score" + i).val();
-				//console.log(name + " " + score);
-				if(name == "" || name == null || score == null || score == ""){
-					alert("所填项均为非空");
-					for(var i in tempinfo){
-						delete tempinfo[i];
-						flag = 0;
-						return ;
-					}
-				}
-				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
-			}
-		}
-		else if(op == 6){
-			for(var i = 1; i <= 6; i ++){
-				var name = $("#name" + i).val();
-				var score = $("#score" + i).val();
-				//console.log(name + " " + score);
-				if(name == "" || name == null || score == null || score == ""){
-					alert("所填项均为非空");
-					for(var i in tempinfo){
-						delete tempinfo[i];
-						flag = 0;
-						return ;
-					}
-				}
-				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
-			}
-		}
-		else if(op == 7){
-			for(var i = 1; i <= 6; i ++){
-				var name = $("#name" + i).val();
-				var score = $("#score" + i).val();
-				//console.log(name + " " + score);
-				if(name == "" || name == null || score == null || score == ""){
-					alert("所填项均为非空");
-					for(var i in tempinfo){
-						delete tempinfo[i];
-						flag = 0;
-						return ;
-					}
-				}
-				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
-			}
-		}
-		else if(op == 8){
-			for(var i = 1; i <= 6; i ++){
-				var name = $("#name" + i).val();
-				var score = $("#score" + i).val();
-				//console.log(name + " " + score);
-				if(name == "" || name == null || score == null || score == ""){
-					alert("所填项均为非空");
-					for(var i in tempinfo){
-						delete tempinfo[i];
-						flag = 0;
-						return ;
-					}
-				}
-				else tempinfo.push({"choice_info": name, "choice_score": score,"choice_sub":"0","choice_type":"0"})
-			}
-		}
+		
 		
 		var temp_name = $("#temp_name").val();
 		
