@@ -46,10 +46,10 @@ $(function(){
                     //动态创建一个tr行标签,并且转换成jQuery对象
                     var $trTemp = $("<tr ></tr>");
                     //往行里面追加 td单元格
-			        $trTemp.append("<td style=" + "text-align:center"  + ">"+ data.Array[i].ScaleId +"</td>");
-			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].ScaleName +"</td>");
-			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].ScaleNumber +"</td>");
-			        $trTemp.append("<td style=" + "text-align:center"  + ">" +data.Array[i].ScaleUpdateTime  +"</td>");
+			        $trTemp.append("<td style=" + "text-align:center;font-size:14px"  + ">"+ data.Array[i].ScaleId +"</td>");
+			        $trTemp.append("<td style=" + "text-align:center;font-size:14px"  + ">"  + data.Array[i].ScaleName +"</td>");
+			        $trTemp.append("<td style=" + "text-align:center;font-size:14px"  + ">"  + data.Array[i].ScaleNumber +"</td>");
+			        $trTemp.append("<td style=" + "text-align:center;font-size:14px"  + ">" +data.Array[i].ScaleUpdateTime  +"</td>");
 			        $trTemp.append("<td>" + 
 			        		'<a><span class="delete" style="cursor:pointer;" data-toggle="modal" data-target="#del_Modal">删除</span></a>'
 			        		 + '<a><span class="update" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#upchoice_Modal">修改</span></a>'

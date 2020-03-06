@@ -26,160 +26,14 @@ $(function(){
 $(function () {
     $("input[type='radio']").on("click",function () {
         op = $("input[type='radio']:checked").val();
-        //alert(op);
-        if(op == 2){
-            $("#ch_one").css("display","block");
-            $("#ch_two").css("display","block");
-            $("#ch_three").css("display","none");
-            $("#ch_four").css("display","none");
-            $("#ch_five").css("display","none");
-            $("#ch_six").css("display","none");
-            $("#ch_seven").css("display","none");
-            $("#ch_eight").css("display","none");
-            $("#ch_nine").css("display","none");
-            $("#ch_ten").css("display","none");
-            $("#ch_eleven").css("display","none");
-            $("#ch_twelve").css("display","none");
+        var num = parseInt(op,10);
+        for(var i = 2; i <= num; i ++){
+        	//console.log("1. = " + "#ch_" + i);
+			$("#ch_" + i).css("display","block");
         }
-        else if(op == 3){
-            $("#ch_one").css("display","block");
-            $("#ch_two").css("display","block");
-            $("#ch_three").css("display","block");
-            $("#ch_four").css("display","none");
-            $("#ch_five").css("display","none");
-            $("#ch_six").css("display","none");
-            $("#ch_seven").css("display","none");
-            $("#ch_eight").css("display","none");
-            $("#ch_nine").css("display","none");
-            $("#ch_ten").css("display","none");
-            $("#ch_eleven").css("display","none");
-            $("#ch_twelve").css("display","none");
-        }
-        else if(op == 4){
-            $("#ch_one").css("display","block");
-            $("#ch_two").css("display","block");
-            $("#ch_three").css("display","block");
-            $("#ch_four").css("display","block");
-            $("#ch_five").css("display","none");
-            $("#ch_six").css("display","none");
-            $("#ch_seven").css("display","none");
-            $("#ch_eight").css("display","none");
-            $("#ch_nine").css("display","none");
-            $("#ch_ten").css("display","none");
-            $("#ch_eleven").css("display","none");
-            $("#ch_twelve").css("display","none");
-        }
-        else if(op == 5){
-            $("#ch_one").css("display","block");
-            $("#ch_two").css("display","block");
-            $("#ch_three").css("display","block");
-            $("#ch_four").css("display","block");
-            $("#ch_five").css("display","block");
-            $("#ch_six").css("display","none");
-            $("#ch_seven").css("display","none");
-            $("#ch_eight").css("display","none");
-            $("#ch_nine").css("display","none");
-            $("#ch_ten").css("display","none");
-            $("#ch_eleven").css("display","none");
-            $("#ch_twelve").css("display","none");
-        }
-        else if(op == 6){
-            $("#ch_one").css("display","block");
-            $("#ch_two").css("display","block");
-            $("#ch_three").css("display","block");
-            $("#ch_four").css("display","block");
-            $("#ch_five").css("display","block");
-            $("#ch_six").css("display","block");
-            $("#ch_seven").css("display","none");
-            $("#ch_eight").css("display","none");
-            $("#ch_nine").css("display","none");
-            $("#ch_ten").css("display","none");
-            $("#ch_eleven").css("display","none");
-            $("#ch_twelve").css("display","none");
-        }
-        else if(op == 7){
-            $("#ch_one").css("display","block");
-            $("#ch_two").css("display","block");
-            $("#ch_three").css("display","block");
-            $("#ch_four").css("display","block");
-            $("#ch_five").css("display","block");
-            $("#ch_six").css("display","block");
-            $("#ch_seven").css("display","block");
-            $("#ch_eight").css("display","none");
-            $("#ch_nine").css("display","none");
-            $("#ch_ten").css("display","none");
-            $("#ch_eleven").css("display","none");
-            $("#ch_twelve").css("display","none");
-        }
-        else if(op == 8){
-            $("#ch_one").css("display","block");
-            $("#ch_two").css("display","block");
-            $("#ch_three").css("display","block");
-            $("#ch_four").css("display","block");
-            $("#ch_five").css("display","block");
-            $("#ch_six").css("display","block");
-            $("#ch_seven").css("display","block");
-            $("#ch_eight").css("display","block");
-            $("#ch_nine").css("display","none");
-            $("#ch_ten").css("display","none");
-            $("#ch_eleven").css("display","none");
-            $("#ch_twelve").css("display","none");
-        }
-        else if(op == 9){
-            $("#ch_one").css("display","block");
-            $("#ch_two").css("display","block");
-            $("#ch_three").css("display","block");
-            $("#ch_four").css("display","block");
-            $("#ch_five").css("display","block");
-            $("#ch_six").css("display","block");
-            $("#ch_seven").css("display","block");
-            $("#ch_eight").css("display","block");
-            $("#ch_nine").css("display","block");
-            $("#ch_ten").css("display","none");
-            $("#ch_eleven").css("display","none");
-            $("#ch_twelve").css("display","none");
-        }
-        else if(op == 10){
-            $("#ch_one").css("display","block");
-            $("#ch_two").css("display","block");
-            $("#ch_three").css("display","block");
-            $("#ch_four").css("display","block");
-            $("#ch_five").css("display","block");
-            $("#ch_six").css("display","block");
-            $("#ch_seven").css("display","block");
-            $("#ch_eight").css("display","block");
-            $("#ch_nine").css("display","block");
-            $("#ch_ten").css("display","block");
-            $("#ch_eleven").css("display","none");
-            $("#ch_twelve").css("display","none");
-        }
-        else if(op == 11){
-            $("#ch_one").css("display","block");
-            $("#ch_two").css("display","block");
-            $("#ch_three").css("display","block");
-            $("#ch_four").css("display","block");
-            $("#ch_five").css("display","block");
-            $("#ch_six").css("display","block");
-            $("#ch_seven").css("display","block");
-            $("#ch_eight").css("display","block");
-            $("#ch_nine").css("display","block");
-            $("#ch_ten").css("display","block");
-            $("#ch_eleven").css("display","block");
-            $("#ch_twelve").css("display","none");
-        }
-        else if(op == 12){
-            $("#ch_one").css("display","block");
-            $("#ch_two").css("display","block");
-            $("#ch_three").css("display","block");
-            $("#ch_four").css("display","block");
-            $("#ch_five").css("display","block");
-            $("#ch_six").css("display","block");
-            $("#ch_seven").css("display","block");
-            $("#ch_eight").css("display","block");
-            $("#ch_nine").css("display","block");
-            $("#ch_ten").css("display","block");
-            $("#ch_eleven").css("display","block");
-            $("#ch_twelve").css("display","block");
+        for(var i = num + 1; i <= 12; i ++){
+        	//console.log("2. = " + "#ch_" + i);
+        	$("#ch_" + i).css("display","none");
         }
     })
 })
@@ -203,9 +57,7 @@ function InitChoiceTable(){
     			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].choiceInfo +"</td>");
     			        $trTemp.append("<td style=" + "text-align:center;"  + ">"  + data.Array[i].choiceScore +"</td>");
     			        $trTemp.append("<td>" + 
-    			        		/*'<a><span class="delete_choice glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#delchoice_Modal"></span></a>'
-    			        		 + '<a><span class="update_choice glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#upchoice_Modal"></span></a>'
-    			        		 +*/ '<a><span class="glyphicon glyphicon-eye-open" style="cursor:pointer;margin-left:18px" ></span></a>'
+    			        		'<a><span class="glyphicon glyphicon-eye-open" style="cursor:pointer;margin-left:18px" ></span></a>'
     			        		+"</td>");
                         // $("#J_TbData").append($trTemp);
                         $trTemp.appendTo("#ChoiceList");
@@ -237,7 +89,7 @@ function NextPage(){
 			            for(var i = 0; i < data.Array.length; i ++){
 			                var html = "<div class='temp'>"
 						    html += "<div class='float'>模板名称：</div>";
-					        html += "<div class='float'>"+data.Array[i].TemplateName+"</div><br>";
+					        html += "<div class='float' style='color:red'>"+data.Array[i].TemplateName+"</div><br>";
 			                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
 			                    html += "<div class='float'>选项内容：</div>";
 			                    html += "<div class='float'>" + data.Array[i].ChoiceList[j].ChoiceInfo + "</div>";
@@ -274,7 +126,7 @@ function PrevPage(){
 			            for(var i = 0; i < data.Array.length; i ++){
 			                var html = "<div class='temp'>"
 						    html += "<div class='float'>模板名称：</div>";
-					        html += "<div class='float'>"+data.Array[i].TemplateName+"</div><br>";
+					        html += "<div class='float' style='color:red'>"+data.Array[i].TemplateName+"</div><br>";
 			                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
 			                    html += "<div class='float'>选项内容：</div>";
 			                    html += "<div class='float'>" + data.Array[i].ChoiceList[j].ChoiceInfo + "</div>";
@@ -324,7 +176,7 @@ function ReloadTemplateList(){
 		            for(var i = 0; i < data.Array.length; i ++){
 		                var html = "<div class='temp'>"
 					    html += "<div class='float'>模板名称：</div>";
-				        html += "<div class='float'>"+data.Array[i].TemplateName+"</div><br>";
+				        html += "<div class='float' style='color:red' >"+data.Array[i].TemplateName+"</div><br>";
 		                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
 		                    html += "<div class='float'>选项内容：</div>";
 		                    html += "<div class='float'>" + data.Array[i].ChoiceList[j].ChoiceInfo + "</div>";
@@ -357,7 +209,7 @@ $(document).ready(function(){
 		            for(var i = 0; i < data.Array.length; i ++){
 		                var html = "<div class='temp'>";
 				        html += "<div class='float'>模板名称：</div>";
-				        html += "<div class='float'>"+data.Array[i].TemplateName+"</div><br>";
+				        html += "<div class='float' style='color:red'>"+data.Array[i].TemplateName+"</div><br>";
 		                for(var j = 0; j < data.Array[i].ChoiceList.length; j ++){
 		                    html += "<div class='float'>选项内容：</div>";
 		                    html += "<div class='float'>" + data.Array[i].ChoiceList[j].ChoiceInfo + "</div>";

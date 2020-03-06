@@ -108,9 +108,11 @@
 	position: absolute;
 	margin-top: -650px;
 	margin-left: 320px;
-	width: 700px;
+	width: 655px;
 	height: 180px;
 	overflow-y: auto;
+	overflow-x: hidden;
+	word-wrap:break-word;
 }
 .saveFacBtn{
 	position: absolute;
@@ -123,17 +125,17 @@
 	border: 2px solid gray;
 	border-radius: 5px;
 }
-/*.saveFac{
+.selAllBtn{
 	width: 122px;
 	height: 30px;
 	text-align: center;
 	background-color: rgb(255,204,51);
 	position: absolute;
 	margin-top: -450px;
-	margin-left: 655px;
+	margin-left: 535px;
 	border: 2px solid gray;
 	border-radius: 5px;
-}*/
+}
 .selBtn{
 	width: 122px;
 	height: 30px;

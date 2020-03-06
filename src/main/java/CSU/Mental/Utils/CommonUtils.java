@@ -118,7 +118,7 @@ public class CommonUtils {
         return url;
     }
 	
-    public static String getRandomChar(int length) {  
+    public static String getRandomChar(int length) {	  
         char[] chr = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',   
                 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',   
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };  
@@ -139,6 +139,29 @@ public class CommonUtils {
         }  
         return buffer.toString();  
     }
+    
+	public int getFactor(String[] cb){
+		/*以下获取选中因子*/
+		char[] factordata = new char[30];
+        for (int i = 0; i < 30; i++) {
+            factordata[i] = '0';
+        }
+        
+        if(cb!=null){
+			for(int i=0;i<cb.length;i++){
+				int k = new Integer(cb[i]);
+				
+				factordata[30-k] = '1';				
+			}
+        }
+        
+        for (int i = 0; i < 30; i++) {
+            System.out.print(factordata[i]+",");// = '0';
+        }
+    	System.out.println();
+		int factor = Integer.parseInt(new String(factordata), 2);
+		return factor;
+	}
     
     public String md5(String inStr) {
         MessageDigest md5 = null;

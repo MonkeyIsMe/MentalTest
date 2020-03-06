@@ -236,7 +236,10 @@ public class ScaleAction extends ActionSupport{
 		JSONObject jo = new JSONObject();
 		
 		Set<Integer> keySet = mp.keySet();
-		Iterator<Integer> it = keySet.iterator();    
+		Iterator<Integer> it = keySet.iterator();
+		
+		JSONArray ans_ja = new JSONArray();
+		
         while(it.hasNext()){     
         	
             //得到每一个factorid
@@ -247,18 +250,30 @@ public class ScaleAction extends ActionSupport{
             
             String answer = null;
             List<Reference> rlist = ReferenceService.QueryReferenceByFactor(key);
+            
+            factor = FactorService.QueryFactor(key);
+/*            System.out.println(factor.getFactorName() + "  " + key + "  " + value);
+            for(Reference r : rlist) {
+            	System.out.println(r.toString());
+            }*/
             //查找答案
+            int begin = 0;
+            int end = 0;
             for(Reference refer : rlist) {
-            	int begin = refer.getReferenceBeginScore();
-            	int end = refer.getReferenceEndScore();
+            	begin = refer.getReferenceBeginScore();
+            	end = refer.getReferenceEndScore();
             	if(value >= begin && value <= end) {
             		answer = refer.getReferenceSuggestion();
             		break;
             	}
             }
-            
-            factor = FactorService.QueryFactor(key);
-            jo.put(factor.getFactorName(), answer);
+            jo.put("FactorScore", value);
+            jo.put("ReferenceInfo", answer);
+            jo.put("ScoreBegin", begin);
+            jo.put("ScoreEnd", end);
+            jo.put("FactorName", factor.getFactorName());
+            jo.put("FactorInfo", factor.getFactorInfo());
+            ans_ja.add(jo);
         }
         
         //保存一份记录
@@ -275,7 +290,7 @@ public class ScaleAction extends ActionSupport{
         
         JSONObject result = new JSONObject();
         result.put("ScaleInfo", scale.toString());
-        result.put("SuggestionInfo", jo.toString());
+        result.put("SuggestionInfo", ans_ja.toString());
         result.put("PatientInfo", patient.toString());
         
 		out.println(result.toString());
@@ -297,7 +312,9 @@ public class ScaleAction extends ActionSupport{
 		String scale_id = request.getParameter("scale_id");
 
 		if(!cutil.IsNumber(scale_id)) {
-			out.println("NoScaleId");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "NoScaleId");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;
@@ -335,7 +352,10 @@ public class ScaleAction extends ActionSupport{
 			result.add(jo);
 		}
 		
-		out.println(result.toString());
+		JSONObject jo = new JSONObject();
+		jo.put("result", result.toString());
+		
+		out.println(jo.toString());
 		out.flush();
 		out.close();
 		return;
@@ -355,7 +375,9 @@ public class ScaleAction extends ActionSupport{
 		String scale_id = request.getParameter("scale_id");
 		
 		if(!cutil.IsNumber(scale_id)) {
-			out.println("NoScaleId");
+			JSONObject jos = new JSONObject();
+			jos.put("result", "NoScaleId");
+			out.println(jos.toString());
 			out.flush();
 			out.close();
 			return;

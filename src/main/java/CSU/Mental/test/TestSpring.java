@@ -21,10 +21,12 @@ import CSU.Mental.Dao.FkindDao;
 import CSU.Mental.Model.Choice;
 import CSU.Mental.Model.Factor;
 import CSU.Mental.Model.Problem;
+import CSU.Mental.Model.Reference;
 import CSU.Mental.Model.Scale;
 import CSU.Mental.Service.ChoiceService;
 import CSU.Mental.Service.FkindService;
 import CSU.Mental.Service.ProblemService;
+import CSU.Mental.Service.ReferenceService;
 import CSU.Mental.Service.ScaleService;
 import CSU.Mental.Service.TemplateService;
 import CSU.Mental.Utils.CommonUtils;
@@ -58,6 +60,9 @@ public class TestSpring {
 	
 	@Resource(name="FactorService")
 	private FactorService FactorService;
+	
+	@Resource(name="ReferenceService")
+	private ReferenceService ReferenceService;
 	
 	@Test
 	public void QueryAllFkind() {
@@ -245,7 +250,30 @@ public class TestSpring {
 	}
 	
 	@Test
-	public void CreatePDF() {
+	public void CreateChoice() {
+		JSONArray ja = new JSONArray();
+		for(int i = 1; i <= 90;i ++) {
+			JSONObject jo = new JSONObject();
+			jo.put("ProblemId", i);
+			jo.put("Score", 2);
+			ja.add(jo);
+		}
+		System.out.println(ja.toString());
 		
+	}
+	
+	@Test
+	public void QueryReferenceByFactor() {
+		List<Reference> rlist = ReferenceService.QueryReferenceByFactor(1);
+		for(Reference refer : rlist) {
+			System.out.println(refer.toString());
+		}
+	}
+	
+	@Test
+	public void EditFactor() {
+		CommonUtils cu = new CommonUtils();
+		String[] cb = {"10","11"};
+		System.out.println(cu.getFactor(cb));
 	}
 }
