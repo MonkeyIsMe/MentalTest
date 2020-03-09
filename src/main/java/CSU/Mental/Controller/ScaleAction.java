@@ -185,7 +185,7 @@ public class ScaleAction extends ActionSupport{
 		String scale_id = request.getParameter("scale_id");
 		String choice_info = request.getParameter("choice_info");
 		String patient_id = request.getParameter("patient_id");
-		
+		System.out.println(choice_info);
 		if(!cutil.IsNumber(scale_id)) {
 			out.println("NoScaleId");
 			out.flush();
@@ -213,6 +213,7 @@ public class ScaleAction extends ActionSupport{
 		for(int i = 0; i < ja.size(); i ++) {
 			
 			JSONObject jo = ja.getJSONObject(i);
+			
 			String ProblemId = jo.getString("ProblemId");
 			String Score = jo.getString("Score");
 			
@@ -291,7 +292,10 @@ public class ScaleAction extends ActionSupport{
         JSONObject result = new JSONObject();
         result.put("ScaleInfo", scale.toString());
         result.put("SuggestionInfo", ans_ja.toString());
-        result.put("PatientInfo", patient.toString());
+        if(patient == null) {
+        	result.put("PatientInfo", "");
+        }
+        else result.put("PatientInfo", patient.toString());
         
 		out.println(result.toString());
 		out.flush();
@@ -321,7 +325,7 @@ public class ScaleAction extends ActionSupport{
 		}
 
 		int sid = Integer.valueOf(scale_id);
-		
+		//System.out.println(sid);
 		JSONArray result = new JSONArray();
 		
 		List<Problem> ProblemlList = ProblemService.QueryProblemByScale(sid);
@@ -334,6 +338,7 @@ public class ScaleAction extends ActionSupport{
 			int tid = p.getTemplateId();
 			String name = p.getProblemName();
 			String type = p.getProblemType();
+			int id = p.getProblemId();
 			
 			List<Choice> ChoiceList = ChoiceService.QueryChoiceByProblem(pid);
 			if(ChoiceList.size() == 0) {
@@ -347,6 +352,7 @@ public class ScaleAction extends ActionSupport{
 			
 			jo.put("ProblemName", name);
 			jo.put("ProblemType", type);
+			jo.put("ProblemId", id);
 			jo.put("ChoiceInfo", ja.toString());
 			
 			result.add(jo);

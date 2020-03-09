@@ -106,6 +106,11 @@ public class ReferenceAction extends ActionSupport{
 			return;
 		}
 		
+		if(reference_bscore == null) reference_bscore = "0";
+		if(reference_escore == null) reference_escore = "0";
+		if(reference_bage == null) reference_bage = "0";
+		if(reference_eage == null) reference_eage = "0";
+		
 		reference.setReferenceBeginScore(Integer.valueOf(reference_bscore));
 		reference.setReferenceEndScore(Integer.valueOf(reference_escore));
 		reference.setReferenceSex(reference_sex);

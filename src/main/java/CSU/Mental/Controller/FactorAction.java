@@ -171,6 +171,10 @@ public class FactorAction extends ActionSupport{
 			return;
 		}
 		
+		
+		if(factor_den == null || factor_den.isEmpty() || factor_den.equals("")) factor_den = "0";
+		if(factor_balance == null || factor_balance.isEmpty() || factor_balance.equals("")) factor_balance = "0";
+		
 		//处理因子
 		factor.setFactorName(factor_name);
 		factor.setFactorInfo(factor_info);
