@@ -260,4 +260,61 @@ public class RecordAction extends ActionSupport{
 		   return;
 		}
 	}
+
+	//查询单一记录
+	public void QuerySingleRecord() throws Exception{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		//返回结果
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		
+		boolean flag = true;
+		
+		String record_id = request.getParameter("record_id");
+		
+		if(!cutil.IsNumber(record_id)) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "NoRecordId");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int rid = Integer.valueOf(record_id);
+		
+		record = RecordService.QueryRecord(rid);
+		
+		if(record == null) {
+			JSONObject jos = new JSONObject();
+			jos.put("result", "NoRecord");
+			out.println(jos.toString());
+			out.flush();
+			out.close();
+			return;
+		}
+		
+		int sid = record.getScaleId();
+		int pid = record.getPatientId();
+		
+		scale = ScaleService.QueryScale(sid);
+		patient = PatientService.QueryPatient(pid);
+		
+		JSONObject jo = new JSONObject();
+		jo.put("RecordInfo", record.toString());
+		jo.put("ScaleInfo", scale.toString());
+		jo.put("PatientInfo", patient.toString());
+		
+		JSONObject result = new JSONObject();
+		result.put("result", jo.toString());
+		
+		//jo.put("result", "NoRecordId");
+		out.println(result.toString());
+		out.flush();
+		out.close();
+		return;
+	}
 }

@@ -185,7 +185,7 @@ public class ScaleAction extends ActionSupport{
 		String scale_id = request.getParameter("scale_id");
 		String choice_info = request.getParameter("choice_info");
 		String patient_id = request.getParameter("patient_id");
-		System.out.println(choice_info);
+		//System.out.println(choice_info);
 		if(!cutil.IsNumber(scale_id)) {
 			out.println("NoScaleId");
 			out.flush();
@@ -240,6 +240,7 @@ public class ScaleAction extends ActionSupport{
 		Iterator<Integer> it = keySet.iterator();
 		
 		JSONArray ans_ja = new JSONArray();
+		JSONArray fac_ja = new JSONArray();
 		
         while(it.hasNext()){     
         	
@@ -253,6 +254,14 @@ public class ScaleAction extends ActionSupport{
             List<Reference> rlist = ReferenceService.QueryReferenceByFactor(key);
             
             factor = FactorService.QueryFactor(key);
+            
+            //因子得分
+            JSONObject fac_jo = new JSONObject();
+            fac_jo.put("FactorName", factor.getFactorName());
+            fac_jo.put("FactorScore", value);
+            
+            fac_ja.add(fac_jo);
+            
 /*            System.out.println(factor.getFactorName() + "  " + key + "  " + value);
             for(Reference r : rlist) {
             	System.out.println(r.toString());
@@ -280,11 +289,11 @@ public class ScaleAction extends ActionSupport{
         //保存一份记录
         Record record = new Record();
         record.setPatientId(PatientId);
-        record.setRecordInfo(jo.toString());
+        record.setRecordInfo(ans_ja.toString());
         record.setScaleId(sid);
         record.setRecordTime(cutil.GetNowDate());
         record.setRecordProblem(choice_info);
-        record.setRecordFactor(mp.toString());
+        record.setRecordFactor(fac_ja.toString());
         
         RecordService.AddRecord(record);
         
@@ -292,6 +301,7 @@ public class ScaleAction extends ActionSupport{
         JSONObject result = new JSONObject();
         result.put("ScaleInfo", scale.toString());
         result.put("SuggestionInfo", ans_ja.toString());
+        result.put("FactorInfo", fac_ja.toString());
         if(patient == null) {
         	result.put("PatientInfo", "");
         }

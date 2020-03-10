@@ -126,6 +126,8 @@
 		</action>
 		<action name="DeleteRecord" class="RecordAction" method="DeleteRecord" >
 		</action>
+		<action name="QuerySingleRecord" class="RecordAction" method="QuerySingleRecord" >
+		</action>
 				  
 		<!-- 选项 -->
 		<action name="DeleteReference" class="ReferenceAction" method="DeleteReference" >
