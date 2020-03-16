@@ -11,7 +11,7 @@
 		 
 		var argsIndex = url .split("?ScaleId=");
 		var sid = argsIndex[1];
-		
+
 			var advice,add,delBtn,addfac,lis,saveQuesBtn;
 			var facArray,nowIndex=0,parLen=0,tabIndex=0;
 			var check1,check2,check3,check4;
@@ -705,11 +705,15 @@
 				    var ageHead_1=$("#"+Info[6]).val();
 				    var ageRear_1=$("#"+Info[7]).val();
 				    var paraInfo_1=$("#"+Info[8]).val();
-                    var str = "123";
-                    var scoreHead=/^\d+$/.test(scoreHead_1);
-                    var scoreRear=/^\d+$/.test(scoreRear_1);
-                    var ageHead=/^\d+$/.test(ageHead_1);
-                    var ageRear=/^\d+$/.test(ageRear_1);
+				    
+                    if(scoreHead_1[0]=='-')var scoreHead_2=scoreHead_1.substr(1,scoreHead_1.length-1);
+                    if(scoreRear_1[0]=='-') var scoreRear_2=scoreRear_1.substr(1,scoreRear_1.length-1);
+                    if(ageHead_1[0]=='-')var ageHead_2=ageHead_1.substr(1,ageHead_1.length-1);
+                    if(ageRear_1[0]=='-') var ageRear_2=ageRear_1.substr(1,ageRear_1.length-1);
+                    var scoreHead=scoreHead_1[0]=='-'?/^\d+$/.test(scoreHead_2):/^\d+$/.test(scoreHead_1);
+                    var scoreRear=scoreRear_1[0]=='-'?/^\d+$/.test(scoreRear_2):/^\d+$/.test(scoreRear_1);
+                    var ageHead=ageHead_1[0]=='-'?/^\d+$/.test(ageHead_2):/^\d+$/.test(ageHead_1);
+                    var ageRear=ageRear_1[0]=='-'?/^\d+$/.test(ageRear_2):/^\d+$/.test(ageRear_1);
 				    if(!refSex_1){
 				    	refer_sex=-1;
 				    }else{
@@ -890,47 +894,46 @@
 				}
 			}
 		</script>
-</head>
-<body>
-	<div style="font-size: 28px; margin-top: 10px; text-align: center;">量表因子信息</div>
-	<div class="first">
-		<span class="background1"></span> <span class="background2"></span>
-	</div>
-
-	<div class="second">
-		<span
-			style="position: absolute; margin-left: 27px; margin-top: 50px; font-size: 16px;">因子种类</span>
-		<button id="addfacBtn"
-			style="position: absolute; margin-left: 125px; margin-top: 22px; width: 78px; background-color: rgb(255, 204, 51);">添加因子</button>
-		<input id="facc"
-			style="position: absolute; width: 105px; height: 16px; resize: none; margin-top: 21px; margin-left: 10px;"></input>
-		<ol id="olClass" class="col_table"></ol>
-	</div>
-
-	<div class="third">
-		<span class="facName">因子名称 :</span>
-		<textarea id="facName" class="facNameTable"
-			placeholder="必填项，与左侧选中项目对应"></textarea>
-		<span class="facIntroduction">因子说明 :</span>
-		<textarea id="facIntro" class="facIntroTable" placeholder="选填"></textarea>
-		<span class="levelFac">平衡因子 :</span>
-		<textarea id="levelFac" class="levelFacTable" placeholder="选填"></textarea>
-		<span class="facNum">因子系数 :</span>
-		<textarea id="facNum" class="facNumTable" placeholder="选填"></textarea>
-		<span class="formula">计算公式：</span>
-		<textarea id="formula" class="formulaTable" placeholder="选填，文本"></textarea>
-		<span class="releQuestion">已关联题号：</span>
-		<div class="queNum" id="quesNum"></div>
-		<button id="saveQueBtn" class="selBtn">保存选题</button>
-		<button id="saveFacBtn" class="saveFacBtn">保存因子信息</button>
-		<button id="selAllBtn" class="selAllBtn">全选</button>
-	</div>
-
-	<div id="fourthDiv" class="fourth"></div>
-
-	<div id="fifthDiv" class="fifth">
-		<button id="addBtn" class="addTable">添加(参考意见表)</button>
-		<button id="nextBtn" class="next">下一步（试题）</button>
-	</div>
-</body>
+	</head>
+	<body>
+		<div style="font-size: 28px;margin-top: 10px;text-align: center;">量表因子信息</div>
+		<div class="first">
+			<span class="background1"></span>
+			<span class="background2"></span>
+		</div>
+		
+		<div class="second">
+		    <span style="position: absolute;margin-left: 27px;margin-top: 50px;font-size: 16px;">因子种类</span>
+		    <button id="addfacBtn" style="position: absolute;margin-left: 125px;margin-top: 22px;width: 78px;background-color: rgb(255,204,51);">添加因子</button>
+		    <input id="facc" style="position:absolute;width: 105px;height: 16px;resize: none;margin-top: 21px;margin-left: 10px;"></input>
+			<ol id="olClass" class="col_table"></ol>
+		</div>
+		
+		<div class="third">
+			<span class="facName">因子名称 :</span>
+			<textarea id="facName" class="facNameTable"  placeholder="必填项，与左侧选中项目对应"></textarea>
+			<span class="facIntroduction">因子说明 :</span>
+			<textarea id="facIntro" class="facIntroTable" placeholder="选填"></textarea>
+			<span class="levelFac">平衡因子 :</span>
+			<textarea id="levelFac" class="levelFacTable" placeholder="选填"></textarea>
+			<span class="facNum">因子系数 :</span>
+			<textarea id="facNum" class="facNumTable" placeholder="选填"></textarea>
+			<span class="formula">计算公式：</span>
+			<textarea id="formula" class="formulaTable" placeholder="选填，文本"></textarea>
+			<span class="releQuestion">已关联题号：</span>
+			<div class="queNum" id="quesNum">
+				
+			</div>
+			<button id="saveQueBtn" class="selBtn">保存选题</button>	
+			<button id="saveFacBtn" class="saveFacBtn">保存因子信息</button>	
+			<button id="selAllBtn" class="selAllBtn">全选</button>	
+		</div>
+		
+		<div id="fourthDiv" class="fourth"></div>
+			
+		<div id="fifthDiv" class="fifth">
+			<button id="addBtn" class="addTable">添加(参考意见表)</button>
+			<button id="nextBtn" class="next">下一步（试题）</button>
+		</div>
+	</body>
 </html>

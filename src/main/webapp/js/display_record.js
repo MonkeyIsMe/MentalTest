@@ -20,19 +20,29 @@ $(function(){
 				//处理因子信息
 				var factorinfo = "";
 				for(var i = 0; i < data.result.RecordInfo.RecordFactor.length; i ++){
+					factorinfo += "<div class=layui-col-xs3>"
 					factorinfo += "因子名称 ：" + data.result.RecordInfo.RecordFactor[i].FactorName; 
-					factorinfo += "　　　　因子得分 ：" + data.result.RecordInfo.RecordFactor[i].FactorScore + "　　　　"; 
-					if(i % 2 != 0) factorinfo += "</br>"; 
+					factorinfo += "</div>"
+					factorinfo += "<div class=layui-col-xs3>"
+					factorinfo += "因子得分 ：" + data.result.RecordInfo.RecordFactor[i].FactorScore;
+					factorinfo += "</div>"
+					
 				}
 				$("#factorinfo").append(factorinfo);
+				
+				/*
+				 *     <div class="layui-col-xs6 layui-col-sm6 layui-col-md4">
+						      移动：6/12 | 平板：6/12 | 桌面：4/12
+						</div>
+				 * */
 				
 				//处理参考信息
 				var suggestinfo = "";
 				for(var i = 0; i < data.result.RecordInfo.RecordInfo.length; i ++){
-					suggestinfo += "因子名称 ：</br>" + data.result.RecordInfo.RecordFactor[i].FactorName + "</br>"; 
-					suggestinfo += "因子得分 ：</br>" + data.result.RecordInfo.RecordFactor[i].FactorScore + "</br>"; 
-					suggestinfo += "因子解释 ：</br>" + data.result.RecordInfo.RecordInfo[i].FactorInfo + "</br>";
-					suggestinfo += "参考信息 ：</br>" + data.result.RecordInfo.RecordInfo[i].ReferenceInfo + "</br>";
+					suggestinfo += "【★因子名称 ：】" + data.result.RecordInfo.RecordFactor[i].FactorName + "</br>"; 
+					suggestinfo += "【★因子得分 ：】" + data.result.RecordInfo.RecordFactor[i].FactorScore + "</br>"; 
+					suggestinfo += "【★因子解释 ：】" + data.result.RecordInfo.RecordInfo[i].FactorInfo + "</br>";
+					suggestinfo += "【★参考信息 ：】" + data.result.RecordInfo.RecordInfo[i].ReferenceInfo + "</br>";
 					suggestinfo += "</br>";
 				}
 				console.log(suggestinfo);

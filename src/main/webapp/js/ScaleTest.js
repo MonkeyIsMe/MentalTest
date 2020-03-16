@@ -30,14 +30,19 @@ $(function(){
 	//console.log(testinfo);
 	//console.log(testlength);
 	//初始化第一个选项
-	$("#problem_name").append(testinfo[0].ProblemName);
+	$("#problem_name").append("题目描述：" + testinfo[0].ProblemName);
 	for(var i = 0;i < testinfo[0].ChoiceInfo.length; i ++){
-		//console.log(testinfo[0].ChoiceInfo[i].choiceInfo);
-		var html = "<li onclick=load("+ countlength +","+testinfo[0].ChoiceInfo[i].choiceScore +"," + testinfo[0].ProblemId +")><label >"+ testinfo[0].ChoiceInfo[i].choiceInfo +"</label>"
-		html += "<input type=radio name=score value="+ testinfo[0].ChoiceInfo[i].choiceScore +"," + testinfo[0].ProblemId  + "></li>";
+		var num = i + 1;
+		var html = "<li class=radio_style onclick=load("+ countlength +","+testinfo[0].ChoiceInfo[i].choiceScore +"," + testinfo[0].ProblemId +")>" ;
+		html += "第"+ num +"个选项：<input type=radio name=score value="+ testinfo[0].ChoiceInfo[i].choiceScore +"," + testinfo[0].ProblemId  + ">";
+		html +=	"<label >"+ testinfo[0].ChoiceInfo[i].choiceInfo +"</label></li>"
 		$("#choice_info").append(html);
+		
 	}
-	
+	$("#process").html("");
+	var process = GetPercent(countlength,testlength);
+	var process_info = "当前第" + (countlength + 1) + "题，已完成:"+ countlength +"题，完成率为:" + process;
+	$("#process").append(process_info);
 });
 
 
@@ -66,13 +71,34 @@ function load(countlength,socre,id){
 				);
 	}
 	else{
-		$("#problem_name").append(testinfo[countlength].ProblemName);
+		
+		$("#problem_name").append("题目描述：" + testinfo[countlength].ProblemName);
+		for(var i = 0;i < testinfo[countlength].ChoiceInfo.length; i ++){
+			var num = i + 1;
+			var html = "<li class=radio_style onclick=load("+ countlength +","+testinfo[countlength].ChoiceInfo[i].choiceScore +"," + testinfo[countlength].ProblemId +")>" ;
+			html += "第"+ num +"个选项：<input type=radio name=score value="+ testinfo[countlength].ChoiceInfo[i].choiceScore +"," + testinfo[countlength].ProblemId  + ">";
+			html +=	"<label >"+ testinfo[0].ChoiceInfo[i].choiceInfo +"</label></li>"
+			$("#choice_info").append(html);
+		}
+		$("#process").html("");
+		var process = GetPercent(countlength,testlength);
+		var process_info = "当前第" + (countlength + 1) + "题，已完成:"+ countlength +"题，完成率为:" + process;
+		$("#process").append(process_info);
+/*		$("#problem_name").append(testinfo[countlength].ProblemName);
 		for(var i = 0;i < testinfo[countlength].ChoiceInfo.length; i ++){
 			//console.log(testinfo[0].ChoiceInfo[i].choiceInfo);
 			var html = "<li onclick=load("+ countlength +","+testinfo[countlength].ChoiceInfo[i].choiceScore +"," + testinfo[countlength].ProblemId +")><label >"+ testinfo[countlength].ChoiceInfo[i].choiceInfo +"</label>"
 			html += "<input type=radio name=score value="+ testinfo[countlength].ChoiceInfo[i].choiceScore +"," + testinfo[countlength].ProblemId  + "></li>";
 			$("#choice_info").append(html);
-		}
+		}*/
 	}
 }
 
+function GetPercent(num, total) {
+    num = parseFloat(num);
+    total = parseFloat(total);
+    if (isNaN(num) || isNaN(total)) {
+        return "-";
+    }
+    return total <= 0 ? "0%" : (Math.round(num / total * 10000) / 100.00)+"%";
+}
