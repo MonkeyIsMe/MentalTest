@@ -69,6 +69,7 @@ $(function(){
 			        $trTemp.append("<td>" + 
 			        		'<a><span class="delete glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#del_myModal"></span></a>'
 			        		 + '<a><span class="update glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#up_Modal"></span></a>'
+			        		 + '<a><span class="totest glyphicon glyphicon-list-alt" style="cursor:pointer;margin-left:18px"></span></a>'
 			        		+"</td>");
                     // $("#J_TbData").append($trTemp);
                     $trTemp.appendTo("#PatientList");
@@ -120,6 +121,7 @@ function PrevPage(){
 				        $trTemp.append("<td>" + 
 				        		'<a><span class="delete glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#del_myModal"></span></a>'
 				        		 + '<a><span class="update glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#up_Modal"></span></a>'
+				        		 + '<a><span class="totest glyphicon glyphicon-list-alt" style="cursor:pointer;margin-left:18px"></span></a>'
 				        		+"</td>");
 	                    // $("#J_TbData").append($trTemp);
 	                    $trTemp.appendTo("#PatientList");
@@ -171,6 +173,7 @@ function NextPage(){
 				        $trTemp.append("<td>" + 
 				        		'<a><span class="delete glyphicon glyphicon-minus" style="cursor:pointer;" data-toggle="modal" data-target="#del_myModal"></span></a>'
 				        		 + '<a><span class="update glyphicon glyphicon-pencil" style="cursor:pointer;margin-left:18px" data-toggle="modal" data-target="#up_Modal"></span></a>'
+				        		 + '<a><span class="totest glyphicon glyphicon-list-alt" style="cursor:pointer;margin-left:18px"></span></a>'
 				        		+"</td>");
 	                    // $("#J_TbData").append($trTemp);
 	                    $trTemp.appendTo("#PatientList");
@@ -194,6 +197,16 @@ $(document).ready(function(){
 		    pname = col2;
 		    $("#del_patient_info").empty();
 		    $("#del_patient_info").append("是否删除名字为: "+ pname + "的病人");
+		  });
+	  
+	  $("#myTable").on('click','.totest',function(){
+		    //获得当前行
+		    var currentRow=$(this).closest("tr"); 
+		    var col1 = currentRow.find("td:eq(0)").text(); //获得当前行第一个TD值
+		    
+		    pid = col1;
+			var edit_url = "MentalScale.html?pid=" + pid;
+			window.location.href = edit_url;
 		  });
 	  
 	  $("#myTable").on('click','.update',function(){

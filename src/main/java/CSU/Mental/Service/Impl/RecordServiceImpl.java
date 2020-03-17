@@ -21,7 +21,7 @@ public class RecordServiceImpl implements RecordService{
 		RecordDao = recordDao;
 	}
 
-	public boolean AddRecord(Record record) {
+	public int AddRecord(Record record) {
 		// TODO Auto-generated method stub
 		return RecordDao.AddRecord(record);
 	}

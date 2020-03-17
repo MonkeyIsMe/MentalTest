@@ -41,7 +41,7 @@ $(function(){
 	}
 	$("#process").html("");
 	var process = GetPercent(countlength,testlength);
-	var process_info = "当前第" + (countlength + 1) + "题，已完成:"+ countlength +"题，完成率为:" + process;
+	var process_info = "当前第" + (countlength + 1) + "题，已完成:"+ countlength +"题，完成率为:" + process + "，总共" +testlength + "题。";
 	$("#process").append(process_info);
 });
 
@@ -56,7 +56,7 @@ function load(countlength,socre,id){
 	$("#choice_info").empty();
 	record.push({Score: socre, ProblemId: id});
 	if(countlength == testlength){
-		console.log(record);
+		//console.log(record);
 		$.post(
 				"MentalTest/DoScaleTest",
 				{
@@ -66,7 +66,9 @@ function load(countlength,socre,id){
 				},
 				function(data){
 					var data = JSON.parse(data);
-					console.log(data);
+					console.log(data.RecordId);
+					var edit_url = "DisplayRecord.html?rid=" + data.RecordId;
+					window.location.href = edit_url;
 				}
 				);
 	}
@@ -82,15 +84,8 @@ function load(countlength,socre,id){
 		}
 		$("#process").html("");
 		var process = GetPercent(countlength,testlength);
-		var process_info = "当前第" + (countlength + 1) + "题，已完成:"+ countlength +"题，完成率为:" + process;
+		var process_info = "当前第" + (countlength + 1) + "题，已完成:"+ countlength +"题，完成率为:" + process + "，总共" +testlength + "题。";
 		$("#process").append(process_info);
-/*		$("#problem_name").append(testinfo[countlength].ProblemName);
-		for(var i = 0;i < testinfo[countlength].ChoiceInfo.length; i ++){
-			//console.log(testinfo[0].ChoiceInfo[i].choiceInfo);
-			var html = "<li onclick=load("+ countlength +","+testinfo[countlength].ChoiceInfo[i].choiceScore +"," + testinfo[countlength].ProblemId +")><label >"+ testinfo[countlength].ChoiceInfo[i].choiceInfo +"</label>"
-			html += "<input type=radio name=score value="+ testinfo[countlength].ChoiceInfo[i].choiceScore +"," + testinfo[countlength].ProblemId  + "></li>";
-			$("#choice_info").append(html);
-		}*/
 	}
 }
 

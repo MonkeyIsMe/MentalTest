@@ -17,17 +17,19 @@ import CSU.Mental.Model.Record;
 @Transactional
 public class RecordDaoImpl extends HibernateDaoSupport implements RecordDao{
 
-	public boolean AddRecord(Record record) {
+	public int AddRecord(Record record) {
 		// TODO Auto-generated method stub
 		boolean flag = true;
+		int rid = 1;
 		try {
 			getHibernateTemplate().save(record);
+			rid = record.getRecordId();
 		} catch (DataAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			flag = false;
 		}
-		return flag;
+		return rid;
 	}
 
 	public boolean DeleteRecord(Record record) {

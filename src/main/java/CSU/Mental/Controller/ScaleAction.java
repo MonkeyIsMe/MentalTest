@@ -295,13 +295,14 @@ public class ScaleAction extends ActionSupport{
         record.setRecordProblem(choice_info);
         record.setRecordFactor(fac_ja.toString());
         
-        RecordService.AddRecord(record);
+        int RecordId = RecordService.AddRecord(record);
         
         
         JSONObject result = new JSONObject();
         result.put("ScaleInfo", scale.toString());
         result.put("SuggestionInfo", ans_ja.toString());
         result.put("FactorInfo", fac_ja.toString());
+        result.put("RecordId", RecordId);
         if(patient == null) {
         	result.put("PatientInfo", "");
         }

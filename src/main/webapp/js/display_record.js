@@ -1,14 +1,19 @@
+var url = decodeURI(window.location.href);
+ 
+var argsIndex = url .split("?rid=");
+var rid = argsIndex[1];
+
 $(function(){
 	$.ajaxSettings.async = false;
 	$.post(
 			"MentalTest/QuerySingleRecord",
 			{
-				record_id:1
+				record_id:rid
 			},
 			function(data){
 				var data = JSON.parse(data);
-				console.log(data.result);
-				console.log(data.result.RecordInfo.RecordInfo);
+				//console.log(data.result);
+				//Sconsole.log(data.result.RecordInfo.RecordInfo);
 				
 				//处理病人信息
 				var patient = data.result.PatientInfo;

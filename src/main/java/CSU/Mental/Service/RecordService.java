@@ -6,7 +6,7 @@ import CSU.Mental.Model.Record;
 
 public interface RecordService {
 	
-	public boolean AddRecord(Record record);
+	public int AddRecord(Record record);
 	
 	public boolean DeleteRecord(Record record);
 	
